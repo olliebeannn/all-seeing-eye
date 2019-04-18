@@ -31,20 +31,25 @@ passport.use(
 			clientSecret: keys.googleClientSecret,
 			callbackURL: '/auth/google/callback'
 		},
-		(accessToken, refreshToken, profile, done) => {
+		async (accessToken, refreshToken, profile, done) => {
 			console.log('id', profile.id);
 			console.log('email', profile.emails[0].value);
 
-			const newUser = {
-				googleId: profile.id,
-				email: profile.emails[0].value
-			};
+			const existingUser = await User.findOne({ googleId: profile.id });
 
-			User.create(new User(newUser)).then(user => {
+			if (existingUser) {
+				console.log('found user:', existingUser.googleId);
+				return done(null, existingUser);
+			} else {
+				const newUser = {
+					googleId: profile.id,
+					email: profile.emails[0].value
+				};
+
+				const user = await new User(newUser).save();
 				console.log(user);
-			});
-
-			done(null, profile);
+				done(null, user);
+			}
 		}
 	)
 );
