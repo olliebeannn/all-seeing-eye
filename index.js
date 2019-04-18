@@ -1,10 +1,20 @@
 const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
+const mongoose = require('mongoose');
 
 const keys = require('./config/keys');
+require('./models/User');
+const User = mongoose.model('users');
 
 const app = express();
+
+mongoose.connect(
+	keys.mongoURI,
+	{
+		useNewUrlParser: true
+	}
+);
 
 passport.serializeUser((user, done) => {
 	done(null, user.id);
@@ -22,8 +32,18 @@ passport.use(
 			callbackURL: '/auth/google/callback'
 		},
 		(accessToken, refreshToken, profile, done) => {
-			console.log('called!');
-			console.log('profile', profile);
+			console.log('id', profile.id);
+			console.log('email', profile.emails[0].value);
+
+			const newUser = {
+				googleId: profile.id,
+				email: profile.emails[0].value
+			};
+
+			User.create(new User(newUser)).then(user => {
+				console.log(user);
+			});
+
 			done(null, profile);
 		}
 	)
