@@ -2,6 +2,7 @@ const express = require('express');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
+const cookieSession = require('cookie-session');
 
 const keys = require('./config/keys');
 require('./models/User');
@@ -21,7 +22,7 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser((id, done) => {
-	done(null, user.id);
+	User.findById(id).then(user => done(null, user));
 });
 
 passport.use(
@@ -54,8 +55,14 @@ passport.use(
 	)
 );
 
+app.use(
+	cookieSession({
+		maxAge: 30 * 24 * 60 * 60 * 1000,
+		keys: [keys.cookieKey]
+	})
+);
 app.use(passport.initialize());
-// app.use(passport.session());
+app.use(passport.session());
 
 app.get('/', (req, res) => {
 	res.send('Test!');
@@ -75,6 +82,15 @@ app.get(
 		res.redirect('/');
 	}
 );
+
+app.get('/api/currentUser', (req, res) => {
+	res.send(req.user);
+});
+
+app.get('/api/logout', (req, res) => {
+	req.logout();
+	res.redirect('/');
+});
 
 app.listen(5000, () => {
 	console.log('App running on port 5000');
