@@ -8,6 +8,8 @@ const keys = require('./config/keys');
 require('./models/User');
 const User = mongoose.model('users');
 
+const PORT = process.env.PORT || 5000;
+
 const app = express();
 
 mongoose.connect(
@@ -93,6 +95,6 @@ app.get('/api/logout', (req, res) => {
 	res.redirect('/');
 });
 
-app.listen(5000, () => {
+app.listen(PORT, () => {
 	console.log('App running on port 5000');
 });
