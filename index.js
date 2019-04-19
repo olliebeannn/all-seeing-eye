@@ -84,6 +84,7 @@ app.get(
 );
 
 app.get('/api/currentUser', (req, res) => {
+	// console.log(req.session);
 	res.send(req.user);
 });
 
