@@ -1,5 +1,8 @@
+@import '../../styles/variables.scss';
+
 .Header {
 	align-items: center;
+	background-color: $primary-color;
 	display: flex;
 	height: 64px;
 	padding: 0 32px;
@@ -11,6 +14,11 @@
 	padding: 16px;
 }
 
+.Header__item:last-of-type {
+	margin-left: auto;
+}
+
 .Header__item a {
+	color: $white;
 	text-decoration: none;
 }
