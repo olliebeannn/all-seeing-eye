@@ -3,6 +3,7 @@ const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
+const axios = require('axios');
 
 const keys = require('./config/keys');
 require('./models/User');
@@ -93,6 +94,18 @@ app.get('/api/currentUser', (req, res) => {
 app.get('/api/logout', (req, res) => {
 	req.logout();
 	res.redirect('/');
+});
+
+app.get('/api/fetch', (req, res) => {
+	axios
+		.get(
+			`https://api.themoviedb.org/3/discover/movie?api_key=${
+				keys.TMDBkey
+			}&vote_count.gte=500&sort_by=vote_average.desc&total_results=100&page=2`
+		)
+		.then(results => {
+			res.send(results.data);
+		});
 });
 
 app.listen(PORT, () => {

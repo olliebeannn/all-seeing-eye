@@ -7,6 +7,9 @@ class Header extends Component {
 		return (
 			<ul className="Header">
 				<li className="Header__item">
+					<a href="/">The All Seeing Eye</a>
+				</li>
+				<li className="Header__item">
 					<a href="/watchlist">Watchlist</a>
 				</li>
 				<li className="Header__item">
