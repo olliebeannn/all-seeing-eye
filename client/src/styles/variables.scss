@@ -1,10 +1,11 @@
 /* base colours */
 
-$primary-color: #365ebf;
+$primary-color: #1f72fe;
+$white: #ffffff;
 
 $dark-bg: #1d1e1f;
+
 $text-secondary: #888888;
-$white: #ffffff;
 
 /* fonts */
 
@@ -12,7 +13,7 @@ $base-font: 'Rubik';
 
 $font-base: 15px;
 
-$font-s: $font-base * 0.72222222;
+$font-s: $font-base * 0.866666667;
 $font-m: $font-base;
 $font-l: $font-base * 1.2;
 $font-xl: $font-base * 1.4;

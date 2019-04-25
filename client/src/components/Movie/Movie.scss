@@ -26,10 +26,21 @@
 	display: flex;
 }
 
+.Movie__yearDirector {
+	color: $text-secondary;
+	font-size: $font-s;
+	font-weight: $font-weight-reg;
+	margin-left: $spacing-1;
+}
+
 .Movie__score {
 	margin-left: auto;
 }
 
 .Movie__overview {
 	color: $text-secondary;
+}
+
+.Movie__buttonWrapper {
+	margin-top: $spacing-1;
 }

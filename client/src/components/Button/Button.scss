@@ -1,0 +1,21 @@
+@import '../../styles/variables.scss';
+
+.Button {
+	border-radius: 4px;
+	font-family: $font-base;
+	font-size: $font-m;
+	height: 40px;
+	padding-left: $spacing-2;
+	padding-right: $spacing-2;
+}
+
+.Button--primary {
+	background-color: $primary-color;
+	border: none;
+	color: $white;
+}
+
+.Button--secondary {
+	border: 2px solid $primary-color;
+	color: $primary-color;
+}
