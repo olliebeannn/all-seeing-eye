@@ -52,6 +52,7 @@ class Discover extends Component {
 					<Movie
 						title={movie.title}
 						voteAverage={movie.vote_average}
+						overview={movie.overview}
 					/>
 				)
 			);

@@ -12,6 +12,7 @@
 	width: 25%;
 
 	img {
+		height: 100%;
 		width: 100%;
 	}
 }
@@ -27,4 +28,8 @@
 
 .Movie__score {
 	margin-left: auto;
+}
+
+.Movie__overview {
+	color: $text-secondary;
 }
