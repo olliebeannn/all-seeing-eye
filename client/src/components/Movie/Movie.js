@@ -1,6 +1,7 @@
 import React from 'react';
 import LinesEllipsis from 'react-lines-ellipsis';
 
+import baseStyles from '../../styles/base.scss';
 import styles from './Movie.scss';
 import image from './inception.png';
 
@@ -32,8 +33,12 @@ const Movie = props => {
 					basedOn="letters"
 				/>
 				<div className="Movie__buttonWrapper">
-					<Button type="primary">Add to Watchlist</Button>
-					<Button type="secondary">I've Seen It</Button>
+					<Button className="Button Button--primary">
+						Add to Watchlist
+					</Button>
+					<Button className="Button Button--secondary ml1">
+						I've Seen It
+					</Button>
 				</div>
 			</div>
 		</div>
