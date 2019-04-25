@@ -1,0 +1,30 @@
+@import '../../styles/variables.scss';
+
+.Movie {
+	background-color: $white;
+	border-radius: 4px;
+	display: flex;
+	margin-bottom: 16px;
+}
+
+.Movie__poster {
+	max-width: 140px;
+	width: 25%;
+
+	img {
+		width: 100%;
+	}
+}
+
+.Movie__content {
+	width: 100%;
+	margin-left: $spacing-05;
+}
+
+.Movie__firstLine {
+	display: flex;
+}
+
+.Movie__score {
+	margin-left: auto;
+}

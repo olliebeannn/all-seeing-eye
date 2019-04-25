@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
 
+import styles from './Discover.scss';
+
 import Movie from '../Movie/Movie';
 
 class Discover extends Component {
@@ -55,7 +57,11 @@ class Discover extends Component {
 			);
 		}
 
-		return <div>{movieContent}</div>;
+		return (
+			<div className="Discover">
+				<div className="MovieContainer">{movieContent}</div>
+			</div>
+		);
 	}
 }
 
