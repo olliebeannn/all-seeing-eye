@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
 import '../styles/reset.css';
+import '../styles/base.scss';
 import './App.scss';
 import Header from './Header/Header';
 import Watchlist from './Watchlist/Watchlist';

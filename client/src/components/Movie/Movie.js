@@ -11,7 +11,7 @@ const Movie = props => {
 			</div>
 			<div className="Movie__content">
 				<div className="Movie__firstLine">
-					<p className="Movie__title">{props.title}</p>
+					<h1 className="Movie__title">{props.title}</h1>
 					<p className="Movie__score">{props.voteAverage}</p>
 				</div>
 				<p className="Movie__cast" />
