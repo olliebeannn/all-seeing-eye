@@ -4,7 +4,7 @@ const Movie = props => {
 	return (
 		<div>
 			<p>{props.title}</p>
-			<p>{props.vote_average}</p>
+			<p>{props.voteAverage}</p>
 		</div>
 	);
 };

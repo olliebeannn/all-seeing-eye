@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import _ from 'lodash';
 
+import Movie from '../Movie/Movie';
+
 class Discover extends Component {
 	constructor(props) {
 		super(props);
@@ -15,30 +17,45 @@ class Discover extends Component {
 			console.log(res.data);
 			console.log(res.data.results);
 
-			let movie = _.cloneDeep(
-				_.pick(res.data.results[0], [
-					'id',
-					'title',
-					'overview',
-					'vote_average',
-					'genre_ids'
-				])
-			);
+			const selectedAttributes = [
+				'id',
+				'title',
+				'overview',
+				'vote_average',
+				'genre_ids'
+			];
 
-			console.log(movie);
+			let newMoviesState = [...this.state.movies];
 
-			let newMoviesState = [...this.state.movies, movie];
+			res.data.results.forEach(result => {
+				newMoviesState.push(
+					_.cloneDeep(_.pick(result, selectedAttributes))
+				);
+			});
 
 			this.setState({
 				movies: newMoviesState
 			});
-
-			console.log(this.state.movies);
 		});
 	}
 
 	render() {
-		return <div>Discover</div>;
+		let movieContent = 'Loading...';
+
+		if (this.state.movies.length > 0) {
+			movieContent = [];
+
+			this.state.movies.forEach(movie =>
+				movieContent.push(
+					<Movie
+						title={movie.title}
+						voteAverage={movie.vote_average}
+					/>
+				)
+			);
+		}
+
+		return <div>{movieContent}</div>;
 	}
 }
 
