@@ -1,4 +1,5 @@
 import React from 'react';
+import LinesEllipsis from 'react-lines-ellipsis';
 
 import styles from './Movie.scss';
 import image from './inception.png';
@@ -15,7 +16,14 @@ const Movie = props => {
 					<p className="Movie__score">{props.voteAverage}</p>
 				</div>
 				<p className="Movie__cast" />
-				<p className="Movie__overview">{props.overview}</p>
+				<LinesEllipsis
+					className="Movie__overview"
+					text={props.overview}
+					maxLine="2"
+					ellipsis="..."
+					trimRight
+					basedOn="letters"
+				/>
 			</div>
 		</div>
 	);
