@@ -96,7 +96,7 @@ app.get('/api/logout', (req, res) => {
 	res.redirect('/');
 });
 
-app.get('/api/fetch', (req, res) => {
+app.get('/api/discover/fetch', (req, res) => {
 	axios
 		.get(
 			`https://api.themoviedb.org/3/discover/movie?api_key=${
@@ -106,6 +106,16 @@ app.get('/api/fetch', (req, res) => {
 		.then(results => {
 			res.send(results.data);
 		});
+});
+
+app.get('/api/movie_detail/:id', (req, res) => {
+	axios
+		.get(
+			`https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${
+				keys.TMDBkey
+			}&append_to_response=credits`
+		)
+		.then(results => res.send(results.data));
 });
 
 app.listen(PORT, () => {
