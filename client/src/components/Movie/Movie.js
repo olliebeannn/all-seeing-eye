@@ -23,7 +23,6 @@ const Movie = props => {
 					</h1>
 					<p className="Movie__score">{props.voteAverage}</p>
 				</div>
-				<p className="Movie__cast" />
 				<LinesEllipsis
 					className="Movie__overview"
 					text={props.overview}

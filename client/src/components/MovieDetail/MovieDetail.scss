@@ -1,0 +1,61 @@
+@import '../../styles/variables.scss';
+
+.MovieDetail {
+	background-color: $white;
+	border-radius: 4px;
+	display: flex;
+	margin-top: $spacing-2;
+}
+
+.MovieDetail__wrapper {
+	height: 100vh;
+	margin: 0 auto;
+	max-width: 800px;
+	padding-top: $spacing-2;
+	width: 80%;
+}
+
+.MovieDetail__poster {
+	max-width: 240px;
+	width: 33%;
+
+	img {
+		height: 100%;
+		width: 100%;
+	}
+}
+
+.MovieDetail__content {
+	width: 100%;
+	padding: $spacing-2;
+}
+
+.MovieDetail__firstLine {
+	display: flex;
+}
+
+.MovieDetail__score {
+	color: $primary-color;
+	font-size: $font-l;
+	margin-left: auto;
+}
+
+.MovieDetail__directorRuntime {
+	color: $text-secondary;
+	font-size: $font-s;
+	font-weight: $font-weight-reg;
+	margin-top: $spacing-05;
+}
+
+.MovieDetail__cast {
+	margin-top: $spacing-1;
+}
+
+.MovieDetail__overview {
+	color: $text-secondary;
+	margin-top: $spacing-1;
+}
+
+.MovieDetail__buttonWrapper {
+	margin-top: $spacing-2;
+}
