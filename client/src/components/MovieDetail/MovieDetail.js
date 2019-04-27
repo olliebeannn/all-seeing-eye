@@ -28,7 +28,6 @@ class MovieDetail extends Component {
 				'vote_count',
 				'vote_average',
 				'release_date',
-				'credits',
 				'genres',
 				'runtime',
 				'original_language',
@@ -45,11 +44,14 @@ class MovieDetail extends Component {
 			);
 
 			if (directorArray.length > 0) {
-				console.log('called!');
 				movieData.directorName = directorArray[0].name;
 			}
 
-			console.log('movie data:', movieData);
+			// Extract first 10 cast members info
+			const cast = _.cloneDeep(res.data.credits.cast.slice(0, 10));
+			movieData.cast = cast;
+
+			// console.log('movie data:', movieData);
 
 			this.setState({
 				movieData: movieData
