@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import LinesEllipsis from 'react-lines-ellipsis';
 
 import baseStyles from '../../styles/base.scss';
@@ -15,12 +16,9 @@ const Movie = props => {
 			</div>
 			<div className="Movie__content">
 				<div className="Movie__firstLine">
-					<h1 className="Movie__title">
-						{props.title}
-						<span className="Movie__yearDirector">
-							(2010, Dir: Ridley Scott)
-						</span>
-					</h1>
+					<Link to={`/movie/${props.id}`}>
+						<h1 className="Movie__title">{props.title}</h1>
+					</Link>
 					<p className="Movie__score">{props.voteAverage}</p>
 				</div>
 				<LinesEllipsis

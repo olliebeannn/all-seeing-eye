@@ -34,6 +34,12 @@
 	display: flex;
 }
 
+.MovieDetail__year {
+	font-size: $font-s;
+	font-weight: $font-weight-reg;
+	margin-left: $spacing-05;
+}
+
 .MovieDetail__score {
 	color: $primary-color;
 	font-size: $font-l;
