@@ -74,6 +74,10 @@ class MovieDetail extends Component {
 			return cast.join(', ');
 		};
 
+		const getReleaseYear = () => {
+			return this.state.movieData.release_date.split('-')[0];
+		};
+
 		const displayContent = () => {
 			let content = <div className="MovieDetail">Loading...</div>;
 
@@ -87,6 +91,9 @@ class MovieDetail extends Component {
 							<div className="MovieDetail__firstLine">
 								<h1 className="MovieDetail__title">
 									{this.state.movieData.title}
+									<span className="MovieDetail__year">
+										({getReleaseYear()})
+									</span>
 								</h1>
 								<p className="MovieDetail__score">
 									{this.state.movieData.vote_average}

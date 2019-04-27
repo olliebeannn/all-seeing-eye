@@ -50,6 +50,7 @@ class Discover extends Component {
 			this.state.movies.forEach(movie =>
 				movieContent.push(
 					<Movie
+						id={movie.id}
 						title={movie.title}
 						voteAverage={movie.vote_average}
 						overview={movie.overview}
