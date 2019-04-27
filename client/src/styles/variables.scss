@@ -1,11 +1,20 @@
 /* base colours */
 
 $primary-color: #1f72fe;
+$accent-color-1: #c32aff;
+$accent-color-2: #0ecc93;
 $white: #ffffff;
 
 $dark-bg: #1d1e1f;
 
 $text-secondary: #888888;
+
+$gradient-1: linear-gradient(
+	to right,
+	$accent-color-1,
+	$primary-color,
+	$accent-color-2
+);
 
 /* fonts */
 
