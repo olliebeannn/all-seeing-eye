@@ -15,7 +15,7 @@ class Discover extends Component {
 	}
 
 	componentDidMount() {
-		axios.get('/api/fetch').then(res => {
+		axios.get('/api/discover/fetch').then(res => {
 			console.log(res.data);
 			console.log(res.data.results);
 

@@ -9,6 +9,7 @@ import './App.scss';
 import Header from './Header/Header';
 import Watchlist from './Watchlist/Watchlist';
 import Discover from './Discover/Discover';
+import MovieDetail from './MovieDetail/MovieDetail';
 import Seen from './Seen/Seen';
 
 class App extends Component {
@@ -24,6 +25,7 @@ class App extends Component {
 					<Route path="/watchlist" component={Watchlist} />
 					<Route path="/discover" component={Discover} />
 					<Route path="/seen" component={Seen} />
+					<Route path="/movie/:id" component={MovieDetail} />
 				</BrowserRouter>
 			</div>
 		);
