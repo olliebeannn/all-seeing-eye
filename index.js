@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const passport = require('passport');
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
@@ -12,6 +13,7 @@ const User = mongoose.model('users');
 const PORT = process.env.PORT || 5000;
 
 const app = express();
+app.use(bodyParser.json());
 
 mongoose.connect(
 	keys.mongoURI,
@@ -118,7 +120,10 @@ app.get('/api/movie_detail/:id', (req, res) => {
 		.then(results => res.send(results.data));
 });
 
-app.post('/api/watchlist/update', (req, res) => {});
+app.post('/api/watchlist/update', (req, res) => {
+	console.log(req.body);
+	res.send('received!');
+});
 
 app.listen(PORT, () => {
 	console.log('App running on port 5000');

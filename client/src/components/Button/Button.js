@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import styles from './Button.scss';
 
-class Button extends Component {
-	render() {
-		return (
-			<button className={this.props.className}>
-				{this.props.children}
-			</button>
-		);
-	}
-}
+const Button = props => {
+	return (
+		<button className={props.className} onClick={props.click}>
+			{props.children}
+		</button>
+	);
+};
 
 export default Button;

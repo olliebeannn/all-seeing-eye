@@ -16,8 +16,8 @@ class Discover extends Component {
 
 	componentDidMount() {
 		axios.get('/api/discover/fetch').then(res => {
-			console.log(res.data);
-			console.log(res.data.results);
+			// console.log(res.data);
+			// console.log(res.data.results);
 
 			const selectedAttributes = [
 				'id',
