@@ -125,10 +125,16 @@ app.post('/api/watchlist/update', (req, res) => {
 	// console.log(req.user);
 
 	if (req.body.action === 'add') {
+		// Find user, check if watchlist contains this movie
+		// If not, then execute this update
+
 		const newMovie = { movieId: req.body.movieId };
 
 		User.findOneAndUpdate(
-			{ _id: req.user._id },
+			{
+				_id: req.user._id,
+				'watchlist.movieId': { $ne: req.body.movieId }
+			},
 			{ $push: { watchlist: newMovie } },
 			{ new: true },
 			(err, doc) => {
