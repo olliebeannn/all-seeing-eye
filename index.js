@@ -120,6 +120,16 @@ app.get('/api/movie_detail/:id', (req, res) => {
 		.then(results => res.send(results.data));
 });
 
+app.post('/api/watchlist/fetch', (req, res) => {
+	let movieIds = req.body.movieIds.map(movie => movie.movieId);
+
+	// req.body.movieIds.forEach(movie => movieIds.push(movie.movieId));
+
+	console.log(movieIds);
+
+	res.send('received request!');
+});
+
 app.post('/api/watchlist/update', (req, res) => {
 	// console.log(req.body);
 	// console.log(req.user);
