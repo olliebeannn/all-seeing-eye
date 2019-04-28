@@ -121,7 +121,26 @@ app.get('/api/movie_detail/:id', (req, res) => {
 });
 
 app.post('/api/watchlist/update', (req, res) => {
-	console.log(req.body);
+	// console.log(req.body);
+	// console.log(req.user);
+
+	if (req.body.action === 'add') {
+		const newMovie = { movieId: req.body.movieId };
+
+		User.findOneAndUpdate(
+			{ _id: req.user._id },
+			{ $push: { watchlist: newMovie } },
+			{ new: true },
+			(err, doc) => {
+				if (err) {
+					console.log('error:', err);
+				} else {
+					console.log(doc);
+				}
+			}
+		);
+	}
+
 	res.send('received!');
 });
 
