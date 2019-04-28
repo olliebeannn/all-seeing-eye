@@ -125,11 +125,26 @@ app.get('/api/watchlist/fetch', (req, res) => {
 	let movieIds = [];
 
 	User.findById(req.user._id).then(user => {
-		console.log(user);
-
 		user.watchlist.forEach(movie => movieIds.push(movie.movieId));
 
-		console.log(movieIds);
+		console.log('movieIds:', movieIds);
+
+		let promises = movieIds.map(id => {
+			axios
+				.get(
+					`https://api.themoviedb.org/3/movie/${id}?api_key=${
+						keys.TMDBkey
+					}`
+				)
+				.then(response => response.data);
+		});
+
+		Promise.all(promises).then(values => {
+			console.log(values);
+			return values;
+		});
+		// console.log(promises);
+		// axios.all(promises)
 	});
 
 	res.send('received request!');
