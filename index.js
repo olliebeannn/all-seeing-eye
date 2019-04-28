@@ -120,12 +120,17 @@ app.get('/api/movie_detail/:id', (req, res) => {
 		.then(results => res.send(results.data));
 });
 
-app.post('/api/watchlist/fetch', (req, res) => {
-	let movieIds = req.body.movieIds.map(movie => movie.movieId);
+app.get('/api/watchlist/fetch', (req, res) => {
+	// Alt version, just pulling from backend
+	let movieIds = [];
 
-	// req.body.movieIds.forEach(movie => movieIds.push(movie.movieId));
+	User.findById(req.user._id).then(user => {
+		console.log(user);
 
-	console.log(movieIds);
+		user.watchlist.forEach(movie => movieIds.push(movie.movieId));
+
+		console.log(movieIds);
+	});
 
 	res.send('received request!');
 });

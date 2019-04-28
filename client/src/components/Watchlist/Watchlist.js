@@ -12,20 +12,9 @@ class Watchlist extends Component {
 	// Display those via movie components
 
 	componentDidMount() {
-		// this.props.fetchUser();
-	}
+		this.props.fetchUser();
 
-	componentDidUpdate(prevProps) {
-		if (prevProps.auth !== this.props.auth) {
-			console.log('componentDidUpdate!');
-			console.log('props', this.props);
-
-			axios
-				.post('/api/watchlist/fetch', {
-					movieIds: this.props.auth.watchlist
-				})
-				.then(res => console.log(res));
-		}
+		axios.get('/api/watchlist/fetch').then(res => console.log(res));
 	}
 
 	render() {
