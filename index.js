@@ -118,6 +118,8 @@ app.get('/api/movie_detail/:id', (req, res) => {
 		.then(results => res.send(results.data));
 });
 
+app.post('/api/watchlist/update', (req, res) => {});
+
 app.listen(PORT, () => {
 	console.log('App running on port 5000');
 });
