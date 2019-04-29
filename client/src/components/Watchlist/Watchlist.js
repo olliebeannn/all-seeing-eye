@@ -33,7 +33,8 @@ class Watchlist extends Component {
 				'title',
 				'overview',
 				'vote_average',
-				'genre_ids'
+				'genre_ids',
+				'onWatchlist'
 			];
 
 			let newMoviesState = [];
@@ -64,6 +65,7 @@ class Watchlist extends Component {
 						voteAverage={movie.vote_average}
 						overview={movie.overview}
 						key={movie.id}
+						onWatchlist={movie.onWatchlist}
 					/>
 				)
 			);
