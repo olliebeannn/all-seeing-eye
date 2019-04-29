@@ -47,7 +47,9 @@ class Movie extends Component {
 							className="Button Button--primary"
 							click={() => this.onAddToWatchlist(this.props.id)}
 						>
-							Add to Watchlist
+							{this.props.onWatchlist
+								? 'Remove from Watchlist'
+								: 'Add to Watchlist'}
 						</Button>
 						<Button className="Button Button--secondary ml1">
 							I've Seen It
