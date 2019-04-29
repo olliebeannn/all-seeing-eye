@@ -55,6 +55,7 @@ class Discover extends Component {
 						voteAverage={movie.vote_average}
 						overview={movie.overview}
 						key={movie.id}
+						onWatchlist={movie.onWatchlist}
 					/>
 				)
 			);
