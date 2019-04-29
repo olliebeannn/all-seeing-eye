@@ -1,0 +1,11 @@
+@import '../../styles/variables.scss';
+
+.Watchlist {
+	height: 100%;
+}
+
+.Watchlist__container {
+	margin: $spacing-4 auto 0 auto;
+	max-width: 624px;
+	width: 60%;
+}
