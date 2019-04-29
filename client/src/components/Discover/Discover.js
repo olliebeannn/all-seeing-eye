@@ -16,19 +16,22 @@ class Discover extends Component {
 
 	componentDidMount() {
 		axios.get('/api/discover/fetch').then(res => {
+			console.log(res);
+
 			const selectedAttributes = [
 				'id',
 				'title',
 				'overview',
 				'vote_average',
-				'genre_ids'
+				'genre_ids',
+				'onWatchlist'
 			];
 
 			let newMoviesState = [...this.state.movies];
 
-			res.data.results.forEach(result => {
+			res.data.forEach(movie => {
 				newMoviesState.push(
-					_.cloneDeep(_.pick(result, selectedAttributes))
+					_.cloneDeep(_.pick(movie, selectedAttributes))
 				);
 			});
 
