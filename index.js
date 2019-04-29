@@ -105,8 +105,28 @@ app.get('/api/discover/fetch', (req, res) => {
 				keys.TMDBkey
 			}&vote_count.gte=500&sort_by=vote_average.desc&total_results=100&page=2`
 		)
-		.then(results => {
-			res.send(results.data);
+		.then(async response => {
+			let returnData = response.data.results;
+
+			// console.log("returnData", returnData);
+
+			let user = await User.findById(req.user._id);
+
+			let watchlistIds = user.watchlist.map(item => item.movieId);
+
+			console.log(watchlistIds);
+
+			returnData.forEach(result => {
+				if (watchlistIds.includes(result.id)) {
+					result.onWatchlist = true;
+				} else {
+					result.onWatchlist = false;
+				}
+			});
+
+			console.log(returnData);
+
+			res.send(returnData);
 		});
 });
 
