@@ -194,6 +194,28 @@ app.post('/api/watchlist/update', (req, res) => {
 		);
 	}
 
+	if (req.body.action === 'remove') {
+		console.log('remove movie!');
+
+		User.findOneAndUpdate(
+			{
+				_id: req.user._id,
+				'watchlist.movieId': { $eq: req.body.movieId }
+			},
+			{
+				$pull: { watchlist: { movieId: req.body.movieId } }
+			},
+			{ new: true },
+			(err, doc) => {
+				if (err) {
+					console.log('err', err);
+				} else {
+					console.log(doc);
+				}
+			}
+		);
+	}
+
 	res.send('received!');
 });
 

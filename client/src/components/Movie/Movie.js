@@ -21,7 +21,40 @@ class Movie extends Component {
 			.then(res => console.log(res));
 	}
 
+	onRemoveFromWatchlist(movieId) {
+		console.log('movieId', movieId);
+
+		axios
+			.post('/api/watchlist/update', {
+				movieId: movieId,
+				action: 'remove'
+			})
+			.then(res => console.log(res));
+	}
+
 	render() {
+		const displayWatchlistButton = () => {
+			if (this.props.onWatchlist) {
+				return (
+					<Button
+						className="Button Button--primary"
+						click={() => this.onRemoveFromWatchlist(this.props.id)}
+					>
+						Remove from Watchlist
+					</Button>
+				);
+			} else {
+				return (
+					<Button
+						className="Button Button--primary"
+						click={() => this.onAddToWatchlist(this.props.id)}
+					>
+						Add to Watchlist
+					</Button>
+				);
+			}
+		};
+
 		return (
 			<div className="Movie">
 				<div className="Movie__poster">
@@ -43,14 +76,7 @@ class Movie extends Component {
 						basedOn="letters"
 					/>
 					<div className="Movie__buttonWrapper">
-						<Button
-							className="Button Button--primary"
-							click={() => this.onAddToWatchlist(this.props.id)}
-						>
-							{this.props.onWatchlist
-								? 'Remove from Watchlist'
-								: 'Add to Watchlist'}
-						</Button>
+						{displayWatchlistButton()}
 						<Button className="Button Button--secondary ml1">
 							I've Seen It
 						</Button>
