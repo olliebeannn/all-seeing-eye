@@ -158,6 +158,10 @@ app.get('/api/watchlist/fetch', (req, res) => {
 		});
 
 		Promise.all(promises).then(data => {
+			data.forEach(movie => {
+				movie.onWatchlist = true;
+			});
+
 			res.send(data);
 		});
 	});
