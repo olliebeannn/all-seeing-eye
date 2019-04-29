@@ -5,43 +5,43 @@ import styles from './Header.scss';
 
 class Header extends Component {
 	renderContent() {
-		let loginButton = <li className="Header__item" />;
+		let headerContent = <li className="Header__item" key="7" />;
 
 		switch (this.props.auth) {
 			case null:
 				break;
 			case false:
-				loginButton = (
-					<li className="Header__item">
+				headerContent = (
+					<li className="Header__item" key="6">
 						<a href="/auth/google">Sign in with Google</a>
 					</li>
 				);
 				break;
 			default:
-				loginButton = (
-					<li className="Header__item">
+				headerContent = [
+					<li className="Header__item" key="2">
+						<a href="/watchlist">Watchlist</a>
+					</li>,
+					<li className="Header__item" key="3">
+						<a href="/discover">Discover</a>
+					</li>,
+					<li className="Header__item" key="4">
+						<a href="/seen">Seen</a>
+					</li>,
+					<li className="Header__item" key="5">
 						<a href="/api/logout">Sign Out</a>
 					</li>
-				);
+				];
 		}
 
-		return loginButton;
+		return headerContent;
 	}
 
 	render() {
 		return (
 			<ul className="Header">
-				<li className="Header__item">
+				<li className="Header__item Header__appName" key="1">
 					<a href="/">The All Seeing Eye</a>
-				</li>
-				<li className="Header__item">
-					<a href="/watchlist">Watchlist</a>
-				</li>
-				<li className="Header__item">
-					<a href="/discover">Discover</a>
-				</li>
-				<li className="Header__item">
-					<a href="/seen">Seen</a>
 				</li>
 				{this.renderContent()}
 			</ul>
