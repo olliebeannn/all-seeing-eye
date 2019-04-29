@@ -127,10 +127,8 @@ app.get('/api/watchlist/fetch', (req, res) => {
 	User.findById(req.user._id).then(user => {
 		user.watchlist.forEach(movie => movieIds.push(movie.movieId));
 
-		console.log('movieIds:', movieIds);
-
 		let promises = movieIds.map(id => {
-			axios
+			return axios
 				.get(
 					`https://api.themoviedb.org/3/movie/${id}?api_key=${
 						keys.TMDBkey
@@ -139,15 +137,10 @@ app.get('/api/watchlist/fetch', (req, res) => {
 				.then(response => response.data);
 		});
 
-		Promise.all(promises).then(values => {
-			console.log(values);
-			return values;
+		Promise.all(promises).then(data => {
+			res.send(data);
 		});
-		// console.log(promises);
-		// axios.all(promises)
 	});
-
-	res.send('received request!');
 });
 
 app.post('/api/watchlist/update', (req, res) => {
