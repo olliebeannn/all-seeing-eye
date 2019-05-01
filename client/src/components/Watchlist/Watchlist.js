@@ -23,10 +23,10 @@ class Watchlist extends Component {
 	componentDidMount() {
 		// Update the state of auth if it's changed since login
 		// Maybe unnecessary or not the right place?
-		this.props.fetchUser();
+		// this.props.fetchUser();
 
 		axios.get('/api/watchlist/fetch').then(res => {
-			console.log(res);
+			// console.log(res);
 
 			const selectedAttributes = [
 				'id',
@@ -79,8 +79,11 @@ class Watchlist extends Component {
 	}
 }
 
-function mapStateToProps({ auth }) {
-	return { auth };
+function mapStateToProps(state) {
+	return {
+		auth: state.auth,
+		watchlist: state.watchlist
+	};
 }
 
 export default connect(
