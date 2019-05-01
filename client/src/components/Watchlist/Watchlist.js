@@ -24,40 +24,43 @@ class Watchlist extends Component {
 		// Update the state of auth if it's changed since login
 		// Maybe unnecessary or not the right place?
 		// this.props.fetchUser();
-
-		axios.get('/api/watchlist/fetch').then(res => {
-			// console.log(res);
-
-			const selectedAttributes = [
-				'id',
-				'title',
-				'overview',
-				'vote_average',
-				'genre_ids',
-				'onWatchlist'
-			];
-
-			let newMoviesState = [];
-
-			res.data.forEach(movie => {
-				newMoviesState.push(
-					_.cloneDeep(_.pick(movie, selectedAttributes))
-				);
-			});
-
-			this.setState({
-				movies: newMoviesState
-			});
-		});
+		// axios.get('/api/watchlist/fetch').then(res => {
+		// 	// console.log(res);
+		//
+		// 	const selectedAttributes = [
+		// 		'id',
+		// 		'title',
+		// 		'overview',
+		// 		'vote_average',
+		// 		'genre_ids',
+		// 		'onWatchlist'
+		// 	];
+		//
+		// 	let newMoviesState = [];
+		//
+		// 	res.data.forEach(movie => {
+		// 		newMoviesState.push(
+		// 			_.cloneDeep(_.pick(movie, selectedAttributes))
+		// 		);
+		// 	});
+		//
+		// 	this.setState({
+		// 		movies: newMoviesState
+		// 	});
+		// });
 	}
 
 	render() {
 		let movieContent = 'Loading...';
 
-		if (this.state.movies.length > 0) {
+		// if (this.state.movies.length > 0) {
+		// 	movieContent = [];
+		//
+		// 	this.state.movies.forEach(movie =>
+		if (this.props.watchlist && this.props.watchlist.length > 0) {
 			movieContent = [];
 
-			this.state.movies.forEach(movie =>
+			this.props.watchlist.forEach(movie =>
 				movieContent.push(
 					<Movie
 						id={movie.id}
