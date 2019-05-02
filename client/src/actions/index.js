@@ -50,6 +50,29 @@ export const removeFromWatchlist = movieId => async dispatch => {
 	dispatch({ type: REMOVE_FROM_WATCHLIST, payload: { movieId: movieId } });
 };
 
-export const fetchDiscover = () => async dispatch => {
-	dispatch({ type: FETCH_DISCOVER, payload: { test: 'test data' } });
+export const loadDiscoverMovies = () => async dispatch => {
+	const response = await axios.get('/api/discover/fetch');
+
+	const selectedAttributes = [
+		'id',
+		'title',
+		'overview',
+		'vote_average',
+		'genre_ids',
+		'onWatchlist'
+	];
+
+	// console.log('response.data', response.data);
+
+	let returnData = [];
+
+	response.data.forEach(movie => {
+		returnData.push(_.cloneDeep(_.pick(movie, selectedAttributes)));
+	});
+
+	// const returnData = _.cloneDeep(_.pick(response.data, selectedAttributes));
+
+	console.log('returnData', returnData);
+
+	dispatch({ type: FETCH_DISCOVER, payload: returnData });
 };
