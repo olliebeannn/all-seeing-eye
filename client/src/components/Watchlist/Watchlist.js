@@ -60,18 +60,20 @@ class Watchlist extends Component {
 		if (this.props.watchlist && this.props.watchlist.length > 0) {
 			movieContent = [];
 
-			this.props.watchlist.forEach(movie =>
-				movieContent.push(
-					<Movie
-						id={movie.id}
-						title={movie.title}
-						voteAverage={movie.vote_average}
-						overview={movie.overview}
-						key={movie.id}
-						onWatchlist={movie.onWatchlist}
-					/>
-				)
-			);
+			this.props.watchlist.forEach(movie => {
+				if (movie.onWatchlist) {
+					movieContent.push(
+						<Movie
+							id={movie.id}
+							title={movie.title}
+							voteAverage={movie.vote_average}
+							overview={movie.overview}
+							key={movie.id}
+							onWatchlist={movie.onWatchlist}
+						/>
+					);
+				}
+			});
 		}
 
 		return (

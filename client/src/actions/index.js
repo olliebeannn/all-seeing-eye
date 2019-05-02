@@ -34,6 +34,6 @@ export const fetchWatchlist = () => async dispatch => {
 	dispatch({ type: FETCH_WATCHLIST, payload: newMoviesState });
 };
 
-export const removeFromWatchlist = movieId => async (dispatch, movieId) => {
-	dispatch({ type: REMOVE_FROM_WATCHLIST, payload: { movieId } });
+export const removeFromWatchlist = movieId => async dispatch => {
+	dispatch({ type: REMOVE_FROM_WATCHLIST, payload: { movieId: movieId } });
 };
