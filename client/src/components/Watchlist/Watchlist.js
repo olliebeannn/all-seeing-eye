@@ -13,12 +13,12 @@ class Watchlist extends Component {
 	// After mount, get the updated user (use existing action creator?) to extract their watchlist
 	// Call backend API to get movie details for watchlist movies (and put on local state?)
 	// Display those via movie components
-	constructor(props) {
-		super(props);
-		this.state = {
-			movies: []
-		};
-	}
+	// constructor(props) {
+	// 	super(props);
+	// 	this.state = {
+	// 		movies: []
+	// 	};
+	// }
 
 	componentDidMount() {
 		// Update the state of auth if it's changed since login
