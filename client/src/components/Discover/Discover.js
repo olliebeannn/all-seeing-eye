@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import _ from 'lodash';
 
@@ -69,4 +70,8 @@ class Discover extends Component {
 	}
 }
 
-export default Discover;
+function mapStateToProps({ discoverList }) {
+	return { discoverList };
+}
+
+export default connect(mapStateToProps)(Discover);
