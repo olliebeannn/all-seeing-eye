@@ -23,16 +23,16 @@ class Movie extends Component {
 			.then(res => console.log(res));
 	}
 
-	onRemoveFromWatchlist(movieId) {
-		console.log('movieId', movieId);
-
-		axios
-			.post('/api/watchlist/update', {
-				movieId: movieId,
-				action: 'remove'
-			})
-			.then(res => console.log(res));
-	}
+	// onRemoveFromWatchlist(movieId) {
+	// 	console.log('movieId', movieId);
+	//
+	// 	axios
+	// 		.post('/api/watchlist/update', {
+	// 			movieId: movieId,
+	// 			action: 'remove'
+	// 		})
+	// 		.then(res => console.log(res));
+	// }
 
 	render() {
 		const displayWatchlistButton = () => {

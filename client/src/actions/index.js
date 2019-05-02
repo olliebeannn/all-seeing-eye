@@ -35,5 +35,12 @@ export const fetchWatchlist = () => async dispatch => {
 };
 
 export const removeFromWatchlist = movieId => async dispatch => {
+	const response = await axios
+		.post('/api/watchlist/update', {
+			movieId: movieId,
+			action: 'remove'
+		})
+		.then(res => console.log(res));
+
 	dispatch({ type: REMOVE_FROM_WATCHLIST, payload: { movieId: movieId } });
 };
