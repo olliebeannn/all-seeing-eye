@@ -4,6 +4,7 @@ import _ from 'lodash';
 import {
 	FETCH_USER,
 	FETCH_WATCHLIST,
+	ADD_TO_WATCHLIST,
 	REMOVE_FROM_WATCHLIST,
 	FETCH_DISCOVER
 } from './types';
@@ -37,6 +38,17 @@ export const fetchWatchlist = () => async dispatch => {
 	console.log('newMoviesState', newMoviesState);
 
 	dispatch({ type: FETCH_WATCHLIST, payload: newMoviesState });
+};
+
+export const addToWatchlist = movieId => async dispatch => {
+	const response = await axios
+		.post('/api/watchlist/update', {
+			movieId: movieId,
+			action: 'add'
+		})
+		.then(res => console.log(res));
+
+	dispatch({ type: ADD_TO_WATCHLIST, payload: { movieId: movieId } });
 };
 
 export const removeFromWatchlist = movieId => async dispatch => {

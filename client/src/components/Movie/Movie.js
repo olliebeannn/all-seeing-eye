@@ -55,9 +55,15 @@ class Movie extends Component {
 				);
 			} else {
 				return (
+					// <Button
+					// 	className="Button Button--primary"
+					// 	click={() => this.onAddToWatchlist(this.props.id)}
+					// >
+					// 	Add to Watchlist
+					// </Button>
 					<Button
 						className="Button Button--primary"
-						click={() => this.onAddToWatchlist(this.props.id)}
+						click={() => this.props.addToWatchlist(this.props.id)}
 					>
 						Add to Watchlist
 					</Button>
