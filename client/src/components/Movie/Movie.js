@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import LinesEllipsis from 'react-lines-ellipsis';
 import axios from 'axios';
 
 import baseStyles from '../../styles/base.scss';
 import styles from './Movie.scss';
 import image from './inception.png';
+import * as actions from '../../actions';
 
 import Button from '../Button/Button';
 
@@ -36,9 +38,17 @@ class Movie extends Component {
 		const displayWatchlistButton = () => {
 			if (this.props.onWatchlist) {
 				return (
+					// <Button
+					// 	className="Button Button--primary"
+					// 	click={() => this.onRemoveFromWatchlist(this.props.id)}
+					// >
+					// 	Remove from Watchlist
+					// </Button>
 					<Button
 						className="Button Button--primary"
-						click={() => this.onRemoveFromWatchlist(this.props.id)}
+						click={() =>
+							this.props.removeFromWatchlist(this.props.id)
+						}
 					>
 						Remove from Watchlist
 					</Button>
@@ -87,4 +97,7 @@ class Movie extends Component {
 	}
 }
 
-export default Movie;
+export default connect(
+	null,
+	actions
+)(Movie);
