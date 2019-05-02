@@ -1,7 +1,7 @@
 import axios from 'axios';
 import _ from 'lodash';
 
-import { FETCH_USER, FETCH_WATCHLIST } from './types';
+import { FETCH_USER, FETCH_WATCHLIST, REMOVE_FROM_WATCHLIST } from './types';
 
 export const fetchUser = () => async dispatch => {
 	const res = await axios.get('/api/currentUser');
@@ -32,4 +32,8 @@ export const fetchWatchlist = () => async dispatch => {
 	console.log('newMoviesState', newMoviesState);
 
 	dispatch({ type: FETCH_WATCHLIST, payload: newMoviesState });
+};
+
+export const removeFromWatchlist = movieId => async (dispatch, movieId) => {
+	dispatch({ type: REMOVE_FROM_WATCHLIST, payload: { movieId } });
 };
