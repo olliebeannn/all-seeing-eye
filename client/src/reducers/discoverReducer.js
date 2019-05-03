@@ -17,6 +17,7 @@ export default function(state = null, action) {
 				action.payload.forEach(item =>
 					newState.push(_.cloneDeep(item))
 				);
+
 				return newState;
 			} else {
 				return action.payload || false;

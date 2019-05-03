@@ -61,6 +61,8 @@ class Discover extends Component {
 						overview={movie.overview}
 						key={movie.id}
 						onWatchlist={movie.onWatchlist}
+						posterURL={movie.poster_path}
+						backdropUrl={movie.backdrop_path}
 					/>
 				)
 			);
