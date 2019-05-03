@@ -9,13 +9,23 @@ import {
 export default function(state = null, action) {
 	switch (action.type) {
 		case FETCH_DISCOVER:
-			// console.log('inside fetch_discover in discoverReducer');
-			return action.payload || false;
+			// If there are already movies loaded, append new movies
+			// Else just return the payload, i.e. first page of movies
+			if (state) {
+				let newState = [];
+				state.forEach(item => newState.push(_.cloneDeep(item)));
+				action.payload.forEach(item =>
+					newState.push(_.cloneDeep(item))
+				);
+				return newState;
+			} else {
+				return action.payload || false;
+			}
 		case ADD_TO_WATCHLIST:
-			console.log(
-				'inside add_to_watchlist in discoverReducer',
-				action.payload.movieId
-			);
+			// console.log(
+			// 	'inside add_to_watchlist in discoverReducer',
+			// 	action.payload.movieId
+			// );
 
 			let addedState = _.cloneDeep(state);
 
