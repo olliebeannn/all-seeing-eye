@@ -7,43 +7,27 @@ import styles from './Discover.scss';
 import * as actions from '../../actions';
 
 import Movie from '../Movie/Movie';
+import Button from '../Button/Button';
 
 class Discover extends Component {
-	// constructor(props) {
-	// 	super(props);
-	// 	this.state = {
-	// 		movies: []
-	// 	};
-	// }
+	constructor(props) {
+		super(props);
+		this.state = {
+			currentPage: 1
+		};
+	}
 
 	componentDidMount() {
-		// axios.get('/api/discover/fetch').then(res => {
-		// 	console.log(res);
-		//
-		// 	const selectedAttributes = [
-		// 		'id',
-		// 		'title',
-		// 		'overview',
-		// 		'vote_average',
-		// 		'genre_ids',
-		// 		'onWatchlist'
-		// 	];
-		//
-		// 	let newMoviesState = [...this.state.movies];
-		//
-		// 	res.data.forEach(movie => {
-		// 		newMoviesState.push(
-		// 			_.cloneDeep(_.pick(movie, selectedAttributes))
-		// 		);
-		// 	});
-		//
-		// 	this.setState({
-		// 		movies: newMoviesState
-		// 	});
-		// });
-
-		this.props.loadDiscoverMovies(1);
+		this.props.loadDiscoverMovies(this.state.currentPage);
 	}
+
+	loadMoreMovies = () => {
+		let page = this.state.currentPage;
+
+		this.props.loadDiscoverMovies(page + 1);
+
+		this.setState({ currentPage: page + 1 });
+	};
 
 	render() {
 		let movieContent = 'Loading...';
@@ -85,6 +69,12 @@ class Discover extends Component {
 		return (
 			<div className="Discover">
 				<div className="MovieContainer">{movieContent}</div>
+				<Button
+					className="Button Button--primary"
+					click={this.loadMoreMovies}
+				>
+					Load More...
+				</Button>
 			</div>
 		);
 	}
