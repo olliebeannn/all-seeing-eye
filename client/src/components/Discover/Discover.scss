@@ -4,6 +4,14 @@
 	height: 100%;
 }
 
+.Discover__loadMore {
+	display: flex;
+	justify-content: center;
+	margin: $spacing-4 auto;
+	max-width: 624px;
+	width: 60%;
+}
+
 .MovieContainer {
 	margin: $spacing-4 auto 0 auto;
 	max-width: 624px;
