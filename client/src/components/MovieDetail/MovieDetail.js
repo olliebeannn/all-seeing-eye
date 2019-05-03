@@ -35,7 +35,9 @@ class MovieDetail extends Component {
 				'genres',
 				'runtime',
 				'original_language',
-				'credits'
+				'credits',
+				'poster_path',
+				'backdrop_path'
 			];
 
 			let movieData = _.cloneDeep(_.pick(res.data, selectedAttributes));
@@ -85,7 +87,12 @@ class MovieDetail extends Component {
 				content = (
 					<div className="MovieDetail">
 						<div className="MovieDetail__poster">
-							<img src={image} alt="movie poster" />
+							<img
+								src={`https://image.tmdb.org/t/p/original/${
+									this.state.movieData.poster_path
+								}`}
+								alt="movie poster"
+							/>
 						</div>
 						<div className="MovieDetail__content">
 							<div className="MovieDetail__firstLine">
