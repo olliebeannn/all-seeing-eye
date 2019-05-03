@@ -42,7 +42,7 @@ class Discover extends Component {
 		// 	});
 		// });
 
-		this.props.loadDiscoverMovies();
+		this.props.loadDiscoverMovies(1);
 	}
 
 	render() {

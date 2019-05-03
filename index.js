@@ -99,11 +99,13 @@ app.get('/api/logout', (req, res) => {
 });
 
 app.get('/api/discover/fetch', (req, res) => {
+	const page = req.query.page;
+
 	axios
 		.get(
 			`https://api.themoviedb.org/3/discover/movie?api_key=${
 				keys.TMDBkey
-			}&vote_count.gte=500&sort_by=vote_average.desc&total_results=100&page=2`
+			}&vote_count.gte=500&sort_by=vote_average.desc&total_results=100&page=${page}`
 		)
 		.then(async response => {
 			let returnData = response.data.results;
@@ -124,7 +126,7 @@ app.get('/api/discover/fetch', (req, res) => {
 				}
 			});
 
-			console.log(returnData);
+			// console.log(returnData);
 
 			res.send(returnData);
 		});

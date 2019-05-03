@@ -62,8 +62,10 @@ export const removeFromWatchlist = movieId => async dispatch => {
 	dispatch({ type: REMOVE_FROM_WATCHLIST, payload: { movieId: movieId } });
 };
 
-export const loadDiscoverMovies = () => async dispatch => {
-	const response = await axios.get('/api/discover/fetch');
+export const loadDiscoverMovies = page => async dispatch => {
+	console.log('page:', page);
+
+	const response = await axios.get(`/api/discover/fetch?page=${page}`);
 
 	const selectedAttributes = [
 		'id',
