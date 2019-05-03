@@ -69,12 +69,14 @@ class Discover extends Component {
 		return (
 			<div className="Discover">
 				<div className="MovieContainer">{movieContent}</div>
-				<Button
-					className="Button Button--primary"
-					click={this.loadMoreMovies}
-				>
-					Load More...
-				</Button>
+				<div className="Discover__loadMore">
+					<Button
+						className="Button Button--primary"
+						click={this.loadMoreMovies}
+					>
+						Load More...
+					</Button>
+				</div>
 			</div>
 		);
 	}
