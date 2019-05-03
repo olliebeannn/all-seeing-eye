@@ -24,7 +24,9 @@ export const fetchWatchlist = () => async dispatch => {
 		'overview',
 		'vote_average',
 		'genre_ids',
-		'onWatchlist'
+		'onWatchlist',
+		'poster_path',
+		'backdrop_path'
 	];
 
 	let newMoviesState = [];
@@ -73,7 +75,9 @@ export const loadDiscoverMovies = page => async dispatch => {
 		'overview',
 		'vote_average',
 		'genre_ids',
-		'onWatchlist'
+		'onWatchlist',
+		'poster_path',
+		'backdrop_path'
 	];
 
 	// console.log('response.data', response.data);

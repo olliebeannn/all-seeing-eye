@@ -74,7 +74,12 @@ class Movie extends Component {
 		return (
 			<div className="Movie">
 				<div className="Movie__poster">
-					<img src={image} alt="movie poster" />
+					<img
+						src={`https://image.tmdb.org/t/p/original/${
+							this.props.posterURL
+						}`}
+						alt="movie poster"
+					/>
 				</div>
 				<div className="Movie__content">
 					<div className="Movie__firstLine">

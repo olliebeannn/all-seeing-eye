@@ -110,7 +110,7 @@ app.get('/api/discover/fetch', (req, res) => {
 		.then(async response => {
 			let returnData = response.data.results;
 
-			// console.log("returnData", returnData);
+			console.log('returnData', returnData);
 
 			let user = await User.findById(req.user._id);
 
