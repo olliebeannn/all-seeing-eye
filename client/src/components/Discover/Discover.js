@@ -7,6 +7,7 @@ import styles from './Discover.scss';
 import * as actions from '../../actions';
 
 import Movie from '../Movie/Movie';
+import MovieList from '../MovieList/MovieList';
 import Button from '../Button/Button';
 
 class Discover extends Component {
@@ -70,7 +71,7 @@ class Discover extends Component {
 
 		return (
 			<div className="Discover">
-				<div className="MovieContainer">{movieContent}</div>
+				<MovieList movies={this.props.discoverList} />
 				<div className="Discover__loadMore">
 					<Button
 						className="Button Button--primary"
