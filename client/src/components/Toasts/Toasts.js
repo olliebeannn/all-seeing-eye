@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Toast from '../Toast/Toast';
+import styles from './Toasts.scss';
 
 const Toasts = props => {
 	let toastsContent = null;

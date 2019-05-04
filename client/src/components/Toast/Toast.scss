@@ -1,0 +1,15 @@
+@import '../../styles/variables.scss';
+
+.Toast {
+	background-color: rgba(255, 255, 255, 0.9);
+	border-radius: 4px;
+	display: flex;
+	justify-content: center;
+	margin: 0 auto $spacing-2 auto;
+	padding: $spacing-2;
+	width: 540px;
+}
+
+.Toast__text {
+	text-align: center;
+}
