@@ -26,6 +26,7 @@ class App extends Component {
 			<div className="App">
 				<BrowserRouter>
 					<Header />
+					<Toasts />
 					<Route path="/watchlist" component={Watchlist} />
 					<Route path="/discover" component={Discover} />
 					<Route path="/seen" component={Seen} />
