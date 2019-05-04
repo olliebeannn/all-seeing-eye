@@ -28,7 +28,7 @@ export default function(state = null, action) {
 
 			return newState;
 		default:
-			console.log('called watchlistReducer with default!', state);
+			// console.log('called watchlistReducer with default!', state);
 			return state;
 	}
 }

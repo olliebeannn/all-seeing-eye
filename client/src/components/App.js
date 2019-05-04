@@ -15,9 +15,7 @@ import Toasts from './Toasts/Toasts';
 
 class App extends Component {
 	componentDidMount() {
-		console.log('calling fetchUser in app.js');
 		this.props.fetchUser();
-		console.log('calling fetchWatchlist in app.js');
 		this.props.fetchWatchlist();
 	}
 

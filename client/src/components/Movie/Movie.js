@@ -12,9 +12,15 @@ import * as actions from '../../actions';
 import Button from '../Button/Button';
 
 class Movie extends Component {
+	generateToastId() {
+		return Math.floor(Math.random() * 1000000);
+	}
+
 	onAddToWatchlist(movieId, movieName) {
+		const toastId = this.generateToastId();
+
 		this.props.addToWatchlist(movieId);
-		this.props.showToast(movieName);
+		this.props.addToast(movieName, 'add', toastId);
 	}
 
 	// onRemoveFromWatchlist(movieId) {
