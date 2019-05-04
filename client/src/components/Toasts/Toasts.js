@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Toast from '../Toast/Toast';
 
@@ -14,4 +15,8 @@ const Toasts = props => {
 	return <div className="Toasts">{toastsContent}</div>;
 };
 
-export default Toasts;
+function mapStateToProps({ toasts }) {
+	return { toasts };
+}
+
+export default connect(mapStateToProps)(Toasts);
