@@ -13,10 +13,21 @@ export default function toasts(state = [], action) {
 				state.forEach(elem => addedState.push(_.cloneDeep(elem)));
 			}
 
+			let newToastText = '';
+
+			if (action.payload.actionTaken === 'add') {
+				newToastText = `Added \"${action.payload.text}\" to Watchlist`;
+			} else if (action.payload.actionTaken === 'remove') {
+				newToastText = `Removed \"${
+					action.payload.text
+				}\" from watchlist`;
+			} else {
+				newToastText = 'Unsupported toast action...';
+			}
+
 			const newToast = {
 				id: action.payload.id,
-				text: action.payload.text,
-				actionTaken: action.payload.actionTaken
+				text: newToastText
 			};
 
 			addedState.push(newToast);
