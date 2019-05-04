@@ -1,11 +1,19 @@
-import { ADD_TOAST, REMOVE_TOAST } from '../actions/types';
+import { SHOW_TOAST, HIDE_TOAST } from '../actions/types';
 
-export default function toasts(state = [], action) {
+export default function toasts(state = { visible: false, text: '' }, action) {
 	switch (action.type) {
-		case ADD_TOAST:
-			return state;
-		case REMOVE_TOAST:
-			return state;
+		case SHOW_TOAST:
+			let shownState = {
+				visible: true,
+				text: action.payload.text
+			};
+			return shownState;
+		case HIDE_TOAST:
+			let hiddenState = {
+				visible: false,
+				text: ''
+			};
+			return hiddenState;
 		default:
 			return state;
 	}
