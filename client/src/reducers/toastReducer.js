@@ -34,7 +34,18 @@ export default function toasts(state = [], action) {
 
 			return addedState;
 		case REMOVE_TOAST:
-			return state;
+			console.log('removeToast in reducer', action);
+
+			let removedState = [];
+
+			if (state.length > 0) {
+				state.forEach(elem => {
+					if (elem.id !== action.payload.id)
+						removedState.push(_.cloneDeep(elem));
+				});
+			}
+
+			return removedState;
 		default:
 			return state;
 	}

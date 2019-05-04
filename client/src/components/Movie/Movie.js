@@ -21,6 +21,7 @@ class Movie extends Component {
 
 		this.props.addToWatchlist(movieId);
 		this.props.addToast(movieName, 'add', toastId);
+		setTimeout(() => this.props.removeToast(toastId), 5000);
 	}
 
 	// onRemoveFromWatchlist(movieId) {
