@@ -19,13 +19,13 @@ class Header extends Component {
 				break;
 			default:
 				headerContent = [
-					<li className="Header__item" key="2">
+					<li className="Header__item Header__tabLink" key="2">
 						<a href="/watchlist">Watchlist</a>
 					</li>,
-					<li className="Header__item" key="3">
+					<li className="Header__item Header__tabLink" key="3">
 						<a href="/discover">Discover</a>
 					</li>,
-					<li className="Header__item" key="4">
+					<li className="Header__item Header__tabLink" key="4">
 						<a href="/seen">Seen</a>
 					</li>,
 					<li className="Header__item" key="5">
@@ -40,6 +40,9 @@ class Header extends Component {
 	render() {
 		return (
 			<ul className="Header">
+				<li className="Header__item Header__menuIcon" key="0">
+					<i class="material-icons">menu</i>
+				</li>
 				<li className="Header__item Header__appName" key="1">
 					<a href="/">The All Seeing Eye</a>
 				</li>
