@@ -11,7 +11,7 @@ import Watchlist from './Watchlist/Watchlist';
 import Discover from './Discover/Discover';
 import MovieDetail from './MovieDetail/MovieDetail';
 import Seen from './Seen/Seen';
-import Toast from './Toast/Toast';
+import Toasts from './Toasts/Toasts';
 
 class App extends Component {
 	componentDidMount() {
@@ -26,7 +26,6 @@ class App extends Component {
 			<div className="App">
 				<BrowserRouter>
 					<Header />
-					<Toast />
 					<Route path="/watchlist" component={Watchlist} />
 					<Route path="/discover" component={Discover} />
 					<Route path="/seen" component={Seen} />

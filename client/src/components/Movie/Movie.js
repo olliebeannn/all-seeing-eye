@@ -12,15 +12,9 @@ import * as actions from '../../actions';
 import Button from '../Button/Button';
 
 class Movie extends Component {
-	onAddToWatchlist(movieId) {
-		console.log('movieId', movieId);
-
-		axios
-			.post('/api/watchlist/update', {
-				movieId: movieId,
-				action: 'add'
-			})
-			.then(res => console.log(res));
+	onAddToWatchlist(movieId, movieName) {
+		this.props.addToWatchlist(movieId);
+		this.props.showToast(movieName);
 	}
 
 	// onRemoveFromWatchlist(movieId) {
@@ -61,9 +55,18 @@ class Movie extends Component {
 					// >
 					// 	Add to Watchlist
 					// </Button>
+					// <Button
+					// 	className="Button Button--primary"
+					// 	click={() => this.props.addToWatchlist(this.props.id)}
+					// >
 					<Button
 						className="Button Button--primary"
-						click={() => this.props.addToWatchlist(this.props.id)}
+						click={() =>
+							this.onAddToWatchlist(
+								this.props.id,
+								this.props.title
+							)
+						}
 					>
 						Add to Watchlist
 					</Button>
