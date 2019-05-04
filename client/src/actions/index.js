@@ -6,7 +6,9 @@ import {
 	FETCH_WATCHLIST,
 	ADD_TO_WATCHLIST,
 	REMOVE_FROM_WATCHLIST,
-	FETCH_DISCOVER
+	FETCH_DISCOVER,
+	ADD_TOAST,
+	REMOVE_TOAST
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -62,6 +64,17 @@ export const removeFromWatchlist = movieId => async dispatch => {
 		.then(res => console.log(res));
 
 	dispatch({ type: REMOVE_FROM_WATCHLIST, payload: { movieId: movieId } });
+};
+
+export const addToast = text => {
+	return {
+		type: ADD_TOAST,
+		payload: { text }
+	};
+};
+
+export const removeToast = () => {
+	return { type: REMOVE_TOAST };
 };
 
 export const loadDiscoverMovies = page => async dispatch => {

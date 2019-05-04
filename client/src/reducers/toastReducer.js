@@ -1,19 +1,13 @@
-import { SHOW_TOAST, HIDE_TOAST } from '../actions/types';
+import { ADD_TOAST, REMOVE_TOAST } from '../actions/types';
 
-export default function toasts(state = { visible: false, text: '' }, action) {
+export default function toasts(state = [], action) {
+	console.log('Toast reducer called', action);
+
 	switch (action.type) {
-		case SHOW_TOAST:
-			let shownState = {
-				visible: true,
-				text: action.payload.text
-			};
-			return shownState;
-		case HIDE_TOAST:
-			let hiddenState = {
-				visible: false,
-				text: ''
-			};
-			return hiddenState;
+		case ADD_TOAST:
+			return state;
+		case REMOVE_TOAST:
+			return state;
 		default:
 			return state;
 	}
