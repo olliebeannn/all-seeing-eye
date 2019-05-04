@@ -107,7 +107,7 @@ class Movie extends Component {
 					<LinesEllipsis
 						className="Movie__overview"
 						text={this.props.overview}
-						maxLine="2"
+						maxLine="3"
 						ellipsis="..."
 						trimRight
 						basedOn="letters"
