@@ -5,7 +5,7 @@
 	background-image: $gradient-1;
 	display: flex;
 	height: 64px;
-	padding: 0 32px;
+	padding: 0 $spacing-2;
 	list-style: none;
 }
 
@@ -14,15 +14,42 @@
 	padding: 16px;
 }
 
-.Header__item:last-of-type {
-	margin-left: auto;
-}
-
 .Header__item a {
 	color: $white;
 	text-decoration: none;
 }
 
+.Header__menuIcon {
+	color: $white;
+	display: flex;
+	padding: 0;
+}
+
 .Header__appName {
 	font-size: $font-xl;
+}
+
+.Header__tabLink {
+	display: none;
+}
+
+.Header__item:last-of-type {
+	margin-left: auto;
+	padding-right: 0;
+}
+
+@media (min-width: 768px) {
+	.Header {
+		padding: 0 $spacing-4;
+	}
+
+	.Header__menuIcon {
+		color: $white;
+		display: none;
+		padding: 0;
+	}
+
+	.Header__tabLink {
+		display: inline;
+	}
 }
