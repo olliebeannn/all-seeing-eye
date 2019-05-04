@@ -20,7 +20,7 @@ export default function toasts(state = [], action) {
 			} else if (action.payload.actionTaken === 'remove') {
 				newToastText = `Removed \"${
 					action.payload.text
-				}\" from watchlist`;
+				}\" from Watchlist`;
 			} else {
 				newToastText = 'Unsupported toast action...';
 			}
