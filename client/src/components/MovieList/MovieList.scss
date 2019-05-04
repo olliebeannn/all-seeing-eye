@@ -1,6 +1,12 @@
 @import '../../styles/variables.scss';
 
 .MovieList {
-	margin: $spacing-4 auto 0 auto;
-	max-width: 720px;
+	margin: $spacing-2;
+}
+
+@media (min-width: 768px) {
+	.MovieList {
+		margin: $spacing-4 auto 0 auto;
+		max-width: 720px;
+	}
 }
