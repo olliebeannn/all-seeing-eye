@@ -4,36 +4,29 @@
 	background-color: $white;
 	border-radius: 4px;
 	display: flex;
-	margin-bottom: 16px;
+	flex-direction: column;
+	margin-bottom: $spacing-2;
 }
 
 .Movie__poster {
-	max-width: 180px;
-	max-height: 200px;
+	height: 200px;
+}
 
-	img {
-		height: 100%;
-		width: 100%;
-		object-fit: cover;
-	}
+.Movie__poster img {
+	height: 100%;
+	width: 100%;
+	object-fit: cover;
 }
 
 .Movie__content {
 	display: flex;
 	flex-direction: column;
 	padding: $spacing-2;
-	width: 100%;
 }
 
 .Movie__firstLine {
 	display: flex;
-}
-
-.Movie__yearDirector {
-	color: $text-secondary;
-	font-size: $font-s;
-	font-weight: $font-weight-reg;
-	margin-left: $spacing-1;
+	justify-content: space-between;
 }
 
 .Movie__score {
@@ -49,9 +42,31 @@
 
 .Movie__buttonWrapper {
 	display: flex;
-	margin-top: auto;
+	margin-top: $spacing-2;
 
 	button {
 		flex-grow: 1;
+	}
+}
+
+@media (min-width: 768px) {
+	.Movie {
+		flex-direction: row;
+	}
+
+	.Movie__poster {
+		height: none;
+		min-width: 140px;
+		width: 140px;
+
+		img {
+			height: 100%;
+			width: 100%;
+			object-fit: cover;
+		}
+	}
+
+	.Movie__buttonWrapper {
+		margin-top: auto;
 	}
 }
