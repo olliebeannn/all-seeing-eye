@@ -8,7 +8,11 @@ const Toasts = props => {
 
 	if (props.toasts.length > 0) {
 		toastsContent = (
-			<ul>{props.toasts.map(toast => <Toast text={toast.text} />)}</ul>
+			<ul>
+				{props.toasts.map(toast => (
+					<Toast text={toast.text} key={toast.id} />
+				))}
+			</ul>
 		);
 	}
 
