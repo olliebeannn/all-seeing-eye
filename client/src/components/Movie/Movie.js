@@ -24,16 +24,13 @@ class Movie extends Component {
 		setTimeout(() => this.props.removeToast(toastId), 5000);
 	}
 
-	// onRemoveFromWatchlist(movieId) {
-	// 	console.log('movieId', movieId);
-	//
-	// 	axios
-	// 		.post('/api/watchlist/update', {
-	// 			movieId: movieId,
-	// 			action: 'remove'
-	// 		})
-	// 		.then(res => console.log(res));
-	// }
+	onRemoveFromWatchlist(movieId, movieName) {
+		const toastId = this.generateToastId();
+
+		this.props.removeFromWatchlist(movieId);
+		this.props.addToast(movieName, 'remove', toastId);
+		setTimeout(() => this.props.removeToast(toastId), 5000);
+	}
 
 	render() {
 		const displayWatchlistButton = () => {
@@ -45,10 +42,19 @@ class Movie extends Component {
 					// >
 					// 	Remove from Watchlist
 					// </Button>
+					// <Button
+					// 	className="Button Button--primary"
+					// 	click={() =>
+					// 		this.props.removeFromWatchlist(this.props.id)
+					// 	}
+					// >
 					<Button
 						className="Button Button--primary"
 						click={() =>
-							this.props.removeFromWatchlist(this.props.id)
+							this.onRemoveFromWatchlist(
+								this.props.id,
+								this.props.title
+							)
 						}
 					>
 						Remove from Watchlist
