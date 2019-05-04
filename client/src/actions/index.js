@@ -33,13 +33,13 @@ export const fetchWatchlist = () => async dispatch => {
 
 	let newMoviesState = [];
 
-	console.log('inside actions.js', res);
+	// console.log('inside actions.js', res);
 
 	res.data.forEach(movie => {
 		newMoviesState.push(_.cloneDeep(_.pick(movie, selectedAttributes)));
 	});
 
-	console.log('newMoviesState', newMoviesState);
+	// console.log('newMoviesState', newMoviesState);
 
 	dispatch({ type: FETCH_WATCHLIST, payload: newMoviesState });
 };
@@ -66,15 +66,15 @@ export const removeFromWatchlist = movieId => async dispatch => {
 	dispatch({ type: REMOVE_FROM_WATCHLIST, payload: { movieId: movieId } });
 };
 
-export const addToast = text => {
+export const addToast = (text, actionTaken, id) => {
 	return {
 		type: ADD_TOAST,
-		payload: { text }
+		payload: { text, actionTaken, id }
 	};
 };
 
-export const removeToast = () => {
-	return { type: REMOVE_TOAST };
+export const removeToast = id => {
+	return { type: REMOVE_TOAST, payload: { id } };
 };
 
 export const loadDiscoverMovies = page => async dispatch => {
@@ -103,7 +103,7 @@ export const loadDiscoverMovies = page => async dispatch => {
 
 	// const returnData = _.cloneDeep(_.pick(response.data, selectedAttributes));
 
-	console.log('returnData', returnData);
+	// console.log('returnData', returnData);
 
 	dispatch({ type: FETCH_DISCOVER, payload: returnData });
 };
