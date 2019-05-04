@@ -8,8 +8,8 @@
 }
 
 .Movie__poster {
-	max-width: 140px;
-	width: 25%;
+	max-width: 180px;
+	max-height: 200px;
 
 	img {
 		height: 100%;
@@ -19,8 +19,10 @@
 }
 
 .Movie__content {
-	width: 100%;
+	display: flex;
+	flex-direction: column;
 	padding: $spacing-2;
+	width: 100%;
 }
 
 .Movie__firstLine {
@@ -42,8 +44,14 @@
 
 .Movie__overview {
 	color: $text-secondary;
+	margin-top: $spacing-05;
 }
 
 .Movie__buttonWrapper {
-	margin-top: $spacing-1;
+	display: flex;
+	margin-top: auto;
+
+	button {
+		flex-grow: 1;
+	}
 }
