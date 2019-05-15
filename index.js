@@ -5,6 +5,7 @@ const GoogleStrategy = require('passport-google-oauth20').Strategy;
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const axios = require('axios');
+const _ = require('lodash');
 
 const keys = require('./config/keys');
 
@@ -12,6 +13,8 @@ require('./models/User');
 const User = mongoose.model('users');
 require('./models/Movie');
 const Movie = mongoose.model('movies');
+
+const selectedCacheAttributes = require('./utils/selectedCacheAttributes');
 
 const PORT = process.env.PORT || 5000;
 
@@ -113,13 +116,13 @@ app.get('/api/discover/fetch', (req, res) => {
     .then(async response => {
       let returnData = response.data.results;
 
-      console.log('returnData', returnData);
+      // console.log('returnData', returnData);
 
       let user = await User.findById(req.user._id);
 
       let watchlistIds = user.watchlist.map(item => item.movieId);
 
-      console.log(watchlistIds);
+      // console.log(watchlistIds);
 
       returnData.forEach(result => {
         if (watchlistIds.includes(result.id)) {
@@ -180,6 +183,20 @@ app.post('/api/watchlist/update', async (req, res) => {
     const existingMovie = await Movie.findOne({ movieId: req.body.movieId });
 
     if (!existingMovie) {
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/${req.body.movieId}?api_key=${
+          keys.TMDBkey
+        }&append_to_response=credits`
+      );
+
+      const fullMovieData = response.data;
+
+      const cacheMovieData = _.cloneDeep(
+        _.pick(fullMovieData, selectedCacheAttributes)
+      );
+
+      console.log('data to cache!', cacheMovieData);
+
       const movie = await new Movie(newMovie).save();
       console.log('new movie saved!', movie);
     }
