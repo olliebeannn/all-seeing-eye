@@ -173,9 +173,8 @@ app.post('/api/watchlist/update', async (req, res) => {
   // console.log(req.user);
 
   if (req.body.action === 'add') {
-    // Find user, check if watchlist contains this movie
-    // If not, then execute this update
-
+    // Check if movie is in DB
+    // If not, pull all movie info and cache it
     const newMovie = { movieId: req.body.movieId };
 
     const existingMovie = await Movie.findOne({ movieId: req.body.movieId });
@@ -185,6 +184,8 @@ app.post('/api/watchlist/update', async (req, res) => {
       console.log('new movie saved!', movie);
     }
 
+    // Find user, check if watchlist contains this movie
+    // If not, then execute this update
     User.findOneAndUpdate(
       {
         _id: req.user._id,
