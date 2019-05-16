@@ -172,14 +172,9 @@ app.get('/api/watchlist/fetch', (req, res) => {
 });
 
 app.post('/api/watchlist/update', async (req, res) => {
-  // console.log(req.body);
-  // console.log(req.user);
-
   if (req.body.action === 'add') {
     // Check if movie is in DB
     // If not, pull all movie info and cache it
-    // const newMovie = { movieId: req.body.movieId };
-
     let movie = await Movie.findOne({ movieId: req.body.movieId });
 
     if (!movie) {
@@ -223,12 +218,6 @@ app.post('/api/watchlist/update', async (req, res) => {
 
     // Find user, check if watchlist contains this movie
     // If not, then execute this update
-    console.log('req.body.movieId', req.body.movieId);
-    console.log(movie);
-    // console.log(
-    //   'mongoose.Types.ObjectId(req.body.movieId)',
-    //   mongoose.Types.ObjectId(req.body.movieId)
-    // );
     User.findOneAndUpdate(
       {
         _id: req.user._id,
