@@ -24,7 +24,7 @@ export const fetchWatchlist = () => async dispatch => {
 
   let newMoviesState = [];
 
-  // console.log('inside actions.js', res);
+  console.log('inside actions.js', res);
 
   res.data.forEach(movie => {
     newMoviesState.push(_.cloneDeep(_.pick(movie, selectedAttributes)));

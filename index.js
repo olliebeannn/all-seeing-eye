@@ -152,22 +152,34 @@ app.get('/api/watchlist/fetch', (req, res) => {
   // Alt version, just pulling from backend
   let movieIds = [];
 
-  User.findById(req.user._id).then(user => {
-    user.watchlist.forEach(movie => movieIds.push(movie.movieId));
+  User.findById(req.user._id).then(async user => {
+    // NEW: just query DB for users' watchlist
+    const movies = await Movie.find({ _id: { $in: user.watchlist } }).lean();
 
-    let promises = movieIds.map(id => {
-      return axios
-        .get(`https://api.themoviedb.org/3/movie/${id}?api_key=${keys.TMDBkey}`)
-        .then(response => response.data);
+    // Mark as onWatchlist so buttons show up correctly
+    movies.forEach(movie => {
+      movie.onWatchlist = true;
     });
 
-    Promise.all(promises).then(data => {
-      data.forEach(movie => {
-        movie.onWatchlist = true;
-      });
+    console.log(movies);
 
-      res.send(data);
-    });
+    res.send(movies);
+
+    // OLD PROMISE VERSION PRE-CACHING IN DB
+    // user.watchlist.forEach(movie => movieIds.push(movie.movieId));
+    // let promises = movieIds.map(id => {
+    //   return axios
+    //     .get(`https://api.themoviedb.org/3/movie/${id}?api_key=${keys.TMDBkey}`)
+    //     .then(response => response.data);
+    // });
+    //
+    // Promise.all(promises).then(data => {
+    //   data.forEach(movie => {
+    //     movie.onWatchlist = true;
+    //   });
+    //
+    //   res.send(data);
+    // });
   });
 });
 
