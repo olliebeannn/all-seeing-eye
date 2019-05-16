@@ -83,7 +83,7 @@ export const loadDiscoverMovies = page => async dispatch => {
 
   // const returnData = _.cloneDeep(_.pick(response.data, selectedAttributes));
 
-  // console.log('returnData', returnData);
+  console.log('returnData from loadDiscoverMovies', returnData);
 
   dispatch({ type: FETCH_DISCOVER, payload: returnData });
 };

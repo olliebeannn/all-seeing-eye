@@ -120,19 +120,28 @@ app.get('/api/discover/fetch', (req, res) => {
 
       let user = await User.findById(req.user._id);
 
-      let watchlistIds = user.watchlist.map(item => item.movieId);
+      let watchlistMovies = await Movie.find({
+        _id: { $in: user.watchlist }
+      }).lean();
 
-      // console.log(watchlistIds);
+      let watchlistIds = watchlistMovies.map(movie => movie.movieId);
+
+      console.log('watchlistIds', watchlistIds);
+
+      // console.log('returnData', returnData);
 
       returnData.forEach(result => {
-        if (watchlistIds.includes(result.id)) {
+        result.movieId = result.id;
+        delete result.id;
+
+        if (watchlistIds.includes(result.movieId)) {
           result.onWatchlist = true;
         } else {
           result.onWatchlist = false;
         }
       });
 
-      // console.log(returnData);
+      console.log(returnData);
 
       res.send(returnData);
     });
@@ -161,7 +170,7 @@ app.get('/api/watchlist/fetch', (req, res) => {
       movie.onWatchlist = true;
     });
 
-    console.log(movies);
+    // console.log(movies);
 
     res.send(movies);
 
@@ -184,17 +193,23 @@ app.get('/api/watchlist/fetch', (req, res) => {
 });
 
 app.post('/api/watchlist/update', async (req, res) => {
+  // console.log('called /api/watchlist/update');
+
   if (req.body.action === 'add') {
     // Check if movie is in DB
     // If not, pull all movie info and cache it
     let movie = await Movie.findOne({ movieId: req.body.movieId });
 
     if (!movie) {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${req.body.movieId}?api_key=${
-          keys.TMDBkey
-        }&append_to_response=credits`
-      );
+      try {
+        const response = await axios.get(
+          `https://api.themoviedb.org/3/movie/${req.body.movieId}?api_key=${
+            keys.TMDBkey
+          }&append_to_response=credits`
+        );
+      } catch (e) {
+        console.log('error fetching movie details', e);
+      }
 
       const fullMovieData = response.data;
 

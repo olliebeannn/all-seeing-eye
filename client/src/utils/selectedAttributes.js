@@ -1,5 +1,6 @@
 export default [
-  'id',
+  '_id',
+  'movieId',
   'title',
   'overview',
   'vote_average',

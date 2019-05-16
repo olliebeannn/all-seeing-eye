@@ -14,7 +14,7 @@ class MovieList extends Component {
         movieContent.push(
           <Movie
             key={movie._id}
-            id={movie.movieId}
+            movieId={movie.movieId}
             title={movie.title}
             voteAverage={movie.vote_average}
             overview={movie.overview}
