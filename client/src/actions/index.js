@@ -22,17 +22,17 @@ export const fetchUser = () => async dispatch => {
 export const fetchWatchlist = () => async dispatch => {
   const res = await axios.get('/api/watchlist/fetch');
 
-  let newMoviesState = [];
-
-  console.log('inside actions.js', res);
-
-  res.data.forEach(movie => {
-    newMoviesState.push(_.cloneDeep(_.pick(movie, selectedAttributes)));
-  });
+  // let newMoviesState = [];
+  //
+  // console.log('inside actions.js', res);
+  //
+  // res.data.forEach(movie => {
+  //   newMoviesState.push(_.cloneDeep(_.pick(movie, selectedAttributes)));
+  // });
 
   // console.log('newMoviesState', newMoviesState);
 
-  dispatch({ type: FETCH_WATCHLIST, payload: newMoviesState });
+  dispatch({ type: FETCH_WATCHLIST, payload: res.data });
 };
 
 export const addToWatchlist = movieId => async dispatch => {
