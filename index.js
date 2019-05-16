@@ -178,11 +178,11 @@ app.post('/api/watchlist/update', async (req, res) => {
   if (req.body.action === 'add') {
     // Check if movie is in DB
     // If not, pull all movie info and cache it
-    const newMovie = { movieId: req.body.movieId };
+    // const newMovie = { movieId: req.body.movieId };
 
-    const existingMovie = await Movie.findOne({ movieId: req.body.movieId });
+    let movie = await Movie.findOne({ movieId: req.body.movieId });
 
-    if (!existingMovie) {
+    if (!movie) {
       const response = await axios.get(
         `https://api.themoviedb.org/3/movie/${req.body.movieId}?api_key=${
           keys.TMDBkey
@@ -195,7 +195,7 @@ app.post('/api/watchlist/update', async (req, res) => {
       const cacheMovieData = _.pick(fullMovieData, simpleMovieAttributes);
 
       //Add other data that needs special processing
-      cacheMovieData._id = fullMovieData.id;
+      cacheMovieData.movieId = fullMovieData.id;
       cacheMovieData.genres = _.cloneDeep(fullMovieData.genres);
 
       // Extract director info from credits arrays
@@ -217,18 +217,24 @@ app.post('/api/watchlist/update', async (req, res) => {
 
       cacheMovieData.savedAt = Date.now();
 
-      const movie = await new Movie(cacheMovieData).save();
+      movie = await new Movie(cacheMovieData).save();
       console.log('new movie saved!', movie);
     }
 
     // Find user, check if watchlist contains this movie
     // If not, then execute this update
+    console.log('req.body.movieId', req.body.movieId);
+    console.log(movie);
+    // console.log(
+    //   'mongoose.Types.ObjectId(req.body.movieId)',
+    //   mongoose.Types.ObjectId(req.body.movieId)
+    // );
     User.findOneAndUpdate(
       {
         _id: req.user._id,
-        'watchlist.movieId': { $ne: req.body.movieId }
+        watchlist: { $ne: movie._id }
       },
-      { $push: { watchlist: newMovie } },
+      { $push: { watchlist: movie._id } },
       { new: true },
       (err, doc) => {
         if (err) {

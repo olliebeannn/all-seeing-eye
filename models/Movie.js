@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const movieSchema = {
-  _id: { type: Number, required: true },
+  movieId: Number,
   title: String,
   overview: String,
   vote_count: Number,
