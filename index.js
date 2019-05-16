@@ -141,7 +141,7 @@ app.get('/api/discover/fetch', (req, res) => {
         }
       });
 
-      console.log(returnData);
+      // console.log(returnData);
 
       res.send(returnData);
     });
@@ -201,15 +201,21 @@ app.post('/api/watchlist/update', async (req, res) => {
     let movie = await Movie.findOne({ movieId: req.body.movieId });
 
     if (!movie) {
-      try {
-        const response = await axios.get(
-          `https://api.themoviedb.org/3/movie/${req.body.movieId}?api_key=${
-            keys.TMDBkey
-          }&append_to_response=credits`
-        );
-      } catch (e) {
-        console.log('error fetching movie details', e);
-      }
+      // try {
+      //   console.log(
+      //     `https://api.themoviedb.org/3/movie/${req.body.movieId}?api_key=${
+      //       keys.TMDBkey
+      //     }&append_to_response=credits`
+      //   );
+
+      const response = await axios.get(
+        `https://api.themoviedb.org/3/movie/${req.body.movieId}?api_key=${
+          keys.TMDBkey
+        }&append_to_response=credits`
+      );
+      // } catch (e) {
+      //   console.log('error fetching movie details', e);
+      // }
 
       const fullMovieData = response.data;
 
