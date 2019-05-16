@@ -14,7 +14,7 @@ const User = mongoose.model('users');
 require('./models/Movie');
 const Movie = mongoose.model('movies');
 
-const selectedCacheAttributes = require('./utils/selectedCacheAttributes');
+const simpleMovieAttributes = require('./utils/simpleMovieAttributes');
 
 const PORT = process.env.PORT || 5000;
 
@@ -191,13 +191,33 @@ app.post('/api/watchlist/update', async (req, res) => {
 
       const fullMovieData = response.data;
 
-      const cacheMovieData = _.cloneDeep(
-        _.pick(fullMovieData, selectedCacheAttributes)
+      //Grab  attributes with same variable names
+      const cacheMovieData = _.pick(fullMovieData, simpleMovieAttributes);
+
+      //Add other data that needs special processing
+      cacheMovieData._id = fullMovieData.id;
+      cacheMovieData.genres = _.cloneDeep(fullMovieData.genres);
+
+      // Extract director info from credits arrays
+      const directorArray = fullMovieData.credits.crew.filter(
+        crewMem =>
+          crewMem.department === 'Directing' && crewMem.job === 'Director'
       );
 
-      console.log('data to cache!', cacheMovieData);
+      if (directorArray.length > 0) {
+        cacheMovieData.director = {
+          id: directorArray[0].id,
+          name: directorArray[0].name
+        };
+      }
 
-      const movie = await new Movie(newMovie).save();
+      // Extract first 10 cast members info
+      const cast = _.cloneDeep(fullMovieData.credits.cast.slice(0, 10));
+      cacheMovieData.cast = cast;
+
+      cacheMovieData.savedAt = Date.now();
+
+      const movie = await new Movie(cacheMovieData).save();
       console.log('new movie saved!', movie);
     }
 
