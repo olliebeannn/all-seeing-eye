@@ -91,7 +91,7 @@ class Movie extends Component {
         </div>
         <div className="Movie__content">
           <div className="Movie__firstLine">
-            <Link to={`/movie/${this.props.id}`}>
+            <Link to={`/movie/${this.props.movieId}`}>
               <h1 className="Movie__title">{this.props.title}</h1>
             </Link>
             <p className="Movie__score">{this.props.voteAverage}</p>
