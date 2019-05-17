@@ -51,7 +51,7 @@ class Movie extends Component {
           <Button
             className="Button Button--primary"
             click={() =>
-              this.onRemoveFromWatchlist(this.props.id, this.props.title)
+              this.onRemoveFromWatchlist(this.props.movieId, this.props.title)
             }
           >
             Remove from Watchlist

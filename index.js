@@ -195,11 +195,11 @@ app.get('/api/watchlist/fetch', (req, res) => {
 app.post('/api/watchlist/update', async (req, res) => {
   // console.log('called /api/watchlist/update');
 
-  if (req.body.action === 'add') {
-    // Check if movie is in DB
-    // If not, pull all movie info and cache it
-    let movie = await Movie.findOne({ movieId: req.body.movieId });
+  // Check if movie is in DB
+  // If not, pull all movie info and cache it
+  let movie = await Movie.findOne({ movieId: req.body.movieId });
 
+  if (req.body.action === 'add') {
     if (!movie) {
       // try {
       //   console.log(
@@ -274,20 +274,38 @@ app.post('/api/watchlist/update', async (req, res) => {
     User.findOneAndUpdate(
       {
         _id: req.user._id,
-        'watchlist.movieId': { $eq: req.body.movieId }
+        watchlist: { $eq: movie._id }
       },
       {
-        $pull: { watchlist: { movieId: req.body.movieId } }
+        $pull: { watchlist: movie._id }
       },
       { new: true },
       (err, doc) => {
         if (err) {
-          console.log('err', err);
+          console.log('error:', err);
         } else {
           console.log(doc);
         }
       }
     );
+
+    // User.findOneAndUpdate(
+    //   {
+    //     _id: req.user._id
+    //     watchlist: { $eq: req.body.movieId }
+    //   },
+    //   {
+    //     // $pull: { watchlist: { movieId: req.body.movieId } }
+    //   },
+    //   { new: true },
+    //   (err, doc) => {
+    //     if (err) {
+    //       console.log('err', err);
+    //     } else {
+    //       console.log(doc);
+    //     }
+    //   }
+    // );
   }
 
   res.send('received!');
