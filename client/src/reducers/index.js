@@ -6,8 +6,8 @@ import discoverReducer from './discoverReducer';
 import toastReducer from './toastReducer';
 
 export default combineReducers({
-	auth: authReducer,
-	watchlist: watchlistReducer,
-	discoverList: discoverReducer,
-	toasts: toastReducer
+  auth: authReducer,
+  watchlist: watchlistReducer,
+  discoverList: discoverReducer,
+  toasts: toastReducer
 });

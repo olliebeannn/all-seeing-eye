@@ -21,11 +21,6 @@ export default function(state = null, action) {
         return action.payload || false;
       }
     case ADD_TO_WATCHLIST:
-      // console.log(
-      // 	'inside add_to_watchlist in discoverReducer',
-      // 	action.payload.movieId
-      // );
-
       let addedState = _.cloneDeep(state);
 
       addedState.forEach(movie => {
