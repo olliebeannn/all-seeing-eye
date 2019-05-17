@@ -36,13 +36,12 @@ export default function(state = null, action) {
 
       return addedState;
     case REMOVE_FROM_WATCHLIST:
-      // console.log('inside remove_from_watchlist inside discoverReducer');
       // only call this if discoverState contains anything (won't happen on first loading)
       if (state) {
         let removedState = _.cloneDeep(state);
 
         removedState.forEach(movie => {
-          if (movie.id === action.payload.movieId) {
+          if (movie.movieId === action.payload.movieId) {
             movie.onWatchlist = false;
           }
         });
