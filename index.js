@@ -147,14 +147,20 @@ app.get('/api/discover/fetch', (req, res) => {
     });
 });
 
-app.get('/api/movie_detail/:id', (req, res) => {
-  axios
-    .get(
-      `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${
-        keys.TMDBkey
-      }&append_to_response=credits`
-    )
-    .then(results => res.send(results.data));
+app.get('/api/movie_detail/:id', async (req, res) => {
+  const movie = await axios.get(
+    `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${
+      keys.TMDBkey
+    }&append_to_response=credits`
+  );
+
+  res.send(movie.data);
+  // .get(
+  //   `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${
+  //     keys.TMDBkey
+  //   }&append_to_response=credits`
+  // )
+  // .then(results => res.send(results.data));
 });
 
 app.get('/api/watchlist/fetch', (req, res) => {
