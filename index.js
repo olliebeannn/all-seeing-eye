@@ -148,13 +148,45 @@ app.get('/api/discover/fetch', (req, res) => {
 });
 
 app.get('/api/movie_detail/:id', async (req, res) => {
-  const movie = await axios.get(
-    `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${
-      keys.TMDBkey
-    }&append_to_response=credits`
-  );
+  let movie = await Movie.findOne({ movieId: req.params.id }).lean();
+  let user = await User.findById(req.user._id);
 
-  res.send(movie.data);
+  // console.log('inside route handler user', user);
+
+  // If movie is in DB, find out if it's on this user's watchlist
+  // Add onWatchlist prop = true to return data
+  if (movie) {
+    // console.log('in code block!');
+
+    let watchlistMovies = await Movie.find({
+      _id: { $in: user.watchlist }
+    }).lean();
+
+    let watchlistIds = watchlistMovies.map(movie => movie.movieId);
+
+    console.log(watchlistIds);
+
+    if (watchlistIds.includes(movie.movieId)) {
+      console.log('block working');
+      movie.onWatchlist = true;
+    } else {
+      movie.onWatchlist = false;
+    }
+
+    console.log('return data', movie);
+  }
+
+  if (!movie) {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${
+        keys.TMDBkey
+      }&append_to_response=credits`
+    );
+
+    movie = response.data;
+  }
+
+  res.send(movie);
   // .get(
   //   `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${
   //     keys.TMDBkey
