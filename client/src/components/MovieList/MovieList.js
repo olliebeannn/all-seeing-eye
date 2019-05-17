@@ -13,7 +13,7 @@ class MovieList extends Component {
       this.props.movies.forEach(movie =>
         movieContent.push(
           <Movie
-            key={movie._id}
+            key={movie.movieId}
             movieId={movie.movieId}
             title={movie.title}
             voteAverage={movie.vote_average}
