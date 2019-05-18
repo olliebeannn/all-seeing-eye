@@ -15,6 +15,7 @@ require('./models/Movie');
 const Movie = mongoose.model('movies');
 
 const simpleMovieAttributes = require('./utils/simpleMovieAttributes');
+const { processMovieData } = require('./utils/processMovieData');
 
 const PORT = process.env.PORT || 5000;
 
@@ -151,13 +152,9 @@ app.get('/api/movie_detail/:id', async (req, res) => {
   let movie = await Movie.findOne({ movieId: req.params.id }).lean();
   let user = await User.findById(req.user._id);
 
-  // console.log('inside route handler user', user);
-
   // If movie is in DB, find out if it's on this user's watchlist
   // Add onWatchlist prop = true to return data
   if (movie) {
-    // console.log('in code block!');
-
     let watchlistMovies = await Movie.find({
       _id: { $in: user.watchlist }
     }).lean();
@@ -173,9 +170,11 @@ app.get('/api/movie_detail/:id', async (req, res) => {
       movie.onWatchlist = false;
     }
 
-    console.log('return data', movie);
+    console.log('in db return data', movie);
   }
 
+  // If not in DB, save to DB and return the processed movie object
+  // with watchlist status = false
   if (!movie) {
     const response = await axios.get(
       `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${
@@ -183,16 +182,16 @@ app.get('/api/movie_detail/:id', async (req, res) => {
       }&append_to_response=credits`
     );
 
-    movie = response.data;
+    const processedMovieData = processMovieData(response.data);
+    const savedMovie = await new Movie(processedMovieData).save();
+
+    movie = savedMovie.toObject();
+    movie.onWatchlist = false;
+
+    console.log('new movie saved to db', movie);
   }
 
   res.send(movie);
-  // .get(
-  //   `https://api.themoviedb.org/3/movie/${req.params.id}?api_key=${
-  //     keys.TMDBkey
-  //   }&append_to_response=credits`
-  // )
-  // .then(results => res.send(results.data));
 });
 
 app.get('/api/watchlist/fetch', (req, res) => {
