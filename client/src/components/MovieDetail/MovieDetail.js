@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import axios from 'axios';
 import _ from 'lodash';
 
+import * as actions from '../../actions';
+
 import '../../styles/base.scss';
 import './MovieDetail.scss';
-import image from './inception.png';
-import selectedDetailAttributes from '../../utils/selectedDetailAttributes';
 
 import Button from '../Button/Button';
 
@@ -29,6 +30,26 @@ class MovieDetail extends Component {
     });
   }
 
+  generateToastId() {
+    return Math.floor(Math.random() * 1000000);
+  }
+
+  onAddToWatchlist(movieId, movieName) {
+    const toastId = this.generateToastId();
+
+    this.props.addToWatchlist(movieId);
+    this.props.addToast(movieName, 'add', toastId);
+    setTimeout(() => this.props.removeToast(toastId), 5000);
+  }
+
+  onRemoveFromWatchlist(movieId, movieName) {
+    const toastId = this.generateToastId();
+
+    this.props.removeFromWatchlist(movieId);
+    this.props.addToast(movieName, 'remove', toastId);
+    setTimeout(() => this.props.removeToast(toastId), 5000);
+  }
+
   render() {
     const listCast = () => {
       const cast = [];
@@ -42,6 +63,40 @@ class MovieDetail extends Component {
 
     const getReleaseYear = () => {
       return this.state.movieData.release_date.split('-')[0];
+    };
+
+    const displayWatchlistButton = () => {
+      if (this.state.movieData.title) {
+        if (this.state.movieData.onWatchlist) {
+          return (
+            <Button
+              className="Button Button--primary"
+              click={() =>
+                this.onRemoveFromWatchlist(
+                  this.state.movieData.movieId,
+                  this.state.movieData.title
+                )
+              }
+            >
+              Remove from Watchlist
+            </Button>
+          );
+        } else {
+          return (
+            <Button
+              className="Button Button--primary"
+              click={() =>
+                this.onAddToWatchlist(
+                  this.state.movieData.movieId,
+                  this.state.movieData.title
+                )
+              }
+            >
+              Add to Watchlist
+            </Button>
+          );
+        }
+      }
     };
 
     const displayContent = () => {
@@ -79,9 +134,7 @@ class MovieDetail extends Component {
                 {this.state.movieData.overview}
               </div>
               <div className="MovieDetail__buttonWrapper">
-                <Button className="Button Button--primary">
-                  Add to Watchlist
-                </Button>
+                {displayWatchlistButton()}
                 <Button className="Button Button--secondary ml1">
                   I've Seen It
                 </Button>
@@ -103,4 +156,7 @@ class MovieDetail extends Component {
   }
 }
 
-export default MovieDetail;
+export default connect(
+  null,
+  actions
+)(MovieDetail);
