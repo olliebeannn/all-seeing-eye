@@ -40,6 +40,13 @@ class MovieDetail extends Component {
     this.props.addToWatchlist(movieId);
     this.props.addToast(movieName, 'add', toastId);
     setTimeout(() => this.props.removeToast(toastId), 5000);
+
+    let newMovieData = _.cloneDeep(this.state.movieData);
+    newMovieData.onWatchlist = true;
+
+    this.setState({
+      movieData: newMovieData
+    });
   }
 
   onRemoveFromWatchlist(movieId, movieName) {
@@ -48,6 +55,13 @@ class MovieDetail extends Component {
     this.props.removeFromWatchlist(movieId);
     this.props.addToast(movieName, 'remove', toastId);
     setTimeout(() => this.props.removeToast(toastId), 5000);
+
+    let newMovieData = _.cloneDeep(this.state.movieData);
+    newMovieData.onWatchlist = false;
+
+    this.setState({
+      movieData: newMovieData
+    });
   }
 
   render() {
