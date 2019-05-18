@@ -21,31 +21,10 @@ class MovieDetail extends Component {
 
   componentDidMount() {
     const movieId = this.props.match.params.id;
-    console.log(movieId);
 
     axios.get(`/api/movie_detail/${movieId}`).then(res => {
-      // console.log('full data:', res.data);
-
-      let movieData = _.cloneDeep(_.pick(res.data, selectedDetailAttributes));
-
-      // Extract director info from credits arrays
-      const directorArray = res.data.credits.crew.filter(
-        crewMem =>
-          crewMem.department === 'Directing' && crewMem.job === 'Director'
-      );
-
-      if (directorArray.length > 0) {
-        movieData.directorName = directorArray[0].name;
-      }
-
-      // Extract first 10 cast members info
-      const cast = _.cloneDeep(res.data.credits.cast.slice(0, 10));
-      movieData.cast = cast;
-
-      // console.log('movie data:', movieData);
-
       this.setState({
-        movieData: movieData
+        movieData: res.data
       });
     });
   }
