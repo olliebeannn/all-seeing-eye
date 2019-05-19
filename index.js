@@ -259,6 +259,26 @@ app.post('/api/update-list', async (req, res) => {
     );
   }
 
+  if (req.body.action === 'add_seen') {
+    console.log('add movie to seen list!');
+
+    User.findOneAndUpdate(
+      {
+        _id: req.user._id,
+        seen: { $ne: movie._id }
+      },
+      { $push: { seen: movie._id } },
+      { new: true },
+      (err, doc) => {
+        if (err) {
+          console.log('error:', err);
+        } else {
+          console.log(doc);
+        }
+      }
+    );
+  }
+
   res.send('received!');
 });
 

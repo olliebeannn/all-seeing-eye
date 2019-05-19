@@ -3,6 +3,8 @@ export const FETCH_USER = 'fetch_user';
 export const FETCH_WATCHLIST = 'fetch_watchlist';
 export const ADD_TO_WATCHLIST = 'add_to_watchlist';
 export const REMOVE_FROM_WATCHLIST = 'remove_from_watchlist';
+export const ADD_TO_SEEN = 'add_to_seen';
+export const REMOVE_FROM_SEEN = 'remove_from_seen';
 
 export const FETCH_DISCOVER = 'fetch_discover';
 

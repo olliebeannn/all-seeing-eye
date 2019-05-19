@@ -84,7 +84,10 @@ class Movie extends Component {
           />
           <div className="Movie__buttonWrapper">
             {displayWatchlistButton()}
-            <Button className="Button Button--secondary ml1">
+            <Button
+              className="Button Button--secondary ml1"
+              click={() => this.props.addToSeen(this.props.movieId)}
+            >
               I've Seen It
             </Button>
           </div>
