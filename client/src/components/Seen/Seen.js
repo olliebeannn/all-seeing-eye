@@ -8,7 +8,11 @@ import styles from './Seen.scss';
 
 class Seen extends Component {
   render() {
-    return <div className="Seen">Seen!</div>;
+    return (
+      <div className="Seen">
+        <MovieList movies={this.props.seen} />
+      </div>
+    );
   }
 }
 

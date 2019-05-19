@@ -14,28 +14,29 @@ import Seen from './Seen/Seen';
 import Toasts from './Toasts/Toasts';
 
 class App extends Component {
-	componentDidMount() {
-		this.props.fetchUser();
-		this.props.fetchWatchlist();
-	}
+  componentDidMount() {
+    this.props.fetchUser();
+    this.props.fetchWatchlist();
+    this.props.fetchSeen();
+  }
 
-	render() {
-		return (
-			<div className="App">
-				<BrowserRouter>
-					<Header />
-					<Toasts />
-					<Route path="/watchlist" component={Watchlist} />
-					<Route path="/discover" component={Discover} />
-					<Route path="/seen" component={Seen} />
-					<Route path="/movie/:id" component={MovieDetail} />
-				</BrowserRouter>
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div className="App">
+        <BrowserRouter>
+          <Header />
+          <Toasts />
+          <Route path="/watchlist" component={Watchlist} />
+          <Route path="/discover" component={Discover} />
+          <Route path="/seen" component={Seen} />
+          <Route path="/movie/:id" component={MovieDetail} />
+        </BrowserRouter>
+      </div>
+    );
+  }
 }
 
 export default connect(
-	null,
-	actions
+  null,
+  actions
 )(App);
