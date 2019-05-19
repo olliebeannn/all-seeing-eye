@@ -279,6 +279,28 @@ app.post('/api/update-list', async (req, res) => {
     );
   }
 
+  if (req.body.action === 'remove_seen') {
+    console.log('remove movie from seen list!');
+
+    User.findOneAndUpdate(
+      {
+        _id: req.user._id,
+        seen: { $eq: movie._id }
+      },
+      {
+        $pull: { seen: movie._id }
+      },
+      { new: true },
+      (err, doc) => {
+        if (err) {
+          console.log('error:', err);
+        } else {
+          console.log(doc);
+        }
+      }
+    );
+  }
+
   res.send('received!');
 });
 

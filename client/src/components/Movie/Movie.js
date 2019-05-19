@@ -86,7 +86,7 @@ class Movie extends Component {
             {displayWatchlistButton()}
             <Button
               className="Button Button--secondary ml1"
-              click={() => this.props.addToSeen(this.props.movieId)}
+              click={() => this.props.removeFromSeen(this.props.movieId)}
             >
               I've Seen It
             </Button>

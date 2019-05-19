@@ -54,6 +54,15 @@ export const addToSeen = movieId => async dispatch => {
   dispatch({ type: ADD_TO_SEEN, payload: { movieId: movieId } });
 };
 
+export const removeFromSeen = movieId => async dispatch => {
+  console.log('in removeFromSeen action creator!');
+
+  const response = await axios.post('/api/update-list', {
+    movieId: movieId,
+    action: 'remove_seen'
+  });
+};
+
 export const addToast = (text, actionTaken, id) => {
   return {
     type: ADD_TOAST,
