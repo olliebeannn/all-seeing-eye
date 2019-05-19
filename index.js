@@ -199,6 +199,23 @@ app.get('/api/watchlist/fetch', (req, res) => {
   });
 });
 
+app.get('/api/seen/fetch', (req, res) => {
+  // Alt version, just pulling from backend
+  let movieIds = [];
+
+  User.findById(req.user._id).then(async user => {
+    // NEW: just query DB for users' watchlist
+    const movies = await Movie.find({ _id: { $in: user.seen } }).lean();
+
+    // Mark as onWatchlist so buttons show up correctly
+    movies.forEach(movie => {
+      movie.onWatchlist = true;
+    });
+
+    res.send(movies);
+  });
+});
+
 app.post('/api/update-list', async (req, res) => {
   // Check if movie is in DB
   // If not, pull all movie info and cache it

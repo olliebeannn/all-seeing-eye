@@ -6,6 +6,7 @@ import {
   FETCH_WATCHLIST,
   ADD_TO_WATCHLIST,
   REMOVE_FROM_WATCHLIST,
+  FETCH_SEEN,
   ADD_TO_SEEN,
   REMOVE_FROM_SEEN,
   FETCH_DISCOVER,
@@ -61,6 +62,11 @@ export const removeFromSeen = movieId => async dispatch => {
     movieId: movieId,
     action: 'remove_seen'
   });
+};
+
+export const fetchSeen = () => async dispatch => {
+  const response = await axios.get('/api/seen/fetch');
+  dispatch({ type: FETCH_SEEN, payload: response.data });
 };
 
 export const addToast = (text, actionTaken, id) => {
