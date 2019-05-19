@@ -36,18 +36,6 @@ class Movie extends Component {
     const displayWatchlistButton = () => {
       if (this.props.onWatchlist) {
         return (
-          // <Button
-          // 	className="Button Button--primary"
-          // 	click={() => this.onRemoveFromWatchlist(this.props.id)}
-          // >
-          // 	Remove from Watchlist
-          // </Button>
-          // <Button
-          // 	className="Button Button--primary"
-          // 	click={() =>
-          // 		this.props.removeFromWatchlist(this.props.id)
-          // 	}
-          // >
           <Button
             className="Button Button--primary"
             click={() =>
@@ -59,16 +47,6 @@ class Movie extends Component {
         );
       } else {
         return (
-          // <Button
-          // 	className="Button Button--primary"
-          // 	click={() => this.onAddToWatchlist(this.props.id)}
-          // >
-          // 	Add to Watchlist
-          // </Button>
-          // <Button
-          // 	className="Button Button--primary"
-          // 	click={() => this.props.addToWatchlist(this.props.id)}
-          // >
           <Button
             className="Button Button--primary"
             click={() =>
