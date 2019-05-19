@@ -76,10 +76,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-// app.get('/', (req, res) => {
-// 	res.send('Test!');
-// });
-
 app.get(
   '/auth/google',
   passport.authenticate('google', {
@@ -96,7 +92,6 @@ app.get(
 );
 
 app.get('/api/currentUser', (req, res) => {
-  // console.log(req.session);
   res.send(req.user);
 });
 
@@ -117,8 +112,6 @@ app.get('/api/discover/fetch', (req, res) => {
     .then(async response => {
       let returnData = response.data.results;
 
-      // console.log('returnData', returnData);
-
       let user = await User.findById(req.user._id);
 
       let watchlistMovies = await Movie.find({
@@ -128,8 +121,6 @@ app.get('/api/discover/fetch', (req, res) => {
       let watchlistIds = watchlistMovies.map(movie => movie.movieId);
 
       console.log('watchlistIds', watchlistIds);
-
-      // console.log('returnData', returnData);
 
       returnData.forEach(result => {
         result.movieId = result.id;
@@ -141,8 +132,6 @@ app.get('/api/discover/fetch', (req, res) => {
           result.onWatchlist = false;
         }
       });
-
-      // console.log(returnData);
 
       res.send(returnData);
     });
@@ -164,7 +153,6 @@ app.get('/api/movie_detail/:id', async (req, res) => {
     console.log(watchlistIds);
 
     if (watchlistIds.includes(movie.movieId)) {
-      console.log('block working');
       movie.onWatchlist = true;
     } else {
       movie.onWatchlist = false;
@@ -207,82 +195,26 @@ app.get('/api/watchlist/fetch', (req, res) => {
       movie.onWatchlist = true;
     });
 
-    // console.log(movies);
-
     res.send(movies);
-
-    // OLD PROMISE VERSION PRE-CACHING IN DB
-    // user.watchlist.forEach(movie => movieIds.push(movie.movieId));
-    // let promises = movieIds.map(id => {
-    //   return axios
-    //     .get(`https://api.themoviedb.org/3/movie/${id}?api_key=${keys.TMDBkey}`)
-    //     .then(response => response.data);
-    // });
-    //
-    // Promise.all(promises).then(data => {
-    //   data.forEach(movie => {
-    //     movie.onWatchlist = true;
-    //   });
-    //
-    //   res.send(data);
-    // });
   });
 });
 
 app.post('/api/watchlist/update', async (req, res) => {
-  // console.log('called /api/watchlist/update');
-
   // Check if movie is in DB
   // If not, pull all movie info and cache it
   let movie = await Movie.findOne({ movieId: req.body.movieId });
 
   if (req.body.action === 'add') {
     if (!movie) {
-      // try {
-      //   console.log(
-      //     `https://api.themoviedb.org/3/movie/${req.body.movieId}?api_key=${
-      //       keys.TMDBkey
-      //     }&append_to_response=credits`
-      //   );
-
       const response = await axios.get(
         `https://api.themoviedb.org/3/movie/${req.body.movieId}?api_key=${
           keys.TMDBkey
         }&append_to_response=credits`
       );
-      // } catch (e) {
-      //   console.log('error fetching movie details', e);
-      // }
 
-      const fullMovieData = response.data;
+      const processedMovieData = processMovieData(response.data);
+      movie = await new Movie(processedMovieData).save();
 
-      //Grab  attributes with same variable names
-      const cacheMovieData = _.pick(fullMovieData, simpleMovieAttributes);
-
-      //Add other data that needs special processing
-      cacheMovieData.movieId = fullMovieData.id;
-      cacheMovieData.genres = _.cloneDeep(fullMovieData.genres);
-
-      // Extract director info from credits arrays
-      const directorArray = fullMovieData.credits.crew.filter(
-        crewMem =>
-          crewMem.department === 'Directing' && crewMem.job === 'Director'
-      );
-
-      if (directorArray.length > 0) {
-        cacheMovieData.director = {
-          id: directorArray[0].id,
-          name: directorArray[0].name
-        };
-      }
-
-      // Extract first 10 cast members info
-      const cast = _.cloneDeep(fullMovieData.credits.cast.slice(0, 10));
-      cacheMovieData.cast = cast;
-
-      cacheMovieData.savedAt = Date.now();
-
-      movie = await new Movie(cacheMovieData).save();
       console.log('new movie saved!', movie);
     }
 
@@ -325,24 +257,6 @@ app.post('/api/watchlist/update', async (req, res) => {
         }
       }
     );
-
-    // User.findOneAndUpdate(
-    //   {
-    //     _id: req.user._id
-    //     watchlist: { $eq: req.body.movieId }
-    //   },
-    //   {
-    //     // $pull: { watchlist: { movieId: req.body.movieId } }
-    //   },
-    //   { new: true },
-    //   (err, doc) => {
-    //     if (err) {
-    //       console.log('err', err);
-    //     } else {
-    //       console.log(doc);
-    //     }
-    //   }
-    // );
   }
 
   res.send('received!');
