@@ -24,18 +24,18 @@ export const fetchWatchlist = () => async dispatch => {
 };
 
 export const addToWatchlist = movieId => async dispatch => {
-  const response = await axios.post('/api/watchlist/update', {
+  const response = await axios.post('/api/update-list', {
     movieId: movieId,
-    action: 'add'
+    action: 'add_watchlist'
   });
 
   dispatch({ type: ADD_TO_WATCHLIST, payload: { movieId: movieId } });
 };
 
 export const removeFromWatchlist = movieId => async dispatch => {
-  const response = await axios.post('/api/watchlist/update', {
+  const response = await axios.post('/api/update-list', {
     movieId: movieId,
-    action: 'remove'
+    action: 'remove_watchlist'
   });
 
   dispatch({ type: REMOVE_FROM_WATCHLIST, payload: { movieId: movieId } });

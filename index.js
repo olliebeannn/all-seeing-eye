@@ -199,7 +199,7 @@ app.get('/api/watchlist/fetch', (req, res) => {
   });
 });
 
-app.post('/api/watchlist/update', async (req, res) => {
+app.post('/api/update-list', async (req, res) => {
   // Check if movie is in DB
   // If not, pull all movie info and cache it
   let movie = await Movie.findOne({ movieId: req.body.movieId });
@@ -217,7 +217,7 @@ app.post('/api/watchlist/update', async (req, res) => {
     console.log('new movie saved!', movie);
   }
 
-  if (req.body.action === 'add') {
+  if (req.body.action === 'add_watchlist') {
     // Find user, check if watchlist contains this movie
     // If not, then execute this update
     User.findOneAndUpdate(
@@ -237,7 +237,7 @@ app.post('/api/watchlist/update', async (req, res) => {
     );
   }
 
-  if (req.body.action === 'remove') {
+  if (req.body.action === 'remove_watchlist') {
     console.log('remove movie!');
 
     User.findOneAndUpdate(
