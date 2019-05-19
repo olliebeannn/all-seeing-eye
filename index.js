@@ -204,20 +204,20 @@ app.post('/api/watchlist/update', async (req, res) => {
   // If not, pull all movie info and cache it
   let movie = await Movie.findOne({ movieId: req.body.movieId });
 
+  if (!movie) {
+    const response = await axios.get(
+      `https://api.themoviedb.org/3/movie/${req.body.movieId}?api_key=${
+        keys.TMDBkey
+      }&append_to_response=credits`
+    );
+
+    const processedMovieData = processMovieData(response.data);
+    movie = await new Movie(processedMovieData).save();
+
+    console.log('new movie saved!', movie);
+  }
+
   if (req.body.action === 'add') {
-    if (!movie) {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${req.body.movieId}?api_key=${
-          keys.TMDBkey
-        }&append_to_response=credits`
-      );
-
-      const processedMovieData = processMovieData(response.data);
-      movie = await new Movie(processedMovieData).save();
-
-      console.log('new movie saved!', movie);
-    }
-
     // Find user, check if watchlist contains this movie
     // If not, then execute this update
     User.findOneAndUpdate(
