@@ -119,17 +119,31 @@ app.get('/api/discover/fetch', (req, res) => {
       }).lean();
 
       let watchlistIds = watchlistMovies.map(movie => movie.movieId);
+      // console.log('watchlistIds', watchlistIds);
 
-      console.log('watchlistIds', watchlistIds);
+      let seenListMovies = await Movie.find({
+        _id: { $in: user.seen }
+      }).lean();
+      let seenIds = seenListMovies.map(movie => movie.movieId);
+      // console.log("seenIds", seenIds);
 
+      // Replace the data prop id with movieId to match cache DB
       returnData.forEach(result => {
         result.movieId = result.id;
         delete result.id;
 
+        // Mark as onWatchlist or not
         if (watchlistIds.includes(result.movieId)) {
           result.onWatchlist = true;
         } else {
           result.onWatchlist = false;
+        }
+
+        // Mark as onSeen or not
+        if (seenIds.includes(result.movieId)) {
+          result.onSeen = true;
+        } else {
+          result.onSeen = false;
         }
       });
 
