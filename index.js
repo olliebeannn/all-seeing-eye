@@ -209,7 +209,7 @@ app.get('/api/seen/fetch', (req, res) => {
 
     // Mark as onWatchlist so buttons show up correctly
     movies.forEach(movie => {
-      movie.onWatchlist = true;
+      movie.onSeen = true;
     });
 
     res.send(movies);

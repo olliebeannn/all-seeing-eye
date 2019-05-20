@@ -20,7 +20,7 @@ class Movie extends Component {
     const toastId = this.generateToastId();
 
     this.props.addToWatchlist(movieId);
-    this.props.addToast(movieName, 'add', toastId);
+    this.props.addToast(movieName, 'add_watchlist', toastId);
     setTimeout(() => this.props.removeToast(toastId), 5000);
   }
 
@@ -28,7 +28,23 @@ class Movie extends Component {
     const toastId = this.generateToastId();
 
     this.props.removeFromWatchlist(movieId);
-    this.props.addToast(movieName, 'remove', toastId);
+    this.props.addToast(movieName, 'remove_watchlist', toastId);
+    setTimeout(() => this.props.removeToast(toastId), 5000);
+  }
+
+  onAddToSeen(movieId, movieName) {
+    const toastId = this.generateToastId();
+
+    this.props.addToSeen(movieId);
+    this.props.addToast(movieName, 'add_seen', toastId);
+    setTimeout(() => this.props.removeToast(toastId), 5000);
+  }
+
+  onRemoveFromSeen(movieId, movieName) {
+    const toastId = this.generateToastId();
+
+    this.props.removeFromSeen(movieId);
+    this.props.addToast(movieName, 'remove_seen', toastId);
     setTimeout(() => this.props.removeToast(toastId), 5000);
   }
 
@@ -59,6 +75,30 @@ class Movie extends Component {
       }
     };
 
+    const displaySeenButton = () => {
+      if (this.props.onSeen) {
+        return (
+          <Button
+            className="Button Button--secondary ml1"
+            click={() => this.onAddToSeen(this.props.movieId, this.props.title)}
+          >
+            I've Seen It
+          </Button>
+        );
+      } else {
+        return (
+          <Button
+            className="Button Button--secondary ml1"
+            click={() =>
+              this.onRemoveFromSeen(this.props.movieId, this.props.title)
+            }
+          >
+            Remove from Seen List
+          </Button>
+        );
+      }
+    };
+
     return (
       <div className="Movie">
         <div className="Movie__poster">
@@ -84,12 +124,7 @@ class Movie extends Component {
           />
           <div className="Movie__buttonWrapper">
             {displayWatchlistButton()}
-            <Button
-              className="Button Button--secondary ml1"
-              click={() => this.props.addToSeen(this.props.movieId)}
-            >
-              I've Seen It
-            </Button>
+            {displaySeenButton()}
           </div>
         </div>
       </div>
