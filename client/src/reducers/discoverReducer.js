@@ -23,15 +23,19 @@ export default function(state = null, action) {
         return action.payload || false;
       }
     case ADD_TO_WATCHLIST:
-      let addedState = _.cloneDeep(state);
+      if (state) {
+        let addedState = _.cloneDeep(state);
 
-      addedState.forEach(movie => {
-        if (movie.movieId === action.payload.movieId) {
-          movie.onWatchlist = true;
-        }
-      });
+        addedState.forEach(movie => {
+          if (movie.movieId === action.payload.movieId) {
+            movie.onWatchlist = true;
+          }
+        });
 
-      return addedState;
+        return addedState;
+      } else {
+        return state;
+      }
     case REMOVE_FROM_WATCHLIST:
       // only call this if discoverState contains anything (won't happen on first loading)
       if (state) {
@@ -48,15 +52,19 @@ export default function(state = null, action) {
         return state;
       }
     case ADD_TO_SEEN:
-      let addedSeenState = _.cloneDeep(state);
+      if (state) {
+        let addedSeenState = _.cloneDeep(state);
 
-      addedSeenState.forEach(movie => {
-        if (movie.movieId === action.payload.movieId) {
-          movie.onSeen = true;
-        }
-      });
+        addedSeenState.forEach(movie => {
+          if (movie.movieId === action.payload.movieId) {
+            movie.onSeen = true;
+          }
+        });
 
-      return addedSeenState;
+        return addedSeenState;
+      } else {
+        return state;
+      }
     default:
       return state;
   }

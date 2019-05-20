@@ -38,7 +38,7 @@ class MovieDetail extends Component {
     const toastId = this.generateToastId();
 
     this.props.addToWatchlist(movieId);
-    this.props.addToast(movieName, 'add', toastId);
+    this.props.addToast(movieName, 'add_watchlist', toastId);
     setTimeout(() => this.props.removeToast(toastId), 5000);
 
     let newMovieData = _.cloneDeep(this.state.movieData);
@@ -53,11 +53,41 @@ class MovieDetail extends Component {
     const toastId = this.generateToastId();
 
     this.props.removeFromWatchlist(movieId);
-    this.props.addToast(movieName, 'remove', toastId);
+    this.props.addToast(movieName, 'remove_watchlist', toastId);
     setTimeout(() => this.props.removeToast(toastId), 5000);
 
     let newMovieData = _.cloneDeep(this.state.movieData);
     newMovieData.onWatchlist = false;
+
+    this.setState({
+      movieData: newMovieData
+    });
+  }
+
+  onAddToSeen(movieId, movieName) {
+    const toastId = this.generateToastId();
+
+    this.props.addToSeen(movieId);
+    this.props.addToast(movieName, 'add_seen', toastId);
+    setTimeout(() => this.props.removeToast(toastId), 5000);
+
+    let newMovieData = _.cloneDeep(this.state.movieData);
+    newMovieData.onSeen = true;
+
+    this.setState({
+      movieData: newMovieData
+    });
+  }
+
+  onRemoveFromSeen(movieId, movieName) {
+    const toastId = this.generateToastId();
+
+    this.props.removeFromSeen(movieId);
+    this.props.addToast(movieName, 'remove_seen', toastId);
+    setTimeout(() => this.props.removeToast(toastId), 5000);
+
+    let newMovieData = _.cloneDeep(this.state.movieData);
+    newMovieData.onSeen = false;
 
     this.setState({
       movieData: newMovieData
@@ -113,6 +143,40 @@ class MovieDetail extends Component {
       }
     };
 
+    const displaySeenButton = () => {
+      if (this.state.movieData.title) {
+        if (this.state.movieData.onSeen) {
+          return (
+            <Button
+              className="Button Button--secondary ml1"
+              click={() =>
+                this.onRemoveFromSeen(
+                  this.state.movieData.movieId,
+                  this.state.movieData.title
+                )
+              }
+            >
+              Remove from Seen List
+            </Button>
+          );
+        } else {
+          return (
+            <Button
+              className="Button Button--secondary ml1"
+              click={() =>
+                this.onAddToSeen(
+                  this.state.movieData.movieId,
+                  this.state.movieData.title
+                )
+              }
+            >
+              I've Seen This
+            </Button>
+          );
+        }
+      }
+    };
+
     const displayContent = () => {
       let content = <div className="MovieDetail">Loading...</div>;
 
@@ -149,9 +213,7 @@ class MovieDetail extends Component {
               </div>
               <div className="MovieDetail__buttonWrapper">
                 {displayWatchlistButton()}
-                <Button className="Button Button--secondary ml1">
-                  I've Seen It
-                </Button>
+                {displaySeenButton()}
               </div>
             </div>
           </div>
