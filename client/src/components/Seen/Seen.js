@@ -8,9 +8,15 @@ import styles from './Seen.scss';
 
 class Seen extends Component {
   render() {
+    let moviesToDisplay = null;
+
+    if (this.props.seen) {
+      moviesToDisplay = this.props.seen.filter(movie => movie.onSeen);
+    }
+
     return (
       <div className="Seen">
-        <MovieList movies={this.props.seen} />
+        <MovieList movies={moviesToDisplay} />
       </div>
     );
   }

@@ -19,6 +19,7 @@ class MovieList extends Component {
             voteAverage={movie.vote_average}
             overview={movie.overview}
             onWatchlist={movie.onWatchlist}
+            onSeen={movie.onSeen}
             posterURL={movie.poster_path}
             backdropUrl={movie.backdrop_path}
           />

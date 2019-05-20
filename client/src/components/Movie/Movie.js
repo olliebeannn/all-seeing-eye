@@ -80,20 +80,20 @@ class Movie extends Component {
         return (
           <Button
             className="Button Button--secondary ml1"
-            click={() => this.onAddToSeen(this.props.movieId, this.props.title)}
+            click={() =>
+              this.onRemoveFromSeen(this.props.movieId, this.props.title)
+            }
           >
-            I've Seen It
+            Remove from Seen List
           </Button>
         );
       } else {
         return (
           <Button
             className="Button Button--secondary ml1"
-            click={() =>
-              this.onRemoveFromSeen(this.props.movieId, this.props.title)
-            }
+            click={() => this.onAddToSeen(this.props.movieId, this.props.title)}
           >
-            Remove from Seen List
+            I've Seen This
           </Button>
         );
       }

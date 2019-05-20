@@ -195,6 +195,20 @@ app.get('/api/watchlist/fetch', (req, res) => {
       movie.onWatchlist = true;
     });
 
+    // Get Seen list and mark add onSeen prop so buttons show up properly
+    const seenMovies = await Movie.find({ _id: { $in: user.seen } }).lean();
+    let seenMovieIds = seenMovies.map(movie => movie.movieId);
+
+    movies.forEach(movie => {
+      if (seenMovieIds.includes(movie.movieId)) {
+        movie.onSeen = true;
+      } else {
+        movie.onSeen = false;
+      }
+    });
+
+    console.log('loading watchlist movies', movies);
+
     res.send(movies);
   });
 });
