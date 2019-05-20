@@ -3,7 +3,9 @@ import _ from 'lodash';
 import {
   FETCH_DISCOVER,
   ADD_TO_WATCHLIST,
-  REMOVE_FROM_WATCHLIST
+  REMOVE_FROM_WATCHLIST,
+  ADD_TO_SEEN,
+  REMOVE_FROM_SEEN
 } from '../actions/types';
 
 export default function(state = null, action) {
@@ -45,6 +47,16 @@ export default function(state = null, action) {
       } else {
         return state;
       }
+    case ADD_TO_SEEN:
+      let addedSeenState = _.cloneDeep(state);
+
+      addedSeenState.forEach(movie => {
+        if (movie.movieId === action.payload.movieId) {
+          movie.onSeen = true;
+        }
+      });
+
+      return addedSeenState;
     default:
       return state;
   }

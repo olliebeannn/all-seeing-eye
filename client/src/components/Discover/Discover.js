@@ -11,85 +11,53 @@ import MovieList from '../MovieList/MovieList';
 import Button from '../Button/Button';
 
 class Discover extends Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			currentPage: 1
-		};
-	}
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentPage: 1
+    };
+  }
 
-	componentDidMount() {
-		this.props.loadDiscoverMovies(this.state.currentPage);
-	}
+  componentDidMount() {
+    this.props.loadDiscoverMovies(this.state.currentPage);
+  }
 
-	loadMoreMovies = () => {
-		let page = this.state.currentPage;
+  loadMoreMovies = () => {
+    let page = this.state.currentPage;
 
-		this.props.loadDiscoverMovies(page + 1);
+    this.props.loadDiscoverMovies(page + 1);
 
-		this.setState({ currentPage: page + 1 });
-	};
+    this.setState({ currentPage: page + 1 });
+  };
 
-	render() {
-		let movieContent = 'Loading...';
+  render() {
+    let moviesToDisplay = null;
 
-		// if (this.state.movies.length > 0) {
-		// 	movieContent = [];
-		//
-		// 	this.state.movies.forEach(movie =>
-		// 		movieContent.push(
-		// 			<Movie
-		// 				id={movie.id}
-		// 				title={movie.title}
-		// 				voteAverage={movie.vote_average}
-		// 				overview={movie.overview}
-		// 				key={movie.id}
-		// 				onWatchlist={movie.onWatchlist}
-		// 			/>
-		// 		)
-		// 	);
-		// }
+    if (this.props.discoverList) {
+      moviesToDisplay = this.props.discoverList.filter(movie => !movie.onSeen);
+    }
 
-		if (this.props.discoverList && this.props.discoverList.length > 0) {
-			movieContent = [];
-
-			this.props.discoverList.forEach(movie =>
-				movieContent.push(
-					<Movie
-						id={movie.id}
-						title={movie.title}
-						voteAverage={movie.vote_average}
-						overview={movie.overview}
-						key={movie.id}
-						onWatchlist={movie.onWatchlist}
-						posterURL={movie.poster_path}
-						backdropUrl={movie.backdrop_path}
-					/>
-				)
-			);
-		}
-
-		return (
-			<div className="Discover">
-				<MovieList movies={this.props.discoverList} />
-				<div className="Discover__loadMore">
-					<Button
-						className="Button Button--primary"
-						click={this.loadMoreMovies}
-					>
-						Load More...
-					</Button>
-				</div>
-			</div>
-		);
-	}
+    return (
+      <div className="Discover">
+        <MovieList movies={moviesToDisplay} />
+        <div className="Discover__loadMore">
+          <Button
+            className="Button Button--primary"
+            click={this.loadMoreMovies}
+          >
+            Load More...
+          </Button>
+        </div>
+      </div>
+    );
+  }
 }
 
 function mapStateToProps({ discoverList }) {
-	return { discoverList };
+  return { discoverList };
 }
 
 export default connect(
-	mapStateToProps,
-	actions
+  mapStateToProps,
+  actions
 )(Discover);
