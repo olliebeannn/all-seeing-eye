@@ -62,6 +62,8 @@ export const removeFromSeen = movieId => async dispatch => {
     movieId: movieId,
     action: 'remove_seen'
   });
+
+  dispatch({ type: REMOVE_FROM_SEEN, payload: { movieId: movieId } });
 };
 
 export const fetchSeen = () => async dispatch => {
