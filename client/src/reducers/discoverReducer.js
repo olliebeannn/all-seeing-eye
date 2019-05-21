@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import {
   FETCH_DISCOVER,
+  UPDATE_FILTERS,
   ADD_TO_WATCHLIST,
   REMOVE_FROM_WATCHLIST,
   ADD_TO_SEEN,
@@ -22,6 +23,9 @@ export default function(state = null, action) {
       } else {
         return action.payload || false;
       }
+    case UPDATE_FILTERS:
+      console.log('update filters!', action);
+      return state;
     case ADD_TO_WATCHLIST:
       if (state) {
         let addedState = _.cloneDeep(state);

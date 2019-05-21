@@ -57,6 +57,12 @@ class Discover extends Component {
     console.log('this.state.releaseDateMin', this.state.releaseDateMin);
     console.log('this.state.releaseDateMax', this.state.releaseDateMax);
     console.log('this.state.genres', this.state.genres);
+
+    this.props.updateFilters(
+      this.state.releaseDateMin,
+      this.state.releaseDateMax,
+      this.state.genres
+    );
   };
 
   handleClearFilters = () => {

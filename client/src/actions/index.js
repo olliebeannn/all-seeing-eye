@@ -10,6 +10,7 @@ import {
   ADD_TO_SEEN,
   REMOVE_FROM_SEEN,
   FETCH_DISCOVER,
+  UPDATE_FILTERS,
   ADD_TOAST,
   REMOVE_TOAST
 } from './types';
@@ -92,4 +93,17 @@ export const loadDiscoverMovies = page => async dispatch => {
   });
 
   dispatch({ type: FETCH_DISCOVER, payload: returnData });
+};
+
+export const updateFilters = (startYear, endYear, genres) => async dispatch => {
+  console.log(startYear, endYear, genres);
+
+  dispatch({
+    type: UPDATE_FILTERS,
+    payload: {
+      startYear,
+      endYear,
+      genres
+    }
+  });
 };
