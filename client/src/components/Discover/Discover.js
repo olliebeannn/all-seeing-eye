@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import _ from 'lodash';
+import Select from 'react-select';
 
 import styles from './Discover.scss';
 // Slider component styles
 import 'rc-slider/assets/index.css';
 
 import * as actions from '../../actions';
+import genres from '../../utils/genres';
 
 import Movie from '../Movie/Movie';
 import MovieList from '../MovieList/MovieList';
@@ -23,7 +25,8 @@ class Discover extends Component {
     this.state = {
       currentPage: 1,
       releaseDateMin: 1900,
-      releaseDateMax: 2019
+      releaseDateMax: 2019,
+      genres: []
     };
   }
 
@@ -40,7 +43,28 @@ class Discover extends Component {
   };
 
   handleReleaseYearChange = sliderValues => {
-    console.log(sliderValues);
+    this.setState({
+      releaseDateMin: sliderValues[0],
+      releaseDateMax: sliderValues[1]
+    });
+  };
+
+  handleGenreChange = selectedOptions => {
+    this.setState({ genres: selectedOptions });
+  };
+
+  handleUpdateFilters = () => {
+    console.log('this.state.releaseDateMin', this.state.releaseDateMin);
+    console.log('this.state.releaseDateMax', this.state.releaseDateMax);
+    console.log('this.state.genres', this.state.genres);
+  };
+
+  handleClearFilters = () => {
+    this.setState({
+      releaseDateMin: 1900,
+      releaseDateMax: 2019,
+      genres: []
+    });
   };
 
   render() {
@@ -53,15 +77,40 @@ class Discover extends Component {
     return (
       <div className="Discover">
         <div className="Discover__filters">
-          <Range
-            min={1900}
-            max={2019}
-            defaultValue={[
-              this.state.releaseDateMin,
-              this.state.releaseDateMax
-            ]}
-            onAfterChange={this.handleReleaseYearChange}
-          />
+          <div className="Discover__filter">
+            <Range
+              min={1900}
+              max={2019}
+              defaultValue={[
+                this.state.releaseDateMin,
+                this.state.releaseDateMax
+              ]}
+              value={[this.state.releaseDateMin, this.state.releaseDateMax]}
+              onChange={this.handleReleaseYearChange}
+            />
+          </div>
+          <div className="mt1">
+            <Select
+              options={genres}
+              isMulti
+              onChange={this.handleGenreChange}
+              value={this.state.genres}
+            />
+          </div>
+          <div>
+            <Button
+              className="Button Button--primary"
+              click={this.handleUpdateFilters}
+            >
+              Update Filters
+            </Button>
+            <Button
+              className="Button Button--secondary"
+              click={this.handleClearFilters}
+            >
+              Clear Filters
+            </Button>
+          </div>
         </div>
         <MovieList movies={moviesToDisplay} />
         <div className="Discover__loadMore">

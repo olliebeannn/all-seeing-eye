@@ -4,8 +4,13 @@
   height: 100%;
 }
 
-.Discover__loadMore,
 .Discover__filters {
+  max-width: 624px;
+  margin: $spacing-4 auto;
+  width: 60%;
+}
+
+.Discover__loadMore {
   display: flex;
   justify-content: center;
   margin: $spacing-4 auto;

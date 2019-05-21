@@ -1,78 +1,78 @@
-[
+export default [
   {
-    id: 28,
-    name: 'Action'
+    value: 28,
+    label: 'Action'
   },
   {
-    id: 12,
-    name: 'Adventure'
+    value: 12,
+    label: 'Adventure'
   },
   {
-    id: 16,
-    name: 'Animation'
+    value: 16,
+    label: 'Animation'
   },
   {
-    id: 35,
-    name: 'Comedy'
+    value: 35,
+    label: 'Comedy'
   },
   {
-    id: 80,
-    name: 'Crime'
+    value: 80,
+    label: 'Crime'
   },
   {
-    id: 99,
-    name: 'Documentary'
+    value: 99,
+    label: 'Documentary'
   },
   {
-    id: 18,
-    name: 'Drama'
+    value: 18,
+    label: 'Drama'
   },
   {
-    id: 10751,
-    name: 'Family'
+    value: 10751,
+    label: 'Family'
   },
   {
-    id: 14,
-    name: 'Fantasy'
+    value: 14,
+    label: 'Fantasy'
   },
   {
-    id: 36,
-    name: 'History'
+    value: 36,
+    label: 'History'
   },
   {
-    id: 27,
-    name: 'Horror'
+    value: 27,
+    label: 'Horror'
   },
   {
-    id: 10402,
-    name: 'Music'
+    value: 10402,
+    label: 'Music'
   },
   {
-    id: 9648,
-    name: 'Mystery'
+    value: 9648,
+    label: 'Mystery'
   },
   {
-    id: 10749,
-    name: 'Romance'
+    value: 10749,
+    label: 'Romance'
   },
   {
-    id: 878,
-    name: 'Science Fiction'
+    value: 878,
+    label: 'Science Fiction'
   },
   {
-    id: 10770,
-    name: 'TV Movie'
+    value: 10770,
+    label: 'TV Movie'
   },
   {
-    id: 53,
-    name: 'Thriller'
+    value: 53,
+    label: 'Thriller'
   },
   {
-    id: 10752,
-    name: 'War'
+    value: 10752,
+    label: 'War'
   },
   {
-    id: 37,
-    name: 'Western'
+    value: 37,
+    label: 'Western'
   }
 ];
