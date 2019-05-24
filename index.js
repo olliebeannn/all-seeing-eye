@@ -124,7 +124,7 @@ app.post('/api/discover/fetch', (req, res) => {
   // Add the page param to request
   reqString += `&page=${req.body.page}`;
 
-  console.log('reqString with filters', reqString);
+  // console.log('reqString with filters', reqString);
 
   axios.get(reqString).then(async response => {
     let returnData = response.data.results;
@@ -136,13 +136,11 @@ app.post('/api/discover/fetch', (req, res) => {
     }).lean();
 
     let watchlistIds = watchlistMovies.map(movie => movie.movieId);
-    // console.log('watchlistIds', watchlistIds);
 
     let seenListMovies = await Movie.find({
       _id: { $in: user.seen }
     }).lean();
     let seenIds = seenListMovies.map(movie => movie.movieId);
-    // console.log("seenIds", seenIds);
 
     // Replace the data prop id with movieId to match cache DB
     returnData.forEach(result => {
@@ -181,7 +179,7 @@ app.get('/api/movie_detail/:id', async (req, res) => {
 
     let watchlistIds = watchlistMovies.map(movie => movie.movieId);
 
-    console.log(watchlistIds);
+    // console.log(watchlistIds);
 
     if (watchlistIds.includes(movie.movieId)) {
       movie.onWatchlist = true;
@@ -238,7 +236,7 @@ app.get('/api/watchlist/fetch', (req, res) => {
       }
     });
 
-    console.log('loading watchlist movies', movies);
+    // console.log('loading watchlist movies', movies);
 
     res.send(movies);
   });

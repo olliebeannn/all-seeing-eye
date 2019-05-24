@@ -97,8 +97,6 @@ export const loadDiscoverMovies = page => async dispatch => {
 };
 
 export const updateFilters = (startYear, endYear, genres) => async dispatch => {
-  console.log(startYear, endYear, genres);
-
   const response = await axios.post('/api/discover/fetch', {
     startYear,
     endYear,
@@ -106,15 +104,5 @@ export const updateFilters = (startYear, endYear, genres) => async dispatch => {
     page: 1
   });
 
-  console.log('updateFilters response', response);
-
-  // dispatch({
-  //   type: UPDATE_FILTERS,
-  //   payload: {
-  //     startYear,
-  //     endYear,
-  //     genres
-  //   }
-  // });
   dispatch({ type: UPDATE_FILTERS, payload: response.data });
 };
