@@ -25,6 +25,7 @@ export default function(state = null, action) {
       }
     case UPDATE_FILTERS:
       console.log('update filters!', action);
+
       return action.payload || false;
     case ADD_TO_WATCHLIST:
       if (state) {
