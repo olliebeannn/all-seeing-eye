@@ -100,8 +100,8 @@ app.get('/api/logout', (req, res) => {
   res.redirect('/');
 });
 
-app.get('/api/discover/fetch', (req, res) => {
-  const page = req.query.page;
+app.post('/api/discover/fetch', (req, res) => {
+  const page = req.body.page;
 
   axios
     .get(

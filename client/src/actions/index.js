@@ -84,7 +84,8 @@ export const removeToast = id => {
 };
 
 export const loadDiscoverMovies = page => async dispatch => {
-  const response = await axios.get(`/api/discover/fetch?page=${page}`);
+  // const response = await axios.get(`/api/discover/fetch?page=${page}`);
+  const response = await axios.post('/api/discover/fetch', { page });
 
   let returnData = [];
 
@@ -97,6 +98,10 @@ export const loadDiscoverMovies = page => async dispatch => {
 
 export const updateFilters = (startYear, endYear, genres) => async dispatch => {
   console.log(startYear, endYear, genres);
+
+  // const response = await axios.get(`/api/discover/fetch?page=1`);
+
+  // console.log("updateFilters response", response);
 
   dispatch({
     type: UPDATE_FILTERS,
