@@ -108,12 +108,13 @@ export const updateFilters = (startYear, endYear, genres) => async dispatch => {
 
   console.log('updateFilters response', response);
 
-  dispatch({
-    type: UPDATE_FILTERS,
-    payload: {
-      startYear,
-      endYear,
-      genres
-    }
-  });
+  // dispatch({
+  //   type: UPDATE_FILTERS,
+  //   payload: {
+  //     startYear,
+  //     endYear,
+  //     genres
+  //   }
+  // });
+  dispatch({ type: UPDATE_FILTERS, payload: response.data });
 };

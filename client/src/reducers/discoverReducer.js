@@ -25,7 +25,7 @@ export default function(state = null, action) {
       }
     case UPDATE_FILTERS:
       console.log('update filters!', action);
-      return state;
+      return action.payload || false;
     case ADD_TO_WATCHLIST:
       if (state) {
         let addedState = _.cloneDeep(state);

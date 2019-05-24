@@ -111,60 +111,61 @@ app.post('/api/discover/fetch', (req, res) => {
 
     reqString += '&with_genres=' + cleanedGenres.join('|');
   }
-  const page = req.body.page;
+
+  // If there is start year filter, add it
+  if (req.body.startYear) {
+    reqString += `&release_date.gte=${req.body.startYear}-01-01`;
+  }
+
+  if (req.body.endYear) {
+    reqString += `&release_date.lte=${req.body.endYear}-12-31`;
+  }
 
   // Add the page param to request
   reqString += `&page=${req.body.page}`;
 
   console.log('reqString with filters', reqString);
 
-  axios
-    // .get(
-    //   `https://api.themoviedb.org/3/discover/movie?api_key=${
-    //     keys.TMDBkey
-    //   }&vote_count.gte=500&sort_by=vote_average.desc&total_results=100&page=${page}`
-    // )
-    .get(reqString)
-    .then(async response => {
-      let returnData = response.data.results;
+  axios.get(reqString).then(async response => {
+    let returnData = response.data.results;
 
-      let user = await User.findById(req.user._id);
+    let user = await User.findById(req.user._id);
 
-      let watchlistMovies = await Movie.find({
-        _id: { $in: user.watchlist }
-      }).lean();
+    let watchlistMovies = await Movie.find({
+      _id: { $in: user.watchlist }
+    }).lean();
 
-      let watchlistIds = watchlistMovies.map(movie => movie.movieId);
-      // console.log('watchlistIds', watchlistIds);
+    let watchlistIds = watchlistMovies.map(movie => movie.movieId);
+    // console.log('watchlistIds', watchlistIds);
 
-      let seenListMovies = await Movie.find({
-        _id: { $in: user.seen }
-      }).lean();
-      let seenIds = seenListMovies.map(movie => movie.movieId);
-      // console.log("seenIds", seenIds);
+    let seenListMovies = await Movie.find({
+      _id: { $in: user.seen }
+    }).lean();
+    let seenIds = seenListMovies.map(movie => movie.movieId);
+    // console.log("seenIds", seenIds);
 
-      // Replace the data prop id with movieId to match cache DB
-      returnData.forEach(result => {
-        result.movieId = result.id;
-        delete result.id;
+    // Replace the data prop id with movieId to match cache DB
+    returnData.forEach(result => {
+      result.movieId = result.id;
+      delete result.id;
 
-        // Mark as onWatchlist or not
-        if (watchlistIds.includes(result.movieId)) {
-          result.onWatchlist = true;
-        } else {
-          result.onWatchlist = false;
-        }
+      // Mark as onWatchlist or not
+      if (watchlistIds.includes(result.movieId)) {
+        result.onWatchlist = true;
+      } else {
+        result.onWatchlist = false;
+      }
 
-        // Mark as onSeen or not
-        if (seenIds.includes(result.movieId)) {
-          result.onSeen = true;
-        } else {
-          result.onSeen = false;
-        }
-      });
-
-      res.send(returnData);
+      // Mark as onSeen or not
+      if (seenIds.includes(result.movieId)) {
+        result.onSeen = true;
+      } else {
+        result.onSeen = false;
+      }
     });
+
+    res.send(returnData);
+  });
 });
 
 app.get('/api/movie_detail/:id', async (req, res) => {
