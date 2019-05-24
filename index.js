@@ -101,14 +101,30 @@ app.get('/api/logout', (req, res) => {
 });
 
 app.post('/api/discover/fetch', (req, res) => {
+  let reqString = `https://api.themoviedb.org/3/discover/movie?api_key=${
+    keys.TMDBkey
+  }&vote_count.gte=500&sort_by=vote_average.desc`;
+
+  // If there are genre filters applied
+  if (req.body.genres && req.body.genres.length) {
+    let cleanedGenres = req.body.genres.map(elem => elem.value);
+
+    reqString += '&with_genres=' + cleanedGenres.join('|');
+  }
   const page = req.body.page;
 
+  // Add the page param to request
+  reqString += `&page=${req.body.page}`;
+
+  console.log('reqString with filters', reqString);
+
   axios
-    .get(
-      `https://api.themoviedb.org/3/discover/movie?api_key=${
-        keys.TMDBkey
-      }&vote_count.gte=500&sort_by=vote_average.desc&total_results=100&page=${page}`
-    )
+    // .get(
+    //   `https://api.themoviedb.org/3/discover/movie?api_key=${
+    //     keys.TMDBkey
+    //   }&vote_count.gte=500&sort_by=vote_average.desc&total_results=100&page=${page}`
+    // )
+    .get(reqString)
     .then(async response => {
       let returnData = response.data.results;
 
