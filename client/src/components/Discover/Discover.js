@@ -14,6 +14,7 @@ import genres from '../../utils/genres';
 import Movie from '../Movie/Movie';
 import MovieList from '../MovieList/MovieList';
 import Button from '../Button/Button';
+import Spinner from '../Spinner/Spinner';
 
 const Slider = require('rc-slider');
 const createSliderWithTooltip = Slider.createSliderWithTooltip;
@@ -90,8 +91,11 @@ class Discover extends Component {
   render() {
     let moviesToDisplay = null;
 
+    let content = <Spinner />;
+
     if (this.props.discoverList) {
       moviesToDisplay = this.props.discoverList.filter(movie => !movie.onSeen);
+      content = <MovieList movies={moviesToDisplay} />;
     }
 
     return (
@@ -132,7 +136,7 @@ class Discover extends Component {
             </Button>
           </div>
         </div>
-        <MovieList movies={moviesToDisplay} />
+        {content}
         <div className="Discover__loadMore">
           <Button
             className="Button Button--primary"
