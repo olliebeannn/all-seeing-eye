@@ -5,7 +5,8 @@ import styles from './MovieList.scss';
 
 class MovieList extends Component {
   render() {
-    let movieContent = 'Loading...';
+    // let movieContent = 'Loading...';
+    let movieContent = ' ';
 
     if (this.props.movies && this.props.movies.length > 0) {
       movieContent = [];

@@ -3,24 +3,37 @@
 /* font style defaults */
 
 body {
-	line-height: 1.5;
+  line-height: 1.5;
 }
 
 h1 {
-	font-size: $font-l;
-	font-weight: $font-weight-med;
+  font-size: $font-l;
+  font-weight: $font-weight-med;
 }
 
 p {
-	font-size: $font-m;
+  font-size: $font-m;
+}
+
+/* layout helper classes */
+.flex {
+  display: flex;
+}
+
+.flex--jc--c {
+  justify-content: center;
+}
+
+.flex--ai--c {
+  align-items: center;
 }
 
 /* spacing helper classes */
 
 .ml1 {
-	margin-left: $spacing-1;
+  margin-left: $spacing-1;
 }
 
 .mt1 {
-	margin-top: $spacing-1;
+  margin-top: $spacing-1;
 }

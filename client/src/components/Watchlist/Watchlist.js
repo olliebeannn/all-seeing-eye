@@ -6,6 +6,7 @@ import _ from 'lodash';
 import * as actions from '../../actions';
 import Movie from '../Movie/Movie';
 import MovieList from '../MovieList/MovieList';
+import Spinner from '../Spinner/Spinner';
 
 import styles from './Watchlist.scss';
 
@@ -13,15 +14,14 @@ class Watchlist extends Component {
   render() {
     let moviesToDisplay = null;
 
+    let content = <Spinner />;
+
     if (this.props.watchlist) {
       moviesToDisplay = this.props.watchlist.filter(movie => movie.onWatchlist);
+      content = <MovieList movies={moviesToDisplay} />;
     }
 
-    return (
-      <div className="Watchlist">
-        <MovieList movies={moviesToDisplay} />
-      </div>
-    );
+    return <div className="Watchlist">{content}</div>;
   }
 }
 

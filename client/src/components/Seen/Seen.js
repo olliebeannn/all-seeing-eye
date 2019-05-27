@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 
 import * as actions from '../../actions';
 import MovieList from '../MovieList/MovieList';
+import Spinner from '../Spinner/Spinner';
 
 import styles from './Seen.scss';
 
@@ -10,15 +11,14 @@ class Seen extends Component {
   render() {
     let moviesToDisplay = null;
 
+    let content = <Spinner />;
+
     if (this.props.seen) {
       moviesToDisplay = this.props.seen.filter(movie => movie.onSeen);
+      content = <MovieList movies={moviesToDisplay} />;
     }
 
-    return (
-      <div className="Seen">
-        <MovieList movies={moviesToDisplay} />
-      </div>
-    );
+    return <div className="Seen">{content}</div>;
   }
 }
 
