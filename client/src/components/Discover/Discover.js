@@ -37,7 +37,12 @@ class Discover extends Component {
   loadMoreMovies = () => {
     let page = this.state.currentPage;
 
-    this.props.loadDiscoverMovies(page + 1);
+    this.props.loadDiscoverMovies(
+      page + 1,
+      this.state.releaseDateMin,
+      this.state.releaseDateMax,
+      this.state.genres
+    );
 
     this.setState({ currentPage: page + 1 });
   };

@@ -114,17 +114,17 @@ app.post('/api/discover/fetch', (req, res) => {
 
   // If there is start year filter, add it
   if (req.body.startYear) {
-    reqString += `&release_date.gte=${req.body.startYear}-01-01`;
+    reqString += `&primary_release_date.gte=${req.body.startYear}-01-01`;
   }
 
   if (req.body.endYear) {
-    reqString += `&release_date.lte=${req.body.endYear}-12-31`;
+    reqString += `&primary_release_date.lte=${req.body.endYear}-12-31`;
   }
 
   // Add the page param to request
   reqString += `&page=${req.body.page}`;
 
-  // console.log('reqString with filters', reqString);
+  console.log('reqString with filters', reqString);
 
   axios.get(reqString).then(async response => {
     let returnData = response.data.results;

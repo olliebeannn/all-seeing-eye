@@ -83,9 +83,19 @@ export const removeToast = id => {
   return { type: REMOVE_TOAST, payload: { id } };
 };
 
-export const loadDiscoverMovies = page => async dispatch => {
+export const loadDiscoverMovies = (
+  page,
+  startYear,
+  endYear,
+  genres
+) => async dispatch => {
   // const response = await axios.get(`/api/discover/fetch?page=${page}`);
-  const response = await axios.post('/api/discover/fetch', { page });
+  const response = await axios.post('/api/discover/fetch', {
+    page,
+    startYear,
+    endYear,
+    genres
+  });
 
   let returnData = [];
 
