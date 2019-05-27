@@ -225,7 +225,9 @@ class MovieDetail extends Component {
 
     return (
       <div className="MovieDetail__wrapper">
-        <Link to="/discover">← Back</Link>
+        <a href="#" onClick={() => this.props.history.goBack()}>
+          ← Back
+        </a>
         {displayContent()}
       </div>
     );
