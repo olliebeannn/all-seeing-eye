@@ -71,17 +71,19 @@ class Discover extends Component {
   };
 
   handleClearFilters = () => {
-    this.setState({
-      releaseDateMin: 1900,
-      releaseDateMax: 2019,
-      genres: [],
-      page: 1
-    });
-
-    this.props.updateFilters(
-      this.state.releaseDateMin,
-      this.state.releaseDateMax,
-      this.state.genres
+    this.setState(
+      {
+        releaseDateMin: 1900,
+        releaseDateMax: 2019,
+        genres: [],
+        page: 1
+      },
+      async () =>
+        this.props.updateFilters(
+          this.state.releaseDateMin,
+          this.state.releaseDateMax,
+          this.state.genres
+        )
     );
   };
 
