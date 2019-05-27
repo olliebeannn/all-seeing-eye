@@ -44,7 +44,7 @@ class Header extends Component {
           <i className="material-icons">menu</i>
         </li>
         <li className="Header__item Header__appName" key="1">
-          <a href="/">The All Seeing Eye</a>
+          <a href="/watchlist">The All Seeing Eye</a>
         </li>
         {this.renderContent()}
       </ul>
