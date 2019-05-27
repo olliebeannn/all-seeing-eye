@@ -10,6 +10,7 @@ import '../../styles/base.scss';
 import './MovieDetail.scss';
 
 import Button from '../Button/Button';
+import Spinner from '../Spinner/Spinner';
 
 class MovieDetail extends Component {
   constructor(props) {
@@ -178,7 +179,8 @@ class MovieDetail extends Component {
     };
 
     const displayContent = () => {
-      let content = <div className="MovieDetail">Loading...</div>;
+      // let content = <div className="MovieDetail">Loading...</div>;
+      let content = <Spinner />;
 
       if (this.state.movieData.title) {
         content = (
