@@ -100,9 +100,11 @@ class Discover extends Component {
 
     return (
       <div className="Discover">
-        <div className="Discover__filters">
-          <div className="Discover__filter">
+        <div className="Filters">
+          <div className="Filter Filter--YearRange">
+            <p className="Filter__Label">Year Released</p>
             <Range
+              className="Filter__Slider mt2"
               min={1900}
               max={2019}
               defaultValue={[
@@ -113,23 +115,25 @@ class Discover extends Component {
               onChange={this.handleReleaseYearChange}
             />
           </div>
-          <div className="mt1">
+          <div className="Filter mt3">
+            <p className="Filter__Label">Genres</p>
             <Select
+              className="Filter--Select mt1"
               options={genres}
               isMulti
               onChange={this.handleGenreChange}
               value={this.state.genres}
             />
           </div>
-          <div>
+          <div className="mt3 flex">
             <Button
-              className="Button Button--primary"
+              className="Button Button--primary flex-g-1 mr1"
               click={this.handleUpdateFilters}
             >
               Update Filters
             </Button>
             <Button
-              className="Button Button--secondary"
+              className="Button Button--secondary flex-g-1 ml1"
               click={this.handleClearFilters}
             >
               Clear Filters

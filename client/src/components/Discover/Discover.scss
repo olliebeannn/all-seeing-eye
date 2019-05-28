@@ -1,25 +1,30 @@
 @import '../../styles/variables.scss';
 
-.Discover {
-  height: 100%;
+.Filters {
+  margin: $spacing-4 $spacing-3;
 }
 
-.Discover__filters {
-  max-width: 624px;
-  margin: $spacing-4 auto;
-  width: 60%;
+.Filter__Label {
+  color: $white;
+  font-weight: $font-weight-med;
+}
+
+.Filter__Slider {
+  margin-left: auto;
+  margin-right: auto;
+  width: 98% !important;
 }
 
 .Discover__loadMore {
   display: flex;
   justify-content: center;
   margin: $spacing-4 auto;
-  max-width: 624px;
-  width: 60%;
+  max-width: 720px;
 }
 
-.MovieContainer {
-  margin: $spacing-4 auto 0 auto;
-  max-width: 624px;
-  width: 60%;
+@media (min-width: 768px) {
+  .Filters {
+    margin: $spacing-4 auto;
+    max-width: 720px;
+  }
 }

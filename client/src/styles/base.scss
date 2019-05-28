@@ -28,12 +28,36 @@ p {
   align-items: center;
 }
 
+.flex-g-1 {
+  flex-grow: 1;
+}
+
 /* spacing helper classes */
+
+.mb1 {
+  margin-bottom: $spacing-1;
+}
 
 .ml1 {
   margin-left: $spacing-1;
 }
 
+.mr1 {
+  margin-right: $spacing-1;
+}
+
 .mt1 {
   margin-top: $spacing-1;
+}
+
+.mt2 {
+  margin-top: $spacing-2;
+}
+
+.mt3 {
+  margin-top: $spacing-3;
+}
+
+.mt4 {
+  margin-top: $spacing-4;
 }
