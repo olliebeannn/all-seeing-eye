@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import MovieList from '../MovieList/MovieList';
 import Spinner from '../Spinner/Spinner';
+import EmptyList from '../EmptyList/EmptyList';
 
 import styles from './Seen.scss';
 
@@ -14,8 +15,18 @@ class Seen extends Component {
     let content = <Spinner />;
 
     if (this.props.seen) {
-      moviesToDisplay = this.props.seen.filter(movie => movie.onSeen);
-      content = <MovieList movies={moviesToDisplay} />;
+      if (this.props.seen.length) {
+        moviesToDisplay = this.props.seen.filter(movie => movie.onSeen);
+        content = <MovieList movies={moviesToDisplay} />;
+      } else {
+        content = (
+          <EmptyList
+            text="You haven’t saved anything to your Seen list"
+            buttonText="Go to Discover"
+            image={process.env.PUBLIC_URL + '/images/seen-empty.png'}
+          />
+        );
+      }
     }
 
     return <div className="Seen">{content}</div>;

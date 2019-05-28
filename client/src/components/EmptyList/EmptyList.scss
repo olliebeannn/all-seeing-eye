@@ -1,0 +1,14 @@
+@import '../../styles/variables.scss';
+
+.EmptyList {
+  margin: $spacing-4 auto;
+  max-width: 480px;
+  // width: 50%;
+}
+
+.EmptyList__image {
+  width: 60%;
+}
+
+.EmptyList__text {
+}

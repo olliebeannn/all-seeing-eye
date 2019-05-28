@@ -11,6 +11,10 @@ h1 {
   font-weight: $font-weight-med;
 }
 
+h2 {
+  font-size: $font-l;
+}
+
 p {
   font-size: $font-m;
 }
@@ -18,6 +22,10 @@ p {
 /* layout helper classes */
 .flex {
   display: flex;
+}
+
+.flex--dir-c {
+  flex-direction: column;
 }
 
 .flex--jc--c {
@@ -60,4 +68,13 @@ p {
 
 .mt4 {
   margin-top: $spacing-4;
+}
+
+/* presentational classes */
+.center {
+  text-align: center;
+}
+
+.white {
+  color: $white;
 }
