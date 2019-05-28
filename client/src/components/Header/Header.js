@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { NavLink } from 'react-router-dom';
 
 import './Header.scss';
 
@@ -20,13 +21,13 @@ class Header extends Component {
       default:
         headerContent = [
           <li className="Header__item Header__tabLink" key="3">
-            <a href="/watchlist">Watchlist</a>
+            <NavLink to="/watchlist">Watchlist</NavLink>
           </li>,
           <li className="Header__item Header__tabLink" key="4">
-            <a href="/discover">Discover</a>
+            <NavLink to="/discover">Discover</NavLink>
           </li>,
           <li className="Header__item Header__tabLink" key="5">
-            <a href="/seen">Seen</a>
+            <NavLink to="/seen">Seen</NavLink>
           </li>,
           <li className="Header__item" key="6">
             <a href="/api/logout">Sign Out</a>

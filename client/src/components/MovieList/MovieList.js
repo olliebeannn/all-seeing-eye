@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 import Movie from '../Movie/Movie';
-import styles from './MovieList.scss';
+import './MovieList.scss';
 
 class MovieList extends Component {
   render() {

@@ -8,7 +8,7 @@ import Movie from '../Movie/Movie';
 import MovieList from '../MovieList/MovieList';
 import Spinner from '../Spinner/Spinner';
 
-import styles from './Watchlist.scss';
+import './Watchlist.scss';
 
 class Watchlist extends Component {
   render() {

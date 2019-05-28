@@ -20,6 +20,12 @@
   text-decoration: none;
 }
 
+.Header__item a.active {
+  border-bottom: 4px solid white;
+  font-weight: $font-weight-med;
+  padding-bottom: $spacing-05;
+}
+
 .Header__menuIcon {
   color: $white;
   display: flex;
@@ -27,7 +33,7 @@
 }
 
 .Header__logo {
-  padding: 0;
+  padding: 0 0 0 $spacing-2;
 }
 
 .Header__appName {
@@ -51,6 +57,10 @@
   .Header__menuIcon {
     color: $white;
     display: none;
+    padding: 0;
+  }
+
+  .Header__logo {
     padding: 0;
   }
 
