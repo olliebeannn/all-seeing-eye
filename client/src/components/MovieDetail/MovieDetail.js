@@ -11,6 +11,7 @@ import './MovieDetail.scss';
 
 import Button from '../Button/Button';
 import Spinner from '../Spinner/Spinner';
+import ScrollToTopOnMount from '../ScrollToTopOnMount/ScrollToTopOnMount';
 
 class MovieDetail extends Component {
   constructor(props) {
@@ -227,6 +228,7 @@ class MovieDetail extends Component {
 
     return (
       <div className="MovieDetail__wrapper">
+        <ScrollToTopOnMount />
         <a href="#" onClick={() => this.props.history.goBack()}>
           ← Back
         </a>
