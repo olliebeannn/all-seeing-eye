@@ -6,7 +6,7 @@ import MovieList from '../MovieList/MovieList';
 import Spinner from '../Spinner/Spinner';
 import EmptyList from '../EmptyList/EmptyList';
 
-import styles from './Seen.scss';
+import './Seen.scss';
 
 class Seen extends Component {
   render() {

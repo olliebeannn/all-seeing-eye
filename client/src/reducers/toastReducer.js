@@ -17,16 +17,16 @@ export default function toasts(state = [], action) {
 
       switch (action.payload.actionTaken) {
         case 'add_watchlist':
-          newToastText = `Added \"${action.payload.text}\" to Watchlist`;
+          newToastText = `Added "${action.payload.text}" to Watchlist`;
           break;
         case 'remove_watchlist':
-          newToastText = `Removed \"${action.payload.text}\" from Watchlist`;
+          newToastText = `Removed "${action.payload.text}" from Watchlist`;
           break;
         case 'add_seen':
-          newToastText = `Added \"${action.payload.text}\" to Seen list`;
+          newToastText = `Added "${action.payload.text}" to Seen list`;
           break;
         case 'remove_seen':
-          newToastText = `Removed \"${action.payload.text}\" from Seen list`;
+          newToastText = `Removed "${action.payload.text}" from Seen list`;
           break;
         default:
           newToastText = 'Unsupported toast action...';

@@ -5,8 +5,7 @@ import {
   UPDATE_FILTERS,
   ADD_TO_WATCHLIST,
   REMOVE_FROM_WATCHLIST,
-  ADD_TO_SEEN,
-  REMOVE_FROM_SEEN
+  ADD_TO_SEEN
 } from '../actions/types';
 
 export default function(state = null, action) {

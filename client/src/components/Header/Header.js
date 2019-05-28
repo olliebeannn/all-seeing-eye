@@ -47,6 +47,7 @@ class Header extends Component {
         <li className="Header__item Header__logo" key="1">
           <img
             src={process.env.PUBLIC_URL + '/images/logo-all-seeing-eye.svg'}
+            alt="All Seeing Eye logo"
           />
         </li>
         <li className="Header__item Header__appName" key="2">

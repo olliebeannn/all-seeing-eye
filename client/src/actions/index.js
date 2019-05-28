@@ -28,7 +28,7 @@ export const fetchWatchlist = () => async dispatch => {
 };
 
 export const addToWatchlist = movieId => async dispatch => {
-  const response = await axios.post('/api/update-list', {
+  await axios.post('/api/update-list', {
     movieId: movieId,
     action: 'add_watchlist'
   });
@@ -37,7 +37,7 @@ export const addToWatchlist = movieId => async dispatch => {
 };
 
 export const removeFromWatchlist = movieId => async dispatch => {
-  const response = await axios.post('/api/update-list', {
+  await axios.post('/api/update-list', {
     movieId: movieId,
     action: 'remove_watchlist'
   });
@@ -48,7 +48,7 @@ export const removeFromWatchlist = movieId => async dispatch => {
 export const addToSeen = movieId => async dispatch => {
   console.log('in addToSeen action creator!');
 
-  const response = await axios.post('/api/update-list', {
+  await axios.post('/api/update-list', {
     movieId: movieId,
     action: 'add_seen'
   });
@@ -57,9 +57,7 @@ export const addToSeen = movieId => async dispatch => {
 };
 
 export const removeFromSeen = movieId => async dispatch => {
-  console.log('in removeFromSeen action creator!');
-
-  const response = await axios.post('/api/update-list', {
+  await axios.post('/api/update-list', {
     movieId: movieId,
     action: 'remove_seen'
   });

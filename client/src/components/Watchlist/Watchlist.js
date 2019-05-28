@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import _ from 'lodash';
 
 import * as actions from '../../actions';
-import Movie from '../Movie/Movie';
 import MovieList from '../MovieList/MovieList';
 import Spinner from '../Spinner/Spinner';
 import EmptyList from '../EmptyList/EmptyList';

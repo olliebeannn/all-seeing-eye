@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
-import _ from 'lodash';
 import Select from 'react-select';
 
-import styles from './Discover.scss';
+import './Discover.scss';
 // Slider component styles
 import 'rc-slider/assets/index.css';
 
 import * as actions from '../../actions';
 import genres from '../../utils/genres';
 
-import Movie from '../Movie/Movie';
 import MovieList from '../MovieList/MovieList';
 import Button from '../Button/Button';
 import Spinner from '../Spinner/Spinner';

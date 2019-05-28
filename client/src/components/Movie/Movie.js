@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LinesEllipsis from 'react-lines-ellipsis';
-import axios from 'axios';
 
-import baseStyles from '../../styles/base.scss';
-import styles from './Movie.scss';
-import image from './inception.png';
+import '../../styles/base.scss';
+import './Movie.scss';
 import * as actions from '../../actions';
 
 import Button from '../Button/Button';

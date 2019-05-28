@@ -2,26 +2,24 @@ import React from 'react';
 import { connect } from 'react-redux';
 
 import Toast from '../Toast/Toast';
-import styles from './Toasts.scss';
+import './Toasts.scss';
 
 const Toasts = props => {
-	let toastsContent = null;
+  let toastsContent = null;
 
-	if (props.toasts.length > 0) {
-		toastsContent = (
-			<ul>
-				{props.toasts.map(toast => (
-					<Toast text={toast.text} key={toast.id} />
-				))}
-			</ul>
-		);
-	}
+  if (props.toasts.length > 0) {
+    toastsContent = (
+      <ul>
+        {props.toasts.map(toast => <Toast text={toast.text} key={toast.id} />)}
+      </ul>
+    );
+  }
 
-	return <div className="Toasts">{toastsContent}</div>;
+  return <div className="Toasts">{toastsContent}</div>;
 };
 
 function mapStateToProps({ toasts }) {
-	return { toasts };
+  return { toasts };
 }
 
 export default connect(mapStateToProps)(Toasts);
