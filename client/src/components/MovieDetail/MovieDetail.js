@@ -116,7 +116,7 @@ class MovieDetail extends Component {
         if (this.state.movieData.onWatchlist) {
           return (
             <Button
-              className="Button Button--primary"
+              className="Button Button--primary flex-g-1"
               click={() =>
                 this.onRemoveFromWatchlist(
                   this.state.movieData.movieId,
@@ -130,7 +130,7 @@ class MovieDetail extends Component {
         } else {
           return (
             <Button
-              className="Button Button--primary"
+              className="Button Button--primary flex-g-1"
               click={() =>
                 this.onAddToWatchlist(
                   this.state.movieData.movieId,
@@ -150,7 +150,7 @@ class MovieDetail extends Component {
         if (this.state.movieData.onSeen) {
           return (
             <Button
-              className="Button Button--secondary ml1"
+              className="Button Button--secondary ml1 flex-g-1"
               click={() =>
                 this.onRemoveFromSeen(
                   this.state.movieData.movieId,
@@ -164,7 +164,7 @@ class MovieDetail extends Component {
         } else {
           return (
             <Button
-              className="Button Button--secondary ml1"
+              className="Button Button--secondary ml1 flex-g-1"
               click={() =>
                 this.onAddToSeen(
                   this.state.movieData.movieId,
@@ -185,7 +185,7 @@ class MovieDetail extends Component {
 
       if (this.state.movieData.title) {
         content = (
-          <div className="MovieDetail">
+          <div className="MovieDetail mt2">
             <div className="MovieDetail__poster">
               <img
                 src={`https://image.tmdb.org/t/p/original/${
@@ -210,11 +210,11 @@ class MovieDetail extends Component {
                 Director: {this.state.movieData.director.name}, Runtime:{' '}
                 {this.state.movieData.runtime} mins
               </div>
-              <div className="MovieDetail__cast">Starring: {listCast()}</div>
-              <div className="MovieDetail__overview">
+              <div className="mt1">Starring: {listCast()}</div>
+              <div className="MovieDetail__overview mt1">
                 {this.state.movieData.overview}
               </div>
-              <div className="MovieDetail__buttonWrapper">
+              <div className="mt2 flex">
                 {displayWatchlistButton()}
                 {displaySeenButton()}
               </div>

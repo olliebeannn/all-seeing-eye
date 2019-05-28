@@ -4,18 +4,18 @@
   background-color: $white;
   border-radius: 4px;
   display: flex;
-  margin-top: $spacing-2;
+  flex-direction: column;
 }
 
 .MovieDetail__wrapper {
-  margin: 0 auto;
-  max-width: 800px;
+  // margin: 0 auto;
+  margin: 0 $spacing-2;
+  max-width: 720px;
   padding-top: $spacing-2;
 }
 
 .MovieDetail__poster {
-  max-width: 240px;
-  width: 33%;
+  height: 240px;
 
   img {
     height: 100%;
@@ -25,7 +25,6 @@
 }
 
 .MovieDetail__content {
-  width: 100%;
   padding: $spacing-2;
 }
 
@@ -52,15 +51,12 @@
   margin-top: $spacing-05;
 }
 
-.MovieDetail__cast {
-  margin-top: $spacing-1;
-}
-
 .MovieDetail__overview {
   color: $text-secondary;
-  margin-top: $spacing-1;
 }
 
-.MovieDetail__buttonWrapper {
-  margin-top: $spacing-2;
+@media (min-width: 768px) {
+  .MovieDetail__wrapper {
+    margin: 0 auto;
+  }
 }
