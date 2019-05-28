@@ -206,7 +206,7 @@ class MovieDetail extends Component {
                 </p>
               </div>
               <div className="MovieDetail__directorRuntime">
-                Director: {this.state.movieData.directorName}, Runtime:{' '}
+                Director: {this.state.movieData.director.name}, Runtime:{' '}
                 {this.state.movieData.runtime} mins
               </div>
               <div className="MovieDetail__cast">Starring: {listCast()}</div>
