@@ -1,0 +1,33 @@
+@import '../../styles/variables.scss';
+
+.MobileMenu {
+  margin: 0 auto $spacing-8 auto;
+}
+
+.MobileMenu li {
+  color: white;
+  font-size: $font-xxl;
+  margin-top: $spacing-4;
+  text-align: center;
+}
+
+.MobileMenu li.MobileMenu__logout {
+  margin-top: $spacing-8;
+}
+
+.MobileMenu li.MobileMenu__logout a {
+  font-weight: $font-weight-reg;
+}
+
+.MobileMenu li a {
+  color: white;
+  font-size: $font-xxl;
+  font-weight: $font-weight-med;
+  text-decoration: none;
+}
+
+.MobileMenu li.MobileMenu__close {
+  color: $primary-color;
+  font-weight: $font-weight-reg;
+  text-transform: uppercase;
+}

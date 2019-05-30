@@ -4,6 +4,8 @@ import { NavLink } from 'react-router-dom';
 
 import './Header.scss';
 
+import MobileMenu from '../MobileMenu/MobileMenu';
+
 class Header extends Component {
   renderContent() {
     let headerContent = <li className="Header__item" key="8" />;
@@ -14,7 +16,7 @@ class Header extends Component {
       case false:
         headerContent = (
           <li className="Header__item" key="7">
-            <a href="/auth/google">Sign in with Google</a>
+            <a href="/auth/google">Sign In</a>
           </li>
         );
         break;
@@ -40,21 +42,24 @@ class Header extends Component {
 
   render() {
     return (
-      <ul className="Header">
-        <li className="Header__item Header__menuIcon" key="0">
-          <i className="material-icons">menu</i>
-        </li>
-        <li className="Header__item Header__logo" key="1">
-          <img
-            src={process.env.PUBLIC_URL + '/images/logo-all-seeing-eye.svg'}
-            alt="All Seeing Eye logo"
-          />
-        </li>
-        <li className="Header__item Header__appName" key="2">
-          <a href="/watchlist">The All Seeing Eye</a>
-        </li>
-        {this.renderContent()}
-      </ul>
+      <>
+        <ul className="Header">
+          <li className="Header__item Header__menuIcon" key="0">
+            <i className="material-icons">menu</i>
+          </li>
+          <li className="Header__item Header__logo" key="1">
+            <img
+              src={process.env.PUBLIC_URL + '/images/logo-all-seeing-eye.svg'}
+              alt="All Seeing Eye logo"
+            />
+          </li>
+          <li className="Header__item Header__appName" key="2">
+            <a href="/watchlist">The All Seeing Eye</a>
+          </li>
+          {this.renderContent()}
+        </ul>
+        <MobileMenu />
+      </>
     );
   }
 }
