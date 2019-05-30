@@ -7,6 +7,14 @@ import './Header.scss';
 import MobileMenu from '../MobileMenu/MobileMenu';
 
 class Header extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      showMobileMenu: false
+    };
+  }
+
   renderContent() {
     let headerContent = <li className="Header__item" key="8" />;
 
@@ -40,11 +48,31 @@ class Header extends Component {
     return headerContent;
   }
 
+  displayMobileMenu = () => {
+    if (this.state.showMobileMenu) {
+      return <MobileMenu click={this.hideMobileMenu} />;
+    } else {
+      return null;
+    }
+  };
+
+  hideMobileMenu = () => {
+    this.setState({ showMobileMenu: false });
+  };
+
+  toggleMobileMenu = () => {
+    this.setState({ showMobileMenu: !this.state.showMobileMenu });
+  };
+
   render() {
     return (
       <>
         <ul className="Header">
-          <li className="Header__item Header__menuIcon" key="0">
+          <li
+            className="Header__item Header__menuIcon"
+            onClick={this.toggleMobileMenu}
+            key="0"
+          >
             <i className="material-icons">menu</i>
           </li>
           <li className="Header__item Header__logo" key="1">
@@ -58,7 +86,7 @@ class Header extends Component {
           </li>
           {this.renderContent()}
         </ul>
-        <MobileMenu />
+        {this.displayMobileMenu()}
       </>
     );
   }

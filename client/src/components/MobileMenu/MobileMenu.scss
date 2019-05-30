@@ -6,7 +6,7 @@
 
 .MobileMenu li {
   color: white;
-  font-size: $font-xxl;
+  font-size: $font-l;
   margin-top: $spacing-4;
   text-align: center;
 }
@@ -24,6 +24,12 @@
   font-size: $font-xxl;
   font-weight: $font-weight-med;
   text-decoration: none;
+}
+
+.MobileMenu li a.active {
+  border-bottom: 4px solid white;
+  font-weight: $font-weight-med;
+  padding-bottom: $spacing-05;
 }
 
 .MobileMenu li.MobileMenu__close {
