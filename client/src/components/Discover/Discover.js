@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
+import { withRouter } from 'react-router-dom';
 
 import './Discover.scss';
 // Slider component styles
@@ -57,9 +58,24 @@ class Discover extends Component {
   };
 
   handleUpdateFilters = () => {
-    console.log('this.state.releaseDateMin', this.state.releaseDateMin);
-    console.log('this.state.releaseDateMax', this.state.releaseDateMax);
-    console.log('this.state.genres', this.state.genres);
+    // console.log('this.state.releaseDateMin', this.state.releaseDateMin);
+    // console.log('this.state.releaseDateMax', this.state.releaseDateMax);
+    // console.log('this.state.genres', this.state.genres);
+
+    // console.log('this.state.genres', this.state.genres);
+    let genreString = this.state.genres.map(elem => elem.value).join(',');
+    // console.log(genreString);
+
+    this.props.history.push({
+      pathname: '/discover',
+      search:
+        '?' +
+        new URLSearchParams({
+          startYear: this.state.releaseDateMin,
+          endYear: this.state.releaseDateMax,
+          genres: genreString
+        }).toString()
+    });
 
     this.props.updateFilters(
       this.state.releaseDateMin,
@@ -155,7 +171,9 @@ function mapStateToProps({ discoverList }) {
   return { discoverList };
 }
 
-export default connect(
-  mapStateToProps,
-  actions
-)(Discover);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    actions
+  )(Discover)
+);
