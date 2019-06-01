@@ -51,12 +51,31 @@ class Discover extends Component {
     //   genres: search.genres ? search.genres.split(',') : []
     // });
 
-    this.props.loadDiscoverMovies(
-      search.page ? search.page : 1,
-      search.startYear ? search.startYear : 1900,
-      search.endYear ? search.endYear : 2019,
-      search.genres ? search.genres.split(',') : []
-    );
+    let page = search.page ? parseInt(search.page) : 1;
+    let startYear = search.startYear ? parseInt(search.startYear) : 1900;
+    let endYear = search.endYear ? parseInt(search.endYear) : 2019;
+
+    let genreIds = search.genres ? search.genres.split(',') : [];
+
+    // Load movies based on filters in query params, or use defaults
+    this.props.loadDiscoverMovies(page, startYear, endYear, genreIds);
+
+    // Grab the genre objects to push onto state from the IDs in params
+    let currentGenres = genres.filter(elem => {
+      return genreIds.includes(elem.value.toString());
+    });
+    // console.log('currentGenres', currentGenres);
+
+    // Set the state to query params if available so filter state matches
+    this.setState({
+      // currentPage: search.page ? search.page : 1,
+      // startYear: search.startYear ? search.startYear : 1900,
+      // endYear: search.endYear ? search.endYear : 2019,
+      currentPage: page,
+      startYear: startYear,
+      endYear: endYear,
+      genres: currentGenres
+    });
 
     // this.setState(
     //   {
@@ -115,6 +134,7 @@ class Discover extends Component {
     //   this.state.endYear,
     //   this.state.genres
     // );
+
     this.props.loadDiscoverMovies(
       this.state.currentPage,
       this.state.startYear,
