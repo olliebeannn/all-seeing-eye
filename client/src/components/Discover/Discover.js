@@ -110,10 +110,16 @@ class Discover extends Component {
       search: searchParams.toString()
     });
 
-    this.props.updateFilters(
+    // this.props.updateFilters(
+    //   this.state.startYear,
+    //   this.state.endYear,
+    //   this.state.genres
+    // );
+    this.props.loadDiscoverMovies(
+      this.state.currentPage,
       this.state.startYear,
       this.state.endYear,
-      this.state.genres
+      this.state.genres.map(elem => elem.value)
     );
   };
 

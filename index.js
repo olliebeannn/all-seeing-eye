@@ -107,9 +107,9 @@ app.post('/api/discover/fetch', (req, res) => {
 
   // If there are genre filters applied
   if (req.body.genres && req.body.genres.length) {
-    let cleanedGenres = req.body.genres.map(elem => elem.value);
-
-    reqString += '&with_genres=' + cleanedGenres.join('|');
+    // let cleanedGenres = req.body.genres.map(elem => elem.value);
+    // reqString += '&with_genres=' + cleanedGenres.join('|');
+    reqString += '&with_genres=' + req.body.genres.join('|');
   }
 
   // If there is start year filter, add it
