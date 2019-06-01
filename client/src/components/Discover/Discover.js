@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Select from 'react-select';
 import { withRouter } from 'react-router-dom';
+import queryString from 'query-string';
 
 import './Discover.scss';
 // Slider component styles
@@ -23,14 +24,28 @@ class Discover extends Component {
     super(props);
     this.state = {
       currentPage: 1,
-      releaseDateMin: 1900,
-      releaseDateMax: 2019,
+      startYear: 1900,
+      endYear: 2019,
       genres: []
     };
   }
 
   componentDidMount() {
     this.props.loadDiscoverMovies(this.state.currentPage);
+
+    let search = queryString.parse(this.props.location.search);
+
+    console.log('search', search);
+
+    // this.setState(
+    //   {
+    //     startYear: search.startYear,
+    //     endYear: search.endYear
+    //   },
+    //   async () => {
+    //     this.props.loadDiscoverMovies(this.state.currentPage);
+    //   }
+    // );
   }
 
   loadMoreMovies = () => {
@@ -38,8 +53,8 @@ class Discover extends Component {
 
     this.props.loadDiscoverMovies(
       page + 1,
-      this.state.releaseDateMin,
-      this.state.releaseDateMax,
+      this.state.startYear,
+      this.state.endYear,
       this.state.genres
     );
 
@@ -48,8 +63,8 @@ class Discover extends Component {
 
   handleReleaseYearChange = sliderValues => {
     this.setState({
-      releaseDateMin: sliderValues[0],
-      releaseDateMax: sliderValues[1]
+      startYear: sliderValues[0],
+      endYear: sliderValues[1]
     });
   };
 
@@ -58,44 +73,45 @@ class Discover extends Component {
   };
 
   handleUpdateFilters = () => {
-    // console.log('this.state.releaseDateMin', this.state.releaseDateMin);
-    // console.log('this.state.releaseDateMax', this.state.releaseDateMax);
-    // console.log('this.state.genres', this.state.genres);
+    let searchParams = new URLSearchParams({
+      startYear: this.state.startYear,
+      endYear: this.state.endYear
+    });
 
-    // console.log('this.state.genres', this.state.genres);
-    let genreString = this.state.genres.map(elem => elem.value).join(',');
-    // console.log(genreString);
+    if (this.state.genres.length) {
+      let genreString = this.state.genres.map(elem => elem.value).join(',');
+      searchParams.append('genres', genreString);
+    }
 
     this.props.history.push({
       pathname: '/discover',
-      search:
-        '?' +
-        new URLSearchParams({
-          startYear: this.state.releaseDateMin,
-          endYear: this.state.releaseDateMax,
-          genres: genreString
-        }).toString()
+      search: searchParams.toString()
     });
 
     this.props.updateFilters(
-      this.state.releaseDateMin,
-      this.state.releaseDateMax,
+      this.state.startYear,
+      this.state.endYear,
       this.state.genres
     );
   };
 
   handleClearFilters = () => {
+    this.props.history.push({
+      pathname: '/discover',
+      search: ''
+    });
+
     this.setState(
       {
-        releaseDateMin: 1900,
-        releaseDateMax: 2019,
+        startYear: 1900,
+        endYear: 2019,
         genres: [],
         page: 1
       },
       async () =>
         this.props.updateFilters(
-          this.state.releaseDateMin,
-          this.state.releaseDateMax,
+          this.state.startYear,
+          this.state.endYear,
           this.state.genres
         )
     );
@@ -120,11 +136,8 @@ class Discover extends Component {
               className="Filter__Slider mt2"
               min={1900}
               max={2019}
-              defaultValue={[
-                this.state.releaseDateMin,
-                this.state.releaseDateMax
-              ]}
-              value={[this.state.releaseDateMin, this.state.releaseDateMax]}
+              defaultValue={[this.state.startYear, this.state.endYear]}
+              value={[this.state.startYear, this.state.endYear]}
               onChange={this.handleReleaseYearChange}
             />
           </div>
