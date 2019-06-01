@@ -88,6 +88,7 @@ export const loadDiscoverMovies = (
   genres
 ) => async dispatch => {
   // const response = await axios.get(`/api/discover/fetch?page=${page}`);
+  console.log('loadDiscoverMovies', { page, startYear, endYear, genres });
   const response = await axios.post('/api/discover/fetch', {
     page,
     startYear,

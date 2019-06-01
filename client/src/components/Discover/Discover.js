@@ -31,11 +31,32 @@ class Discover extends Component {
   }
 
   componentDidMount() {
-    this.props.loadDiscoverMovies(this.state.currentPage);
+    // this.props.loadDiscoverMovies(this.state.currentPage);
 
     let search = queryString.parse(this.props.location.search);
 
-    console.log('search', search);
+    // console.log('search', search);
+    //
+    // let requestGenres = [];
+    // if (search.genres) {
+    //   requestGenres = search.genres.split(',');
+    // }
+    //
+    // console.log('requestGenres', requestGenres);
+
+    // this.props.loadDiscoverMovies({
+    //   page: search.page ? search.page : 1,
+    //   startYear: search.startYear ? search.startYear : 1900,
+    //   endYear: search.endYear ? search.endYear : 2019,
+    //   genres: search.genres ? search.genres.split(',') : []
+    // });
+
+    this.props.loadDiscoverMovies(
+      search.page ? search.page : 1,
+      search.startYear ? search.startYear : 1900,
+      search.endYear ? search.endYear : 2019,
+      search.genres ? search.genres.split(',') : []
+    );
 
     // this.setState(
     //   {
@@ -75,7 +96,8 @@ class Discover extends Component {
   handleUpdateFilters = () => {
     let searchParams = new URLSearchParams({
       startYear: this.state.startYear,
-      endYear: this.state.endYear
+      endYear: this.state.endYear,
+      page: this.state.currentPage
     });
 
     if (this.state.genres.length) {

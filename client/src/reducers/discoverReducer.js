@@ -14,12 +14,12 @@ export default function(state = null, action) {
       // If there are already movies loaded, append new movies
       // Else just return the payload, i.e. first page of movies
       if (state) {
-        let newState = [];
-        state.forEach(item => newState.push(_.cloneDeep(item)));
-        action.payload.forEach(item => newState.push(_.cloneDeep(item)));
-
-        return newState;
-      } else {
+        //   let newState = [];
+        //   state.forEach(item => newState.push(_.cloneDeep(item)));
+        //   action.payload.forEach(item => newState.push(_.cloneDeep(item)));
+        //
+        //   return newState;
+        // } else {
         return action.payload || false;
       }
     case UPDATE_FILTERS:
