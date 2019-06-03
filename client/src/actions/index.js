@@ -95,6 +95,7 @@ export const loadDiscoverMovies = (
     endYear,
     genres
   });
+  console.log('loadDiscoverMovies response', response);
 
   let returnData = [];
 
