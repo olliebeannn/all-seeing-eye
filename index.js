@@ -166,6 +166,81 @@ app.post('/api/discover/fetch', (req, res) => {
   });
 });
 
+// Load all data up to the given page, e.g. if page=3, return pages 1,2,3
+app.post('/api/discover/load-all-pages', async (req, res) => {
+  console.log('load-all-pages called!');
+
+  let reqString = `https://api.themoviedb.org/3/discover/movie?api_key=${
+    keys.TMDBkey
+  }&vote_count.gte=500&sort_by=vote_average.desc`;
+
+  // If there are genre filters applied
+  if (req.body.genres && req.body.genres.length) {
+    // let cleanedGenres = req.body.genres.map(elem => elem.value);
+    // reqString += '&with_genres=' + cleanedGenres.join('|');
+    reqString += '&with_genres=' + req.body.genres.join('|');
+  }
+
+  // If there is start year filter, add it
+  if (req.body.startYear) {
+    reqString += `&primary_release_date.gte=${req.body.startYear}-01-01`;
+  }
+
+  if (req.body.endYear) {
+    reqString += `&primary_release_date.lte=${req.body.endYear}-12-31`;
+  }
+
+  let fullReturnData = [];
+
+  // Add the page param to request
+  let maxPage = req.body.page ? req.body.page : 1;
+
+  for (let i = 1; i <= maxPage; i++) {
+    reqString += `&page=${i}`;
+    console.log('reqString with filters', reqString);
+
+    let response = await axios.get(reqString);
+    let returnData = response.data.results;
+
+    let user = await User.findById(req.user._id);
+
+    let watchlistMovies = await Movie.find({
+      _id: { $in: user.watchlist }
+    }).lean();
+
+    let watchlistIds = watchlistMovies.map(movie => movie.movieId);
+
+    let seenListMovies = await Movie.find({
+      _id: { $in: user.seen }
+    }).lean();
+    let seenIds = seenListMovies.map(movie => movie.movieId);
+
+    // Replace the data prop id with movieId to match cache DB
+    returnData.forEach(result => {
+      result.movieId = result.id;
+      delete result.id;
+
+      // Mark as onWatchlist or not
+      if (watchlistIds.includes(result.movieId)) {
+        result.onWatchlist = true;
+      } else {
+        result.onWatchlist = false;
+      }
+
+      // Mark as onSeen or not
+      if (seenIds.includes(result.movieId)) {
+        result.onSeen = true;
+      } else {
+        result.onSeen = false;
+      }
+
+      fullReturnData.push(_.cloneDeep(result));
+    });
+  }
+
+  res.send(fullReturnData);
+});
+
 app.get('/api/movie_detail/:id', async (req, res) => {
   let movie = await Movie.findOne({ movieId: req.params.id }).lean();
   let user = await User.findById(req.user._id);
