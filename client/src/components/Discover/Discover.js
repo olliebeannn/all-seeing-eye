@@ -96,6 +96,7 @@ class Discover extends Component {
       page + 1,
       this.state.startYear,
       this.state.endYear,
+      // Causes request to fail b/c genres is the full object, not just IDs
       this.state.genres
     );
 
@@ -152,17 +153,20 @@ class Discover extends Component {
     //   this.state.genres
     // );
 
-    this.setState({
-      ...(_.cloneDeep(this.state)),
-      currentPage: 1
-    }, async () => {
-      this.props.loadDiscoverMovies(
-        1,
-        this.state.startYear,
-        this.state.endYear,
-        this.state.genres.map(elem => elem.value)
-      );
-    });
+    this.setState(
+      {
+        ..._.cloneDeep(this.state),
+        currentPage: 1
+      },
+      async () => {
+        this.props.loadDiscoverMovies(
+          1,
+          this.state.startYear,
+          this.state.endYear,
+          this.state.genres.map(elem => elem.value)
+        );
+      }
+    );
   };
 
   handleClearFilters = () => {

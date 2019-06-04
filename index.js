@@ -178,6 +178,7 @@ app.post('/api/discover/load-all-pages', async (req, res) => {
   if (req.body.genres && req.body.genres.length) {
     // let cleanedGenres = req.body.genres.map(elem => elem.value);
     // reqString += '&with_genres=' + cleanedGenres.join('|');
+    console.log('req.body.genres', req.body.genres);
     reqString += '&with_genres=' + req.body.genres.join('|');
   }
 
