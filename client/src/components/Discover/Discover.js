@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import Select from 'react-select';
 import { withRouter } from 'react-router-dom';
 import queryString from 'query-string';
+import _ from 'lodash';
 
 import './Discover.scss';
 // Slider component styles
@@ -98,6 +99,22 @@ class Discover extends Component {
       this.state.genres
     );
 
+    let searchParams = new URLSearchParams({
+      startYear: this.state.startYear,
+      endYear: this.state.endYear,
+      page: page + 1
+    });
+
+    if (this.state.genres.length) {
+      let genreString = this.state.genres.map(elem => elem.value).join(',');
+      searchParams.append('genres', genreString);
+    }
+
+    this.props.history.push({
+      pathname: '/discover',
+      search: searchParams.toString()
+    });
+
     this.setState({ currentPage: page + 1 });
   };
 
@@ -116,7 +133,7 @@ class Discover extends Component {
     let searchParams = new URLSearchParams({
       startYear: this.state.startYear,
       endYear: this.state.endYear,
-      page: this.state.currentPage
+      page: 1
     });
 
     if (this.state.genres.length) {
@@ -135,12 +152,17 @@ class Discover extends Component {
     //   this.state.genres
     // );
 
-    this.props.loadDiscoverMovies(
-      this.state.currentPage,
-      this.state.startYear,
-      this.state.endYear,
-      this.state.genres.map(elem => elem.value)
-    );
+    this.setState({
+      ...(_.cloneDeep(this.state)),
+      currentPage: 1
+    }, async () => {
+      this.props.loadDiscoverMovies(
+        1,
+        this.state.startYear,
+        this.state.endYear,
+        this.state.genres.map(elem => elem.value)
+      );
+    });
   };
 
   handleClearFilters = () => {
