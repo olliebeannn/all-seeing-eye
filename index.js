@@ -196,10 +196,10 @@ app.post('/api/discover/load-all-pages', async (req, res) => {
   let maxPage = req.body.page ? req.body.page : 1;
 
   for (let i = 1; i <= maxPage; i++) {
-    reqString += `&page=${i}`;
-    console.log('reqString with filters', reqString);
+    let pageReqString = reqString + `&page=${i}`;
+    console.log('reqString with filters', pageReqString);
 
-    let response = await axios.get(reqString);
+    let response = await axios.get(pageReqString);
     let returnData = response.data.results;
 
     let user = await User.findById(req.user._id);
