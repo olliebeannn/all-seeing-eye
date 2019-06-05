@@ -3,7 +3,6 @@ import _ from 'lodash';
 import {
   FETCH_DISCOVER,
   LOAD_DISCOVER_PAGE,
-  UPDATE_FILTERS,
   ADD_TO_WATCHLIST,
   REMOVE_FROM_WATCHLIST,
   ADD_TO_SEEN
@@ -13,21 +12,10 @@ export default function(state = null, action) {
   switch (action.type) {
     case FETCH_DISCOVER:
       console.log('fetch_discover', action);
-      // If there are already movies loaded, append new movies
-      // Else just return the payload, i.e. first page of movies
-      // if (state) {
-      //   let newState = [];
-      //   state.forEach(item => newState.push(_.cloneDeep(item)));
-      //   action.payload.forEach(item => newState.push(_.cloneDeep(item)));
-      //
-      //   return newState;
-      // } else {
       return action.payload || false;
-    // }
-    case UPDATE_FILTERS:
-      console.log('update filters!', action);
-
-      return action.payload || false;
+    // case UPDATE_FILTERS:
+    //   console.log('update filters!', action);
+    //   return action.payload || false;
     case LOAD_DISCOVER_PAGE:
       console.log('load-discover-page', action);
 

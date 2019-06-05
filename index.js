@@ -107,8 +107,6 @@ app.post('/api/discover/load-page', (req, res) => {
 
   // If there are genre filters applied
   if (req.body.genres && req.body.genres.length) {
-    // let cleanedGenres = req.body.genres.map(elem => elem.value);
-    // reqString += '&with_genres=' + cleanedGenres.join('|');
     reqString += '&with_genres=' + req.body.genres.join('|');
   }
 
@@ -123,8 +121,7 @@ app.post('/api/discover/load-page', (req, res) => {
 
   // Add the page param to request
   reqString += `&page=${req.body.page}`;
-
-  console.log('reqString with filters', reqString);
+  // console.log('reqString with filters', reqString);
 
   axios.get(reqString).then(async response => {
     let returnData = response.data.results;
@@ -168,16 +165,12 @@ app.post('/api/discover/load-page', (req, res) => {
 
 // Load all data up to the given page, e.g. if page=3, return pages 1,2,3
 app.post('/api/discover/load-all-pages', async (req, res) => {
-  console.log('load-all-pages called!');
-
   let reqString = `https://api.themoviedb.org/3/discover/movie?api_key=${
     keys.TMDBkey
   }&vote_count.gte=500&sort_by=vote_average.desc`;
 
   // If there are genre filters applied
   if (req.body.genres && req.body.genres.length) {
-    // let cleanedGenres = req.body.genres.map(elem => elem.value);
-    // reqString += '&with_genres=' + cleanedGenres.join('|');
     console.log('req.body.genres', req.body.genres);
     reqString += '&with_genres=' + req.body.genres.join('|');
   }
@@ -198,7 +191,7 @@ app.post('/api/discover/load-all-pages', async (req, res) => {
 
   for (let i = 1; i <= maxPage; i++) {
     let pageReqString = reqString + `&page=${i}`;
-    console.log('reqString with filters', pageReqString);
+    // console.log('reqString with filters', pageReqString);
 
     let response = await axios.get(pageReqString);
     let returnData = response.data.results;
@@ -254,7 +247,6 @@ app.get('/api/movie_detail/:id', async (req, res) => {
     }).lean();
 
     let watchlistIds = watchlistMovies.map(movie => movie.movieId);
-
     // console.log(watchlistIds);
 
     if (watchlistIds.includes(movie.movieId)) {
@@ -311,8 +303,6 @@ app.get('/api/watchlist/fetch', (req, res) => {
         movie.onSeen = false;
       }
     });
-
-    // console.log('loading watchlist movies', movies);
 
     res.send(movies);
   });

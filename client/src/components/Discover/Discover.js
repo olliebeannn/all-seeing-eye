@@ -32,25 +32,7 @@ class Discover extends Component {
   }
 
   componentDidMount() {
-    // this.props.loadDiscoverMovies(this.state.currentPage);
-
     let search = queryString.parse(this.props.location.search);
-
-    // console.log('search', search);
-    //
-    // let requestGenres = [];
-    // if (search.genres) {
-    //   requestGenres = search.genres.split(',');
-    // }
-    //
-    // console.log('requestGenres', requestGenres);
-
-    // this.props.loadDiscoverMovies({
-    //   page: search.page ? search.page : 1,
-    //   startYear: search.startYear ? search.startYear : 1900,
-    //   endYear: search.endYear ? search.endYear : 2019,
-    //   genres: search.genres ? search.genres.split(',') : []
-    // });
 
     let page = search.page ? parseInt(search.page) : 1;
     let startYear = search.startYear ? parseInt(search.startYear) : 1900;
@@ -65,28 +47,14 @@ class Discover extends Component {
     let currentGenres = genres.filter(elem => {
       return genreIds.includes(elem.value.toString());
     });
-    // console.log('currentGenres', currentGenres);
 
     // Set the state to query params if available so filter state matches
     this.setState({
-      // currentPage: search.page ? search.page : 1,
-      // startYear: search.startYear ? search.startYear : 1900,
-      // endYear: search.endYear ? search.endYear : 2019,
       currentPage: page,
       startYear: startYear,
       endYear: endYear,
       genres: currentGenres
     });
-
-    // this.setState(
-    //   {
-    //     startYear: search.startYear,
-    //     endYear: search.endYear
-    //   },
-    //   async () => {
-    //     this.props.loadDiscoverMovies(this.state.currentPage);
-    //   }
-    // );
   }
 
   loadMoreMovies = () => {
@@ -96,7 +64,6 @@ class Discover extends Component {
       page + 1,
       this.state.startYear,
       this.state.endYear,
-      // Causes request to fail b/c genres is the full object, not just IDs
       this.state.genres.map(elem => elem.value)
     );
 
@@ -146,12 +113,6 @@ class Discover extends Component {
       pathname: '/discover',
       search: searchParams.toString()
     });
-
-    // this.props.updateFilters(
-    //   this.state.startYear,
-    //   this.state.endYear,
-    //   this.state.genres
-    // );
 
     this.setState(
       {
