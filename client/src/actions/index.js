@@ -10,6 +10,7 @@ import {
   ADD_TO_SEEN,
   REMOVE_FROM_SEEN,
   FETCH_DISCOVER,
+  LOAD_DISCOVER_PAGE,
   UPDATE_FILTERS,
   ADD_TOAST,
   REMOVE_TOAST
@@ -122,4 +123,22 @@ export const updateFilters = (startYear, endYear, genres) => async dispatch => {
   });
 
   dispatch({ type: UPDATE_FILTERS, payload: response.data });
+};
+
+export const loadDiscoverPage = (
+  page,
+  startYear,
+  endYear,
+  genres
+) => async dispatch => {
+  const response = await axios.post('/api/discover/load-page', {
+    page,
+    startYear,
+    endYear,
+    genres
+  });
+
+  console.log('load-page response', response.data);
+
+  dispatch({ type: LOAD_DISCOVER_PAGE, payload: response.data });
 };

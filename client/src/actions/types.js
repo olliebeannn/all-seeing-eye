@@ -9,6 +9,7 @@ export const ADD_TO_SEEN = 'add_to_seen';
 export const REMOVE_FROM_SEEN = 'remove_from_seen';
 
 export const FETCH_DISCOVER = 'fetch_discover';
+export const LOAD_DISCOVER_PAGE = 'load_discover_page';
 export const UPDATE_FILTERS = 'update_filters';
 
 export const ADD_TOAST = 'add_toast';

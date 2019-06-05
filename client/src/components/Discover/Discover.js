@@ -92,12 +92,12 @@ class Discover extends Component {
   loadMoreMovies = () => {
     let page = this.state.currentPage;
 
-    this.props.loadDiscoverMovies(
+    this.props.loadDiscoverPage(
       page + 1,
       this.state.startYear,
       this.state.endYear,
       // Causes request to fail b/c genres is the full object, not just IDs
-      this.state.genres
+      this.state.genres.map(elem => elem.value)
     );
 
     let searchParams = new URLSearchParams({

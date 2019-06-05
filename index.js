@@ -100,7 +100,7 @@ app.get('/api/logout', (req, res) => {
   res.redirect('/');
 });
 
-app.post('/api/discover/fetch', (req, res) => {
+app.post('/api/discover/load-page', (req, res) => {
   let reqString = `https://api.themoviedb.org/3/discover/movie?api_key=${
     keys.TMDBkey
   }&vote_count.gte=500&sort_by=vote_average.desc`;

@@ -2,6 +2,7 @@ import _ from 'lodash';
 
 import {
   FETCH_DISCOVER,
+  LOAD_DISCOVER_PAGE,
   UPDATE_FILTERS,
   ADD_TO_WATCHLIST,
   REMOVE_FROM_WATCHLIST,
@@ -27,6 +28,18 @@ export default function(state = null, action) {
       console.log('update filters!', action);
 
       return action.payload || false;
+    case LOAD_DISCOVER_PAGE:
+      console.log('load-discover-page', action);
+
+      if (state) {
+        let newState = [];
+        state.forEach(item => newState.push(_.cloneDeep(item)));
+        action.payload.forEach(item => newState.push(_.cloneDeep(item)));
+
+        return newState;
+      } else {
+        return action.payload || false;
+      }
     case ADD_TO_WATCHLIST:
       if (state) {
         let addedState = _.cloneDeep(state);
