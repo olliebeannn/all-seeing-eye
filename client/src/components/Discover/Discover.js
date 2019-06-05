@@ -180,10 +180,11 @@ class Discover extends Component {
         startYear: 1900,
         endYear: 2019,
         genres: [],
-        page: 1
+        currentPage: 1
       },
       async () =>
-        this.props.updateFilters(
+        this.props.loadDiscoverMovies(
+          this.state.currentPage,
           this.state.startYear,
           this.state.endYear,
           this.state.genres

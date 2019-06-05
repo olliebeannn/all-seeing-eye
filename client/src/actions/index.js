@@ -114,16 +114,16 @@ export const loadDiscoverMovies = (
   dispatch({ type: FETCH_DISCOVER, payload: returnData });
 };
 
-export const updateFilters = (startYear, endYear, genres) => async dispatch => {
-  const response = await axios.post('/api/discover/load-all-pages', {
-    startYear,
-    endYear,
-    genres,
-    page: 1
-  });
-
-  dispatch({ type: UPDATE_FILTERS, payload: response.data });
-};
+// export const updateFilters = (startYear, endYear, genres) => async dispatch => {
+//   const response = await axios.post('/api/discover/load-all-pages', {
+//     startYear,
+//     endYear,
+//     genres,
+//     page: 1
+//   });
+//
+//   dispatch({ type: UPDATE_FILTERS, payload: response.data });
+// };
 
 export const loadDiscoverPage = (
   page,
