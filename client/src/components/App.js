@@ -7,6 +7,7 @@ import '../styles/reset.css';
 import '../styles/base.scss';
 import './App.scss';
 import Header from './Header/Header';
+import Landing from './Landing/Landing';
 import Watchlist from './Watchlist/Watchlist';
 import Discover from './Discover/Discover';
 import MovieDetail from './MovieDetail/MovieDetail';
@@ -26,6 +27,7 @@ class App extends Component {
         <BrowserRouter>
           <Header />
           <Toasts />
+          <Route path="/" exact component={Landing} />
           <Route path="/watchlist" component={Watchlist} />
           <Route path="/discover" component={Discover} />
           <Route path="/seen" component={Seen} />

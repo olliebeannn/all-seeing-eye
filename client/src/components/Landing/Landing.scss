@@ -1,0 +1,28 @@
+@import '../../styles/variables.scss';
+
+.Landing {
+  background-image: url('/images/bg-icons.svg');
+  background-repeat: repeat;
+  height: calc(100vh - 64px);
+  padding: 0 $spacing-4;
+}
+
+.Landing__Header {
+  font-size: $font-base * 3;
+}
+
+.Landing__Subhead {
+  font-size: $font-base * 1.6;
+}
+
+.Landing__Button {
+  background-color: $primary-color;
+  border: none;
+  border-radius: 4px;
+  color: $white;
+  font-size: $font-l;
+  height: $spacing-8;
+  width: 240px;
+  padding-left: $spacing-2;
+  padding-right: $spacing-2;
+}
