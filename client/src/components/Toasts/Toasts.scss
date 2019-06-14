@@ -1,5 +1,10 @@
 .Toasts {
-	position: fixed;
-	top: 40px;
-	width: 100%;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  left: 0;
+  position: fixed;
+  right: 0;
+  top: 40px;
+  width: 100%;
 }
