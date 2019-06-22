@@ -9,6 +9,10 @@ import EmptyList from '../EmptyList/EmptyList';
 import './Watchlist.scss';
 
 class Watchlist extends Component {
+  componentDidMount() {
+    this.props.fetchWatchlist();
+  }
+
   render() {
     let moviesToDisplay = null;
 

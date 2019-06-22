@@ -9,6 +9,10 @@ import EmptyList from '../EmptyList/EmptyList';
 import './Seen.scss';
 
 class Seen extends Component {
+  componentDidMount() {
+    this.props.fetchSeen();
+  }
+
   render() {
     let moviesToDisplay = null;
 
