@@ -1,5 +1,11 @@
 @import '../../styles/variables.scss';
 
 .Watchlist {
-  // height: 100%;
+  margin-top: 80px;
+}
+
+@media (min-width: 768px) {
+  .Watchlist {
+    margin-top: 96px;
+  }
 }

@@ -1,5 +1,9 @@
 @import '../../styles/variables.scss';
 
+.Discover {
+  margin-top: 80px;
+}
+
 .Filters {
   margin: $spacing-4 $spacing-3;
 }
@@ -23,6 +27,10 @@
 }
 
 @media (min-width: 768px) {
+  .Discover {
+    margin-top: 96px;
+  }
+
   .Filters {
     margin: $spacing-4 auto;
     max-width: 720px;

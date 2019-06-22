@@ -1,3 +1,9 @@
 .Seen {
-  // height: 100%;
+  margin-top: 80px;
+}
+
+@media (min-width: 768px) {
+  .Seen {
+    margin-top: 96px;
+  }
 }
