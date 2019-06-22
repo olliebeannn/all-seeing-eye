@@ -316,9 +316,20 @@ app.get('/api/seen/fetch', (req, res) => {
     // NEW: just query DB for users' watchlist
     const movies = await Movie.find({ _id: { $in: user.seen } }).lean();
 
+    let watchlistMovies = await Movie.find({
+      _id: { $in: user.watchlist }
+    }).lean();
+    let watchlistIds = watchlistMovies.map(movie => movie.movieId);
+
     // Mark as onWatchlist so buttons show up correctly
     movies.forEach(movie => {
       movie.onSeen = true;
+
+      if (watchlistIds.includes(movie.movieId)) {
+        movie.onWatchlist = true;
+      } else {
+        movie.onWatchlist = false;
+      }
     });
 
     res.send(movies);
