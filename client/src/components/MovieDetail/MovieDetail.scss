@@ -9,7 +9,7 @@
 
 .MovieDetail__wrapper {
   // margin: 0 auto;
-  margin: 0 $spacing-2;
+  margin: 64px $spacing-2 $spacing-2 $spacing-2;
   max-width: 720px;
   padding-top: $spacing-2;
 }
@@ -57,6 +57,6 @@
 
 @media (min-width: 768px) {
   .MovieDetail__wrapper {
-    margin: 0 auto;
+    margin: 64px auto 0 auto;
   }
 }
