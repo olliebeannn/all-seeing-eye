@@ -20,3 +20,6 @@ Users can filter the highest rated movies from TMDB by release year and genre, a
 
 - Create more movie filters, e.g. by number of reviews, average rating, cast and director
 - Build friend relationships between users and prioritise movies that your friends have also saved
+
+
+Designed + developed by [Ollie Khakwani](github.com/olliebeannn)
