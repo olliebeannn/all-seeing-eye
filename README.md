@@ -8,7 +8,9 @@ The app is hosted on [Heroku](theallseeingeye.herokuapp.com) - try it out there!
 
 ## Technologies
 
-TASE runs on a Heroku server with a Mongo, Express, and Node.js backend and a React front-end. State is managed in Redux with Redux Thunk, and I designed the UI and wrote the CSS without using front-end libraries. TASE is responsive and works well on mobile devices. Users create accounts and log in with Google OAuth (with help from Passport.js). The movie info is pulled from The Movie Database API and cached in Mongo to reduce the number of calls to the API.
+TASE runs on a Heroku server with a Mongo, Express, and Node.js backend and a React front-end. State is managed in Redux with Redux Thunk, and I designed the UI and wrote the CSS without using front-end libraries. TASE is responsive and works well on mobile devices. Users create accounts and log in with Google OAuth (with help from Passport.js). 
+
+The movie info is pulled from The Movie Database API and cached in Mongo to reduce the number of calls to the API. The Discover section is paginated to increase load speed.
 
 ## Features
 
