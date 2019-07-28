@@ -18,6 +18,8 @@ Users can filter the highest rated movies from TMDB by release year and genre, a
 
 ## Future Development
 
+- Search for movies by title
+- Related movie suggestions
 - Create more movie filters, e.g. by number of reviews, average rating, cast and director
 - Build friend relationships between users and prioritise movies that your friends have also saved
 
