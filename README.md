@@ -4,7 +4,7 @@ The All Seeing Eye is an app to discover movies you want to watch for later so y
 
 ## Use
 
-The app is hosted on [Heroku](theallseeingeye.herokuapp.com) - try it out there!
+The app is hosted on [Heroku](https://theallseeingeye.herokuapp.com) - try it out there!
 
 ## Technologies
 
